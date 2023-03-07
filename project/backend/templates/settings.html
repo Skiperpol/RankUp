@@ -17,8 +17,15 @@
     <a href="{% url 'login_web' %}">Logowanie</a><br>
     <a href="{% url 'main' %}">Main</a><br>
 
+    <!-- form.instance.coś daje tekst tego co chcemy uzyskać np email a form.coś daje nam ten tekst w inpucie gotowy do zmiany -->
+
     <h1>Your profile</h1>
-    {{ email }}<br>
+    {{ form.instance.email }}<br>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Update</button>
+    </form>
 
 </body>
 </html>

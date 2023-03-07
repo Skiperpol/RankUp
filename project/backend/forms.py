@@ -24,9 +24,14 @@ class userRegistrationForm(UserCreationForm):
         return user
     
 
-class UserUpdateForm(forms.ModelForm):
-    # email = forms.EmailField()
-
+class UserData(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ['first_name', 'last_name', 'email', 'nick', 'punkty']
+
+class UserUpdate(forms.ModelForm):
+    opis = forms.Textarea()
+
+    class Meta:
+        model = get_user_model()
+        fields = ['first_name', 'last_name', 'username', 'nick', 'data_urodzenia', 'avatar', 'email', 'opis', 'password']

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model, login, authenticate
-from .forms import userRegistrationForm, UserUpdateForm
+from .forms import userRegistrationForm, UserData, UserUpdate
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -15,7 +15,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('/main')
+            return redirect('/backend/main')
         else:
             for error in list(form.errors.values()):
                 print(request, error)
@@ -32,12 +32,12 @@ def register(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/main')
+    return redirect('/backend/main')
 
 
 def login_web(request):
     if request.user.is_authenticated:
-        return redirect('/main')
+        return redirect('/backend/main')
 
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
@@ -48,7 +48,7 @@ def login_web(request):
             )
             if user is not None:
                 login(request, user)
-                return redirect('/main')
+                return redirect('/backend/main')
 
         else:
             for error in list(form.errors.values()):
@@ -70,18 +70,23 @@ def profile(request, nick):
 
     user = get_user_model().objects.filter(nick=nick).first()
     if user:
-        form = UserUpdateForm(instance=user)
+        form = UserData(instance=user)
         return render(request, 'profile.html', context={'form': form})
 
-    return redirect("/main")
+    return redirect("/backend/main")
 
 
 
 def settings(request):
     user = request.user
     if user.is_authenticated:
-        email = user.email
-        context = {'email': email}
-        return render(request, 'settings.html', context)
+        if request.method == 'POST':
+            form = UserUpdate(request.POST, instance=user)
+            if form.is_valid():
+                form.save()
+                return redirect('/backend/main')
+        else:
+            form = UserUpdate(instance=user)
+        return render(request, 'settings.html', {'form': form})
     else:
-        return redirect('/main')
+        return redirect('/backend/main')
