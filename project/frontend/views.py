@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
+from backend.models import CustomUser
 from api.models import Team, Tournament, Player
 
 
@@ -36,7 +37,7 @@ def tournament_site(request, tournamentname):
     return HttpResponse(template.render(context, request))
     
 def player_site(request, playername):
-    player = Player.objects.get(nick=playername)
+    player = CustomUser.objects.get(username=playername)
 
     template = loader.get_template('frontend/player.html')
     context = {
@@ -55,7 +56,7 @@ def tournament_list_site(request):
     return HttpResponse(template.render(context, request))     
 
 def player_list_site(request):
-    players = Player.objects.all()
+    players = CustomUser.objects.all()
 
     template = loader.get_template('frontend/players_list.html')
     context = {
