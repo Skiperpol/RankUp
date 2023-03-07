@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div id="side_menu">
+        <a href="{% url 'index' %}"><img src="https://i.ibb.co/Z8c6WrV/sa.png" alt=""></a>
+        <a href="{% url 'tournament_list_site' %}"><h2>Turnieje</h2></a>
+        <a href="{% url 'player_list_site' %}"><h2>Gracze</h2></a>
+        <a href="{% url 'team_list_site' %}"><h2>Drużyny</h2></a>
+        <h2>Kontakt</h2>
+        <div>
+            <h2>Zaloguj się</h2>
+            <h2>Zarejestruj się</h2>
+        </div>
+    </div>
+    
+    <div id="players-list-container" class="tournament-detail-container">
+        <!-- ZAWARTOSC -->
+        <div id="player-inner-wrapper">
+            <h1 id="name" class="float-left">Najlepsi gracze</h1>
+            <div class="clear"><span class="grayed bold">Ostatnia aktualizacja: 10.02.2032</span></div>
+            <div id="player-nav"></div>
+            <div id="tournament-content">
+                <ol>
+                    {% for player in players %}
+                    <div class="players-list-div"><div class="float-right">123pkt</div><li><span></span>
+                        {% if player.zdjecie %}<img src="{{ player.zdjecie.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
+                        <div>{{ player }}</div></li></div>
+                    {% endfor %}
+                </ol>
+            </div>
+            <a href=""><div id="zmiany">zgłoś uwagi do rankingu</div></a>
+        </div>
+    </div>
+
+    <script>
+        side_menu.classList.add("black")
+    </script>
+</body>
+</html>

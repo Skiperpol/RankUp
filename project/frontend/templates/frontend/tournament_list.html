@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div id="side_menu">
+        <a href="{% url 'index' %}"><img src="https://i.ibb.co/Z8c6WrV/sa.png" alt=""></a>
+        <a href="{% url 'tournament_list_site' %}"><h2>Turnieje</h2></a>
+        <a href="{% url 'player_list_site' %}"><h2>Gracze</h2></a>
+        <a href="{% url 'team_list_site' %}"><h2>Drużyny</h2></a>
+        <h2>Kontakt</h2>
+        <div>
+            <h2>Zaloguj się</h2>
+            <h2>Zarejestruj się</h2>
+        </div>
+    </div>
+    <div class="tournament-list-container">
+        <div id="turnieje-list">
+            <div id="turnieje-list-header">
+                <h1>TURNIEJE</h1>
+            </div>
+            <div id="turnieje-list-container">
+                {% for tournament in tournaments %}
+                <a href="{% url 'tournament_site' tournamentname=tournament.nazwa%}">
+                <div class="turnieje-list-object">
+                    <img src="{{ tournament.zdjecie.url }}" alt="">
+                    <div class="tournament-list-object-box">
+                        <div><span class="bold">10.02.2032</span></div>
+                        <div>{{ tournament }}</div>
+                        <div><span>Hosted by Acer &#x2022; Bo5 &#x2022; 5vs5 &#x2022; 5.000zł</span></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script>
+        side_menu.classList.add("black")
+    </script>
+</body>
+</html>

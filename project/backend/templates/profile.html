@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <h1>{{user.username}}</h1>
+    {% else %}
+        <h1>Main!</h1>
+    {% endif %}
+
+    <a href="{% url 'register' %}">Rejestracja</a><br>
+    <a href="{% url 'login_web' %}">Logowanie</a><br>
+    <a href="{% url 'main' %}">Main</a><br>
+
+    <h1>Profile</h1>
+    {{ form.instance.username }}<br>
+    {{ form.instance.email }}<br>
+    {{ form.instance.punkty }}<br>
+</body>
+</html>
