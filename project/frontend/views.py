@@ -1,13 +1,12 @@
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
-from backend.models import CustomUser
-from api.models import Team, Tournament, Player
+from backend.models import Team, Tournament, CustomUser
 
 
 def index(request):
     teams = Team.objects.all()[0:3]
     tournaments = Tournament.objects.all()[0:3]
-    players = Player.objects.all()[0:3]
+    players = CustomUser.objects.all()[0:3]
 
     template = loader.get_template('frontend/index.html')
     context = {

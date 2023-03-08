@@ -38,10 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api.apps.ApiConfig',
     'frontend.apps.FrontendConfig',
-    'rest_framework',
-    'backend'
+    'backend.apps.BackendConfig',
 ]
 
 AUTH_USER_MODEL = 'backend.CustomUser'
