@@ -73,3 +73,10 @@ def team_list_site(request):
         "teams":teams,
     }
     return HttpResponse(template.render(context, request))
+
+    
+def contact_site(request):
+    template = loader.get_template('frontend/contact.html')
+    context = {
+    }
+    return HttpResponse(template.render(context, request))

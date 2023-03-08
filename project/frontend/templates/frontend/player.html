@@ -17,7 +17,8 @@
         <a href="{% url 'tournament_list_site' %}"><h2>Turnieje</h2></a>
         <a href="{% url 'player_list_site' %}"><h2>Gracze</h2></a>
         <a href="{% url 'team_list_site' %}"><h2>Drużyny</h2></a>
-        <h2>Kontakt</h2>
+        
+        <a href="{% url 'contact_site' %}"><h2>Kontakt</h2></a>
         <div>
             <!-- TUTAJ i w innych plikach wstaw hrefy do loginu i rejestracji
             ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
@@ -25,9 +26,17 @@
             <h2>Zarejestruj się</h2>
         </div>
     </div>
-    <div id="container">
-        <!-- ZAWARTOSC -->
-        <h1>{{ player }}</h1>
+    <div id="container" class="player-detail-container">
+        <div id="inner-wrapper" class="playerinner-wrapper">
+            {% if player.avatar %}<img src="{{ player.avatar.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
+            <div id="profile-flex">
+            <h1>{{ player }}</h1>
+            <div class="grayed">Bronze IV</div>
+            <div class="grayed">{{ player.opis }}</div>
+        </div>
+            
+            
+        </div>  
     </div>
     <script>
            side_menu.classList.add("black")
