@@ -522,7 +522,7 @@ li img {
     height: auto;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #101319;
+    background: linear-gradient(0deg, rgba(16,19,25,1) 17%, rgba(31,31,31,1) 74%);
 }
 .playerinner-wrapper {
     margin-top: 10vh !important;
@@ -538,14 +538,18 @@ li img {
     margin-right: 1%;
     margin-left: 1%;
     float: left;
+    margin-bottom: 4vh;
 }
 .playerinner-wrapper h1 {
+    text-transform: none !important;
     float: left;
     margin-left: 3%;
     margin-top: 0%;
     margin-bottom: 0%;
 }
-
+.playerinner-wrapper hr {
+    clear: both;
+}
 .playerinner-wrapper .grayed{
     margin-left: 3%;
     float: left;
@@ -557,4 +561,43 @@ li img {
     justify-content: flex-start;
     align-items: flex-start;
     align-content: flex-start;
+}
+.profile-menu div {
+    color: rgb(174, 174, 174);
+    font-weight: bold;
+    float: left;
+    font-size: 1.4rem;
+    transition: all .1s ease;
+    width: auto;
+    height: auto;
+    padding: 2vh;
+    margin: -2vh;
+    margin-right: 5vw;
+    letter-spacing: .1rem;
+}
+.profile-menu div:hover {
+    color: white;
+}
+.profile-menu {
+    clear:both;
+    height: 1.5rem;
+    width: 100%;
+    margin-bottom: 2vh;
+}
+.profile-info {
+    font-size: 1.4rem;
+    color: rgb(174, 174, 174);
+    margin-top: 7vh;
+}
+.profile-info span { 
+    margin-left: .5vw; 
+}
+.jakas {
+    border: static black 2px;
+    margin-right: -2vh !important;
+    float: right !important;
+}
+.profile-teams {
+    margin: 0 !important;
+    margin-top: 10vh !important;
 }
