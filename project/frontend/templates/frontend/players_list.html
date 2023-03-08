@@ -20,10 +20,8 @@
         
         <a href="{% url 'contact_site' %}"><h2>Kontakt</h2></a>
         <div>
-            <!-- TUTAJ i w innych plikach wstaw hrefy do loginu i rejestracji
-            ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
-            <h2>Zaloguj się</h2>
-            <h2>Zarejestruj się</h2>
+            <a href="{% url 'login_web' %}"><h2>Zaloguj się</h2></a>
+            <a href="{% url 'register' %}"><h2>Zarejestruj się</h2></a>
         </div>
     </div>
     
@@ -36,9 +34,9 @@
             <div id="tournament-content">
                 <ol>
                     {% for player in players %}
-                    <a href="{% url 'player_site' playername=player.username %}"><div class="players-list-div"><div class="float-right">123pkt</div><li><span></span>
+                    <a href="{% url 'player_site' playernick=player.nick %}"><div class="players-list-div"><div class="float-right">{{player.punkty}}pkt</div><li><span></span>
                         {% if player.avatar %}<img src="{{ player.avatar.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
-                        <div>{{ player }}</div></li></div></a>
+                        <div>{{ player.nick }}</div></li></div></a>
                     {% endfor %}
                 </ol>
             </div>

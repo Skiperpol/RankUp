@@ -35,14 +35,6 @@ def tournament_site(request, tournamentname):
     }
     return HttpResponse(template.render(context, request))
     
-def player_site(request, playername):
-    player = CustomUser.objects.get(username=playername)
-
-    template = loader.get_template('frontend/player.html')
-    context = {
-        "player":player,
-    }
-    return HttpResponse(template.render(context, request))
 
        
 def tournament_list_site(request):
@@ -54,14 +46,6 @@ def tournament_list_site(request):
     }
     return HttpResponse(template.render(context, request))     
 
-def player_list_site(request):
-    players = CustomUser.objects.all()
-
-    template = loader.get_template('frontend/players_list.html')
-    context = {
-        "players":players,
-    }
-    return HttpResponse(template.render(context, request))
 
 
 def team_list_site(request):

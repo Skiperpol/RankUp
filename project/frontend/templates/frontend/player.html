@@ -20,17 +20,16 @@
         
         <a href="{% url 'contact_site' %}"><h2>Kontakt</h2></a>
         <div>
-            <!-- TUTAJ i w innych plikach wstaw hrefy do loginu i rejestracji
-            ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
-            <h2>Zaloguj się</h2>
-            <h2>Zarejestruj się</h2>
+            <a href="{% url 'login_web' %}"><h2>Zaloguj się</h2></a>
+            <a href="{% url 'register' %}"><h2>Zarejestruj się</h2></a>
         </div>
     </div>
     <div id="container" class="player-detail-container">
         <div id="inner-wrapper" class="playerinner-wrapper">
             {% if player.avatar %}<img src="{{ player.avatar.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
             <div id="profile-flex">
-                <h1>{{ player }}</h1>
+                <h1>{{ player.nick }}</h1>
+                <h4>{{ player.first_name }} {{ player.last_name }}</h4>
                 <div class="grayed">Bronze IV</div>
                 <div class="grayed">{{ player.opis }}</div>
             </div>
@@ -38,7 +37,7 @@
             <hr>
             <div class="profile-info">
                 <div>Email: <span>{{ player.email }}</span></div>
-                <div>Ranking:  <span>123 punkty</span></div>
+                <div>Ranking:  <span>{{ player.punkty }} punkty</span></div>
                 <div>Winrate: <span>100%</span></div>
             </div>
             <h1 class="profile-teams">Drużyny</h1>

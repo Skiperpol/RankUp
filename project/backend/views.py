@@ -3,6 +3,9 @@ from django.contrib.auth import get_user_model, login, authenticate
 from .forms import userRegistrationForm, UserData, UserUpdate
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
+from backend.models import Team, Tournament, CustomUser
+from django.template import loader
+from django.http import HttpResponse, JsonResponse
 
 def main(request):
     return render(request, 'main.html')
@@ -15,7 +18,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('/backend/main')
+            return redirect('/')
         else:
             for error in list(form.errors.values()):
                 print(request, error)
@@ -25,19 +28,19 @@ def register(request):
 
     return render(
         request = request,
-        template_name = "register.html",
+        template_name = "frontend/register.html",
         context={"form":form}
         )
 
 
 def logout_view(request):
     logout(request)
-    return redirect('/backend/main')
+    return redirect('/')
 
 
 def login_web(request):
     if request.user.is_authenticated:
-        return redirect('/backend/main')
+        return redirect('/')
 
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
@@ -48,7 +51,7 @@ def login_web(request):
             )
             if user is not None:
                 login(request, user)
-                return redirect('/backend/main')
+                return redirect('/')
 
         else:
             for error in list(form.errors.values()):
@@ -58,22 +61,19 @@ def login_web(request):
     
     return render(
         request=request,
-        template_name="login_web.html", 
+        template_name="frontend/login_web.html", 
         context={'form': form}
         )
 
 
 
-def profile(request, nick):
-    if request.method == 'POST':
-        pass
-
-    user = get_user_model().objects.filter(nick=nick).first()
+def player_site(request, playernick):
+    user = get_user_model().objects.filter(nick=playernick).first()
     if user:
-        form = UserData(instance=user)
-        return render(request, 'profile.html', context={'form': form})
+        player = CustomUser.objects.get(nick=playernick)
+        return render(request, 'frontend/player.html', context={'player': player})
 
-    return redirect("/backend/main")
+    return redirect("/")
 
 
 
@@ -84,9 +84,19 @@ def settings(request):
             form = UserUpdate(request.POST, instance=user)
             if form.is_valid():
                 form.save()
-                return redirect('/backend/main')
+                return redirect('/')
         else:
             form = UserUpdate(instance=user)
-        return render(request, 'settings.html', {'form': form})
+        return render(request, 'frontend/settings.html', {'form': form})
     else:
-        return redirect('/backend/main')
+        return redirect('/')
+    
+
+def player_list_site(request):
+    players = CustomUser.objects.all()
+
+    template = loader.get_template('frontend/players_list.html')
+    context = {
+        "players":players,
+    }
+    return HttpResponse(template.render(context, request))

@@ -17,10 +17,12 @@
 
         <a href="{% url 'contact_site' %}"><h2>Kontakt</h2></a>
         <div>
-            <!-- TUTAJ i w innych plikach wstaw hrefy do loginu i rejestracji
-            ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
-            <h2>Zaloguj się</h2>
-            <h2>Zarejestruj się</h2>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}"><h2>Wyloguj</h2></a>
+            {% else %}
+                <a href="{% url 'login_web' %}"><h2>Zaloguj się</h2></a>
+            {% endif %}
+            <a href="{% url 'register' %}"><h2>Zarejestruj się</h2></a>
         </div>
     </div>
 
