@@ -1,35 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <title>Document</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-    <div id="side_menu">
-        <a href="{% url 'index' %}"><img src="https://i.ibb.co/Z8c6WrV/sa.png" alt=""></a>
-        <a href="{% url 'tournament_list_site' %}"><h2>Turnieje</h2></a>
-        <a href="{% url 'player_list_site' %}"><h2>Gracze</h2></a>
-        <a href="{% url 'team_list_site' %}"><h2>Drużyny</h2></a>
-        
-        <a href="{% url 'contact_site' %}"><h2>Kontakt</h2></a>
-        <div>
-            <a href="{% url 'login_web' %}"><h2>Zaloguj się</h2></a>
-            <a href="{% url 'register' %}"><h2>Zarejestruj się</h2></a>
-        </div>
-    </div>
+{% extends 'frontend/base.html' %}
+
+{% block content %}
     <div id="container" class="player-detail-container">
         <div id="inner-wrapper" class="playerinner-wrapper">
             {% if player.avatar %}<img src="{{ player.avatar.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
             <div id="profile-flex">
                 <h1>{{ player.nick }}</h1>
-                <h4>{{ player.first_name }} {{ player.last_name }}</h4>
+                <p>{{ player.first_name }} {{ player.last_name }}</p>
                 <div class="grayed">Bronze IV</div>
                 <div class="grayed">{{ player.opis }}</div>
             </div>
@@ -49,5 +26,4 @@
     <script>
            side_menu.classList.add("black")
     </script>
-</body>
-</html>
+{% endblock %}

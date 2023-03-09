@@ -538,7 +538,7 @@ li img {
     margin-right: 1%;
     margin-left: 1%;
     float: left;
-    margin-bottom: 4vh;
+    margin-bottom: 6vh;
 }
 .playerinner-wrapper h1 {
     text-transform: none !important;
@@ -546,6 +546,15 @@ li img {
     margin-left: 3%;
     margin-top: 0%;
     margin-bottom: 0%;
+}
+.playerinner-wrapper p {
+    text-transform: none !important;
+    float: left;
+    margin-left: 3%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    letter-spacing: 0.1rem;
+    color: #ff2138;
 }
 .playerinner-wrapper hr {
     clear: both;
