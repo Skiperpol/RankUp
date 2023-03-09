@@ -5,7 +5,7 @@ body {
     overflow-x: hidden;
 }
 .ovflow-hidden {
-    overflow: hidden;
+    overflow-y: hidden;
 }
 #container {
     width: 85vw;
@@ -127,9 +127,11 @@ h1, h2, h3, h4, h5{
     padding: 2vh 4vh 2vh 4vh ;
     color: #ffff;
     background-color: #fe4554;
-    margin-top: 50vh;
+    margin-top: 49vh;
     border: none;
-    border-radius: 30px;
+    /* border-radius: 30px; */
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     font-size: 2.3rem;
     font-weight: bold;
 }
@@ -189,8 +191,8 @@ h1, h2, h3, h4, h5{
     text-transform: uppercase;
     margin-right: .5vw;
     margin-left: .5vw;
-    border-top-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     border: 1px solid white;
     transition: all .2s;
 }
@@ -226,7 +228,9 @@ h1, h2, h3, h4, h5{
     color: #ffff;
     background-color: #fe4554;
     border: none;
-    border-radius: 2px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 1px solid white;
     font-weight: 400;
     font-size: 1.3rem;
     text-transform: uppercase;
@@ -609,4 +613,85 @@ li img {
 .profile-teams {
     margin: 0 !important;
     margin-top: 10vh !important;
+}
+#logininner-wrapper {
+    text-align: center;
+    color: white;
+    width: auto;
+    height: auto;
+    margin-top: 13vh;
+    margin-right: 10%;
+    margin-left: 10%;
+    font-size: 1.3rem;
+    background-color: #101319cd;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+}
+.nol {
+    letter-spacing: 0 !important;
+}
+.defaultbutton{  
+    padding: 1vh 3vh 1vh 3vh ;
+    color: #ffff;
+    background-color: #fe4554;
+    border: none;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-weight: 400;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    margin-bottom: 1vh;
+    transition: all .2s;
+    margin-top: 5vh;
+}
+
+.defaultbutton:hover{  
+    background-color: #fe45547e;
+}
+#logininner-wrapper h1 {
+    margin-bottom: 0;
+}
+.logincontainer {
+    background-color: rgb(251, 207, 40);
+background-image:  url(https://wallpaperaccess.com/full/7270381.gif);
+background-size: cover;
+background-position: 75% 25%;
+background-repeat: no-repeat;
+}
+.login-form {
+    margin-top: 5vh;
+}
+.login-form input {
+    padding: 5px;
+    font-size: 16px;
+    border-width: 0px;
+    border-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: solid;
+    border-radius: 1px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
+.login-form input:focus {
+    outline:none;
+}
+#registerinner-wrapper {
+    text-align: center;
+    color: white;
+    width: auto;
+    height: auto;
+    margin-top: 7vh;
+    margin-right: 10%;
+    margin-left: 10%;
+    font-size: 1.3rem;
+    background-color: #101319cd;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+}
+.nomt {
+    margin-top: 1vh !important;
 }

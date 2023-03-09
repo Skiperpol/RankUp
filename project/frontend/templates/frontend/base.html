@@ -8,7 +8,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
-<body class="{% block bodyclass %}{% endblock %}">
+<body>
     <div id="side_menu">
         <a href="{% url 'index' %}"><img src="https://i.ibb.co/Z8c6WrV/sa.png" alt=""></a>
         <a href="{% url 'tournament_list_site' %}"><h2>Turnieje</h2></a>
@@ -18,7 +18,7 @@
         <a href="{% url 'contact_site' %}"><h2>Kontakt</h2></a>
         <div>
             {% if user.is_authenticated %}
-                <a href="#"><h2>Moje konto</h2></a>
+                <a href="{% url 'player_site' playernick=user.nick %}"><h2>Moje konto</h2></a>
                 <a href="{% url 'logout' %}"><h2>Wyloguj</h2></a>
             {% else %}
                 <a href="{% url 'login_web' %}"><h2>Zaloguj się</h2></a>

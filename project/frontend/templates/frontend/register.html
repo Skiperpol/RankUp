@@ -1,17 +1,17 @@
 {% extends 'frontend/base.html' %}
 
 {% block content %}
-<div id="container">
-    <h1>Rejestracja!</h1>
-   
-    <a href="{% url 'main' %}">Main</a><br>
-    <a href="{% url 'login_web' %}">Logowanie</a>
+<div id="container" class="logincontainer"> 
+    <div id="registerinner-wrapper">
+    <h1>Rejestracja</h1>
 
-    <br>
     <form method="post">
         {% csrf_token %}
         {{form.as_p}}
-        <button type="submit">Zarejestruj</button>
+        <button type="submit" class="defaultbutton nomt">Zarejestruj</button>
     </form>
-    </div>  
+    </div>  </div>
+    <script>
+        side_menu.classList.add("black")
+    </script>
 {% endblock %}
