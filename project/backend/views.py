@@ -71,7 +71,20 @@ def player_site(request, playernick):
     user = get_user_model().objects.filter(nick=playernick).first()
     if user:
         player = CustomUser.objects.get(nick=playernick)
-        return render(request, 'frontend/player.html', context={'player': player})
+        context = {
+            'player': player,
+            'team': None,
+            'team_member': None,
+        }
+        if Team.objects.filter(creator=user.email).exists():
+            team_creator=Team.objects.get(creator=user.email)
+            context['team']=team_creator
+        
+        if Team.objects.filter(players__email=user.email).exists():
+            team_member = Team.objects.filter(players__email=user.email)
+            context['team_member']=team_member
+
+        return render(request, 'frontend/player.html', context=context)
 
     return redirect("/")
 

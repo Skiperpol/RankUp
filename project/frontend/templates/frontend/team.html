@@ -4,6 +4,17 @@
     <div id="container">
         <!-- ZAWARTOSC -->
         <h1>{{ team }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            <select name="player" multiple>
+                {% for user in users %}
+                    <option value="{{user.email}}">{{user.nick}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <button type="submit">Dodaj gracza do drużyny</button>
+        </form>
+
         {% for player in team.players.all %}
             {{ player.username }}<br>
         {% endfor %}

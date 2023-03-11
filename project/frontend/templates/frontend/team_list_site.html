@@ -8,11 +8,12 @@
             <div class="clear"><span class="grayed bold">Ostatnia aktualizacja: 10.02.2032</span></div>
             <div id="player-nav"></div>
             <div id="tournament-content">
+
                 <ol>
                     {% for team in teams %}
-                    <div class="players-list-div"><div class="float-right">123pkt</div><li><span></span>
+                    <a href="{% url 'team_site' teamname=team.nazwa %}"><div class="players-list-div"><div class="float-right">123pkt</div><li><span></span>
                         {% if team.zdjecie %}<img src="{{ team.zdjecie.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
-                        <div>{{ team }}</div></li></div>
+                        <div>{{ team }}</div></li></div></a>
                     {% endfor %}
                 </ol>
             </div>

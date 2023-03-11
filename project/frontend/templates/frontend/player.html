@@ -24,8 +24,24 @@
                 <div>Ranking:  <span>{{ player.punkty }} punkty</span></div>
                 <div>Winrate: <span>100%</span></div>
             </div>
-            <h1 class="profile-teams">Drużyny</h1>
+            <h1 class="profile-teams">Drużyny<a href="{% url 'create_team' %}" style="padding-left: 10px; border: 1px solid;">Stwórz drużynę</a></h1>
             <hr>
+            {% if team %}
+                <a href="{% url 'team_site' teamname=team.nazwa %}">{{team}}</a><br>
+            {% else %}
+                <p>Użytkownik nie jest kapitanem żadnej drużyny</p><br>
+            {% endif %}
+            {% if team_member %}
+            {% for team in team_member %}
+                <a href="{% url 'team_site' teamname=team.nazwa %}">{{team}}</a><br>
+            {% endfor %}
+            {% else %}
+            <p>Użytkownik nie należy żadnej drużyny</p><br>
+            {% endif %}
+
+
+
+            
             <h1 class="profile-teams">Statystyki</h1>
             <hr>
         </div>  
