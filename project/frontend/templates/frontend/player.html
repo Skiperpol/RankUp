@@ -10,7 +10,14 @@
                 <div class="grayed">Bronze IV</div>
                 <div class="grayed">{{ player.opis }}</div>
             </div>
-            <div class="profile-menu"><div class="active_nav">Info</div><div>Zaproś do drużyny</div><div>Statystyki</div><div class="jakas">Jakas opcja</div></div> 
+            <div class="profile-menu"><div class="active_nav">Info</div><div>Zaproś do drużyny</div><div>Statystyki</div>
+                <div class="jakas">{% if user == player %}
+                    <p><a href="{% url 'settings' %}">Ustawienia</a></p>
+                    {% else %}
+                    Zgłoś gracza
+                    {% endif %}
+                </div>
+            </div> 
             <hr>
             <div class="profile-info">
                 <div>Email: <span>{{ player.email }}</span></div>

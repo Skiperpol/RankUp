@@ -1,11 +1,14 @@
 {% extends 'frontend/base.html' %}
 
 {% block content %}
-<div id="container" class="logincontainer"> 
+<div id="container" class="logincontainer">
+    <video autoplay muted loop id="login-container-video">
+        <source src="/media/valorant.mp4" type="video/mp4">
+      </video> 
     <div id="registerinner-wrapper">
     <h1>Rejestracja</h1>
 
-    <form method="post">
+    <form class="register-form" method="post">
         {% csrf_token %}
         {{form.as_p}}
         <button type="submit" class="defaultbutton nomt">Zarejestruj</button>
