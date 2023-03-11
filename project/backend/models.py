@@ -20,17 +20,19 @@ class CustomUser(AbstractUser):
 
 
 class Tournament(models.Model):
-    nazwa = models.CharField(max_length=100)
+    nazwa = models.CharField(max_length=100, unique=True)
     zdjecie = models.ImageField(upload_to='images/', null=True, blank=True)
-   
+
     def __str__(self):
         return self.nazwa
 
 class Team(models.Model):
     nazwa = models.CharField(max_length=100)
-    opis = models.CharField(max_length=100, null=True, blank=True)
+    opis = models.CharField(max_length=200, null=True, blank=True)
     zdjecie = models.ImageField(upload_to='images/', null=True, blank=True)
-   
+    creator = models.EmailField()
+    players = models.ManyToManyField('CustomUser')
+
     def __str__(self):
         return self.nazwa
 

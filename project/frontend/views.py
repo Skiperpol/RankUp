@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from backend.models import Team, Tournament, CustomUser
+from backend.forms import TeamForm
 
 
 def index(request):
@@ -17,8 +18,15 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
+from django.contrib.auth import get_user_model
 def team_site(request, teamname):
     team = Team.objects.get(nazwa=teamname)
+
+    uzytkownik = get_user_model()
+    team2 = Team.objects.get(nazwa=teamname)
+    user = uzytkownik.objects.get(email = "dawid@dawid.pl")
+    team2.players.add(user)
+
 
     template = loader.get_template('frontend/team.html')
     context = {

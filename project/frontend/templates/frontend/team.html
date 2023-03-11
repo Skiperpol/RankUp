@@ -4,5 +4,8 @@
     <div id="container">
         <!-- ZAWARTOSC -->
         <h1>{{ team }}</h1>
+        {% for player in team.players.all %}
+            {{ player.username }}<br>
+        {% endfor %}
     </div>
 {% endblock %}

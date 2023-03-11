@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model, login, authenticate
-from .forms import userRegistrationForm, UserData, UserUpdate
+from .forms import userRegistrationForm, UserData, UserUpdate, TeamForm
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from backend.models import Team, Tournament, CustomUser
@@ -100,3 +100,22 @@ def player_list_site(request):
         "players":players,
     }
     return HttpResponse(template.render(context, request))
+
+
+
+
+
+def create_team(request):
+    user = request.user
+    if user.is_authenticated:
+        if request.method == 'POST':
+            form = TeamForm(request.POST)
+            if form.is_valid():
+                form.instance.creator=request.user.email
+                form.save()
+                return redirect('/teams')
+        else:
+            form = TeamForm()
+        return render(request, 'frontend/create_team.html', {'form': form})
+    else:
+        return redirect('/')

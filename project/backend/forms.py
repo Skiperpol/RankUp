@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from backend.models import Team
 
 class userRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text="Podaj prawidłowy email", required=True)
@@ -35,3 +36,12 @@ class UserUpdate(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ['first_name', 'last_name', 'username', 'nick', 'data_urodzenia', 'avatar', 'email', 'opis', 'password']
+
+
+class TeamForm(forms.ModelForm):
+    class Meta:
+        model = Team
+        fields = ['nazwa', 'opis', 'zdjecie','creator']
+        widgets = {
+            'creator': forms.HiddenInput(),
+        }
