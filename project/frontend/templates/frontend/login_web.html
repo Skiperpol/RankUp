@@ -2,6 +2,9 @@
 
 {% block content %}
 <div id="container" class="logincontainer">
+    <video autoplay muted loop id="login-container-video">
+        <source src="/media/valorant.mp4" type="video/mp4">
+      </video>
     <div id="logininner-wrapper">
         <h1>Logowanie</h1>
         <a href="{% url 'register' %}"><span class="grayed nol">Nie masz konta?</span> Zarejestuj się</a><br>

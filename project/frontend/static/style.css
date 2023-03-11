@@ -654,11 +654,7 @@ li img {
     margin-bottom: 0;
 }
 .logincontainer {
-    background-color: rgb(251, 207, 40);
-background-image:  url("https://media.tenor.com/Frl3OPOOztUAAAAC/pornhub-intro-download.gif");
-background-size: cover;
-background-position: 75% 25%;
-background-repeat: no-repeat;
+    
 }
 .login-form {
     margin-top: 5vh;
@@ -695,3 +691,11 @@ background-repeat: no-repeat;
 .nomt {
     margin-top: 1vh !important;
 }
+#login-container-video {
+    position: fixed;
+    left: 8vw;
+    bottom: 0;
+    min-width: 92%;
+    min-height: 100%;
+    z-index: -3;
+  }
