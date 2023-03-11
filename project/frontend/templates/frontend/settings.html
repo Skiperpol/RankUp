@@ -3,24 +3,22 @@
 {% block content %}
 
 <div id="container">
-    {% if user.is_authenticated %}
-        <h1>{{user.username}}</h1>
-    {% else %}
-        <h1>Main!</h1>
-    {% endif %}
+    <video autoplay muted loop id="login-container-video">
+        <source src="/media/valorant.mp4" type="video/mp4">
+      </video>
+    <div id="registerinner-wrapper">
+        <!-- form.instance.coś daje tekst tego co chcemy uzyskać np email a form.coś daje nam ten tekst w inpucie gotowy do zmiany -->
 
-    <a href="{% url 'register' %}">Rejestracja</a><br>
-    <a href="{% url 'login_web' %}">Logowanie</a><br>
-    <a href="{% url 'main' %}">Main</a><br>
-
-    <!-- form.instance.coś daje tekst tego co chcemy uzyskać np email a form.coś daje nam ten tekst w inpucie gotowy do zmiany -->
-
-    <h1>Your profile</h1>
-    {{ form.instance.email }}<br>
-    <form method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Update</button>
-    </form>
-    </div>  
+        <h1>{{ user }}</h1>
+        <!-- {{ form.instance.email }}<br> -->
+        <form class="register-form" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="defaultbutton" type="submit">Update</button>
+        </form>
+    </div> 
+</div> 
+<script>
+    side_menu.classList.add("black")
+</script> 
 {% endblock %}

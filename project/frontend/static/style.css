@@ -610,6 +610,9 @@ li img {
     margin-right: -2vh !important;
     float: right !important;
 }
+.jakas p{
+    margin-left: 0 !important;
+}
 .profile-teams {
     margin: 0 !important;
     margin-top: 10vh !important;
@@ -653,13 +656,22 @@ li img {
 #logininner-wrapper h1 {
     margin-bottom: 0;
 }
-.logincontainer {
-    
-}
+
 .login-form {
     margin-top: 5vh;
 }
 .login-form input {
+    padding: 5px;
+    font-size: 16px;
+    border-width: 0px;
+    border-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: solid;
+    border-radius: 1px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
+.register-form input {
     padding: 5px;
     font-size: 16px;
     border-width: 0px;
