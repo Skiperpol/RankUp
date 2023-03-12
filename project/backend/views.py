@@ -77,7 +77,7 @@ def player_site(request, playernick):
             'team_member': None,
         }
         if Team.objects.filter(creator=user.email).exists():
-            team_creator=Team.objects.get(creator=user.email)
+            team_creator=Team.objects.filter(creator=user.email)
             context['team']=team_creator
         
         if Team.objects.filter(players__email=user.email).exists():

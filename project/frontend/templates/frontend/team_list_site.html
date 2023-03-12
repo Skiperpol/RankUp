@@ -11,9 +11,9 @@
 
                 <ol>
                     {% for team in teams %}
-                    <a href="{% url 'team_site' teamname=team.nazwa %}"><div class="players-list-div"><div class="float-right">123pkt</div><li><span></span>
+                    <a href="{% url 'team_site' teamname=team.nazwa %}"><div class="players-list-div"><li><span></span>
                         {% if team.zdjecie %}<img src="{{ team.zdjecie.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
-                        <div>{{ team }}</div></li></div></a>
+                        <div>{{ team }}</div><div class="float-right">123pkt</div></li></div></a>
                     {% endfor %}
                 </ol>
             </div>

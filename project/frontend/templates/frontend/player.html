@@ -12,7 +12,7 @@
             </div>
             <div class="profile-menu"><div class="active_nav">Info</div><div>Zaproś do drużyny</div><div>Statystyki</div>
                 <div class="jakas">{% if user == player %}
-                    <p><a href="{% url 'settings' %}">Ustawienia</a></p>
+                    <a href="{% url 'settings' %}">Ustawienia</a>
                     {% else %}
                     Zgłoś gracza
                     {% endif %}
@@ -24,19 +24,33 @@
                 <div>Ranking:  <span>{{ player.punkty }} punkty</span></div>
                 <div>Winrate: <span>100%</span></div>
             </div>
-            <h1 class="profile-teams">Drużyny<a href="{% url 'create_team' %}" style="padding-left: 10px; border: 1px solid;">Stwórz drużynę</a></h1>
+            <h1 class="profile-teams">Drużyny{% if user.is_authenticated %}{% if user == player %}<span class="jakas create_team"><a href="{% url 'create_team' %}">Stwórz drużynę</a></span>{% endif %}{% endif %}</h1>
             <hr>
             {% if team %}
-                <a href="{% url 'team_site' teamname=team.nazwa %}">{{team}}</a><br>
+                <h3>Kapitan</h3>
+                <hr>
+                <ol>
+                    {% for t in team %}
+                    <a href="{% url 'team_site' teamname=t.nazwa %}"><div class="players-list-div"><li><span></span>
+                    {% if t.zdjecie %}<img src="{{ t.zdjecie.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
+                    <div>{{ t }}</div><div class="float-right">123pkt</div></li></div></a>
+                    {% endfor %}
+                </ol>
             {% else %}
-                <p>Użytkownik nie jest kapitanem żadnej drużyny</p><br>
+                <p class="ifcaptain">Nie jesteś kapitanem żadnej drużyny</p><br>
             {% endif %}
             {% if team_member %}
+            <h3>Członek</h3>
+            <hr>
+            <ol>
             {% for team in team_member %}
-                <a href="{% url 'team_site' teamname=team.nazwa %}">{{team}}</a><br>
+                <a href="{% url 'team_site' teamname=team.nazwa %}"><div class="players-list-div"><li><span></span>
+                {% if team.zdjecie %}<img src="{{ team.zdjecie.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
+                <div>{{ team }}</div><div class="float-right">123pkt</div></li></div></a>
             {% endfor %}
+            </ol>
             {% else %}
-            <p>Użytkownik nie należy żadnej drużyny</p><br>
+            <p class="ifcaptain">Użytkownik nie należy żadnej drużyny</p><br>
             {% endif %}
 
 
