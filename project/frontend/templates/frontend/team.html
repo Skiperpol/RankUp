@@ -2,12 +2,30 @@
 
 {% block content %}        
     <div id="container" class="player-detail-container team-detail-container">
-        <div id="inner-wrapper" class="playerinner-wrapper">
+        <div id="inner-wrapper" class="playerinner-wrapper teamdetail-inner-wrapper">
         <!-- ZAWARTOSC -->
         <!-- JEŚLI SIĘ ZALOGUJESZ NA KONTO ZAŁOŻYCIELA DRUŻYNY TO BĘDZIESZ MÓGŁ DODAWAĆ I USUWAĆ GRACZY -->
-            <img class="team-detail-img" src="{{ team.zdjecie.url }}" alt="">
-        <h1>{{ team }}</h1>
-        <h2>Założyciel drużyny to {{team.creator}}</h2>
+            {% if team.zdjecie %}<img src="{{ team.zdjecie.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
+            <div id="profile-flex">
+                <h1>{{ team.nazwa }}</h1>
+                <p>{{ team.creator }}</p>
+                <div class="grayed">{{ punkty }}</div>
+                <div class="grayed bio">{{ team.opis }}</div>
+            </div>
+            
+        <div class="profile-menu"><h1>Skład</h1></div>
+        <hr>
+        <div class="profile-info">
+            <a href="{% url 'player_site' playernick=creator.nick %}"><div class="players-list-div"><li><span></span>
+                {% if creator.avatar %}<img src="{{ creator.avatar.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
+                <div>{{ creator.nick }}</div><img class="crown" src="https://cdn-icons-png.flaticon.com/512/6941/6941697.png" alt=""><div class="float-right">{{creator.punkty}}pkt</div></li></div></a>
+            {% for player in team.players.all %}
+                <a href="{% url 'player_site' playernick=player.nick %}"><div class="players-list-div"><li><span></span>
+                {% if player.avatar %}<img src="{{ player.avatar.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
+                <div>{{ player.nick }}</div><div class="float-right">{{player.punkty}}pkt</div></li></div></a>
+            {% endfor %}
+        </div>
+
         {% if team.creator == user.email %}
             <h2>DODAJ GRACZA DO DRUŻYNY</h2>
             {% for user in users %}
@@ -36,10 +54,6 @@
                 </select>
                 <br>
         {% endif %}
-        <h2>GRACZE W TEJ DRUŻYNIE</h2>
-        {% for player in team.players.all %}
-            {{ player.username }}<br>
-        {% endfor %}
     </div>
 </div>
 <script>

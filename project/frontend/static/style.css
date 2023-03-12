@@ -509,7 +509,7 @@ li img {
     color: white !important;
     font-size: 1.5rem;
 }
-#teamdetail-inner-wrapper {
+.teamdetail-inner-wrapper {
     width: auto;
     height: auto;
     margin-top: 35vh;
@@ -517,7 +517,9 @@ li img {
     padding-left: 10%;
     color: white !important;
     font-size: 1.5rem;
-    text-align: center;
+}
+.teamdetail-inner-wrapper .profile-menu h1 {
+    margin-left: 0 !important;
 }
 #zmiany {
     margin-top: 10vh;
@@ -791,4 +793,8 @@ align-content: flex-end;
 }
 .bio {
     letter-spacing: 0 !important;
+}
+.playerinner-wrapper li .crown {
+    border-radius: 0 !important;
+    height: 1.3em !important;
 }
