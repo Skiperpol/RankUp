@@ -41,7 +41,8 @@ class UserUpdate(forms.ModelForm):
 class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
-        fields = ['nazwa', 'opis', 'zdjecie','creator']
+        fields = ['nazwa', 'opis', 'zdjecie','creator','punkty']
         widgets = {
             'creator': forms.HiddenInput(),
+            'punkty': forms.HiddenInput(),
         }

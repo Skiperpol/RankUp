@@ -27,26 +27,26 @@ def team_site(request, teamname):
     users = CustomUser.objects.filter()
 
     if request.method == 'POST':
-        email = request.POST["player"]
-        if email:
+        type = request.POST.get('type')
+        email = request.POST.get('email')
+        if type == "delete":
+            user = get_user_model().objects.get(email=email)
+            team.players.remove(user)
+            return redirect('team_site', teamname=teamname)
+        elif type == "add":
             user = get_user_model().objects.get(email=email)
             team.players.add(user)
             return redirect('team_site', teamname=teamname)
 
-
-
     new_users = []
-
     for user in users:
         nalezy = False
         for team_user in team.players.all():
             if user.nick == team_user.nick:
                 nalezy = True
         if nalezy == False:
-            new_users.append(user)
-    print(new_users)
-
-
+            if team.creator != user.email:
+                new_users.append(user)
 
     template = loader.get_template('frontend/team.html')
     context = {

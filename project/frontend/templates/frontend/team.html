@@ -3,18 +3,38 @@
 {% block content %}
     <div id="container">
         <!-- ZAWARTOSC -->
+        <!-- JEŚLI SIĘ ZALOGUJESZ NA KONTO ZAŁOŻYCIELA DRUŻYNY TO BĘDZIESZ MÓGŁ DODAWAĆ I USUWAĆ GRACZY -->
         <h1>{{ team }}</h1>
-        <form method="post">
-            {% csrf_token %}
-            <select name="player" multiple>
-                {% for user in users %}
-                    <option value="{{user.email}}">{{user.nick}}</option>
-                {% endfor %}
-            </select>
-            <br>
-            <button type="submit">Dodaj gracza do drużyny</button>
-        </form>
+        <h2>Założyciel drużyny to {{team.creator}}</h2>
+        {% if team.creator == user.email %}
+            <h2>DODAJ GRACZA DO DRUŻYNY</h2>
+            {% for user in users %}
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" id="type" name="type" value="add">
+                <input type="hidden" name="email" value="{{user.email}}">
+                {{user.nick}} <button type="submit">ADD</button>
+            </form>
+            {% endfor %}
 
+            <h2>USUŃ GRACZA Z DRUŻYNY</h2>
+            {% for player in team.players.all %}
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" id="type" name="type" value="delete">
+                <input type="hidden" name="email" value="{{player.email}}">
+                {{ player.nick }} <button type="submit">REMOVE</button>
+            </form>
+            
+            {% endfor %}
+                <select name="player" multiple>
+                    {% for user in users %}
+                        <option value="{{user.email}}">{{user.nick}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+        {% endif %}
+        <h2>GRACZE W TEJ DRUŻYNIE</h2>
         {% for player in team.players.all %}
             {{ player.username }}<br>
         {% endfor %}

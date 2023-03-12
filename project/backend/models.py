@@ -31,6 +31,7 @@ class Team(models.Model):
     opis = models.CharField(max_length=200, null=True, blank=True)
     zdjecie = models.ImageField(upload_to='images/', null=True, blank=True)
     creator = models.EmailField()
+    punkty = models.IntegerField(default=0)
     players = models.ManyToManyField('CustomUser')
 
     def __str__(self):
