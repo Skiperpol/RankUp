@@ -1,9 +1,11 @@
 {% extends 'frontend/base.html' %}
 
-{% block content %}
-    <div id="container">
+{% block content %}        
+    <div id="container" class="player-detail-container team-detail-container">
+        <div id="inner-wrapper" class="playerinner-wrapper">
         <!-- ZAWARTOSC -->
         <!-- JEŚLI SIĘ ZALOGUJESZ NA KONTO ZAŁOŻYCIELA DRUŻYNY TO BĘDZIESZ MÓGŁ DODAWAĆ I USUWAĆ GRACZY -->
+            <img class="team-detail-img" src="{{ team.zdjecie.url }}" alt="">
         <h1>{{ team }}</h1>
         <h2>Założyciel drużyny to {{team.creator}}</h2>
         {% if team.creator == user.email %}
@@ -39,4 +41,8 @@
             {{ player.username }}<br>
         {% endfor %}
     </div>
+</div>
+<script>
+    side_menu.classList.add("black")
+</script>
 {% endblock %}
