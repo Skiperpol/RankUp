@@ -53,13 +53,13 @@ a {
     border-bottom-right-radius: 10px;
     font-size: 1rem !important;
     letter-spacing: .3rem;
-    background-color: #fe4554;
+    background-color: #ff2138;
     padding: 1vh 2vh 1vh 3vh;
     margin-bottom: 3vh;
 }
 .color_red {
-    color: #fe4554;
-    text-shadow: 1px 0px 3px #fe4554;
+    color: #ff2138;
+    text-shadow: 1px 0px 3px #ff2138;
 
 }
 #container_bc {
@@ -160,22 +160,22 @@ h1, h2, h3, h4, h5{
     margin-left: 2%;
     margin-right: 2%;
     background-color: transparent;
-    border: 5px solid #fe4554;
+    border: 5px solid #ff2138;
     text-transform: uppercase;
-    /* background-color: #fe4554; */
+    /* background-color: #ff2138; */
     transition: all .3s ;
 }
 
 #tournaments-list-more:hover { 
-    background-color: #fe4554;
+    background-color: #ff2138;
 }
 /* #tournaments-list-more::before {
     content: "D";
     user-select: none;
-    color: #fe4554;
+    color: #ff2138;
     top: 0;
     padding: 2vh 4vh 2vh 4vh;
-    background-color: #fe4554;
+    background-color: #ff2138;
     position: absolute;
     right: -50vw;
     width: 50vw;
@@ -226,7 +226,7 @@ h1, h2, h3, h4, h5{
 .tournament-card button{  
     padding: 1vh 3vh 1vh 3vh ;
     color: #ffff;
-    background-color: #fe4554;
+    background-color: #ff2138;
     border: none;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -239,7 +239,7 @@ h1, h2, h3, h4, h5{
 }
 
 .tournament-card button:hover{  
-    background-color: #fe45547e;
+    background-color: #ff21387e;
 }
 #teams-list {
     position: relative;
@@ -391,6 +391,7 @@ letter-spacing: .2em;
     color: white !important;
 }
 .float-right {
+    margin-left: auto;
     float: right;
 }
 .float-left {
@@ -606,16 +607,37 @@ li img {
     margin-left: .5vw; 
 }
 .jakas {
-    border: static black 2px;
-    margin-right: -2vh !important;
+    letter-spacing: 0 !important;
+    padding: 1vh 2vh 1vh 2vh !important;
+    color: #ffff !important;
+    background-color: #ff2138;
+    border: none;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-right: 0vh !important;
     float: right !important;
+    font-size: 1.4rem;
+    font-weight: bold;
+    transition: all .2s;
+}
+
+.jakas:hover { 
+    background-color: #ff21387e;
 }
 .jakas p{
     margin-left: 0 !important;
 }
 .profile-teams {
+    width: 100%;
     margin: 0 !important;
     margin-top: 10vh !important;
+    margin-bottom: 1vh !important;
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-end;
+align-content: flex-end;
 }
 #logininner-wrapper {
     text-align: center;
@@ -638,7 +660,7 @@ li img {
 .defaultbutton{  
     padding: 1vh 3vh 1vh 3vh ;
     color: #ffff;
-    background-color: #fe4554;
+    background-color: #ff2138;
     border: none;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -651,7 +673,7 @@ li img {
 }
 
 .defaultbutton:hover{  
-    background-color: #fe45547e;
+    background-color: #ff21387e;
 }
 #logininner-wrapper h1 {
     margin-bottom: 0;
@@ -711,3 +733,22 @@ li img {
     min-height: 100%;
     z-index: -3;
   }
+.ifcaptain {
+    margin-left: 0 !important;
+}
+.create_team {
+    margin-right: 0 !important;
+}
+.playerinner-wrapper li img {
+    height: 7vh !important;
+    width: auto !important;
+    border-radius: 9999px !important;
+    margin-right: 1% !important;
+    margin-left: 1% !important;
+    margin-bottom: 0 !important;
+}
+.player-detail-container li span::before {
+    counter-increment: a !important; 
+    content: ""; 
+    color: white;
+}

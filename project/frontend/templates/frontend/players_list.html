@@ -10,9 +10,9 @@
             <div id="tournament-content">
                 <ol>
                     {% for player in players %}
-                    <a href="{% url 'player_site' playernick=player.nick %}"><div class="players-list-div"><div class="float-right">{{player.punkty}}pkt</div><li><span></span>
+                    <a href="{% url 'player_site' playernick=player.nick %}"><div class="players-list-div"><li><span></span>
                         {% if player.avatar %}<img src="{{ player.avatar.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
-                        <div>{{ player.nick }}</div></li></div></a>
+                        <div>{{ player.nick }}</div><div class="float-right">{{player.punkty}}pkt</div></li></div></a>
                     {% endfor %}
                 </ol>
             </div>
