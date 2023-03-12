@@ -26,8 +26,10 @@
             </div>
             <h1 class="profile-teams">Drużyny<a href="{% url 'create_team' %}" style="padding-left: 10px; border: 1px solid;">Stwórz drużynę</a></h1>
             <hr>
-            {% if team %}
+            {% if teams %}
+            {% for team in teams %}
                 <a href="{% url 'team_site' teamname=team.nazwa %}">{{team}}</a><br>
+            {% endfor %}
             {% else %}
                 <p>Użytkownik nie jest kapitanem żadnej drużyny</p><br>
             {% endif %}

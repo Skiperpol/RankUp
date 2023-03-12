@@ -22,6 +22,14 @@ class CustomUser(AbstractUser):
 class Tournament(models.Model):
     nazwa = models.CharField(max_length=100, unique=True)
     zdjecie = models.ImageField(upload_to='images/', null=True, blank=True)
+    # nagroda
+    # data
+    # ilosc_graczy
+    # druzyny
+    # regulamin
+    # organizator
+    # rodzaj_gry
+    # format_rozgrywek 5vs5 1vs1
 
     def __str__(self):
         return self.nazwa

@@ -39,10 +39,11 @@ class UserUpdate(forms.ModelForm):
 
 
 class TeamForm(forms.ModelForm):
+    creator = forms.EmailField(widget=forms.HiddenInput(), required=False)
+
     class Meta:
         model = Team
-        fields = ['nazwa', 'opis', 'zdjecie','creator','punkty']
+        fields = ['nazwa', 'opis', 'zdjecie','punkty']
         widgets = {
-            'creator': forms.HiddenInput(),
             'punkty': forms.HiddenInput(),
         }
