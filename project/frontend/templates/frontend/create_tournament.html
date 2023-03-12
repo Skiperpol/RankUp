@@ -2,8 +2,8 @@
 
 {% block content %}
 <div id="container">
-    <h1>Stwórz drużynę</h1>
-    <form method="post">
+    <h1>Stwórz turniej</h1>
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Wyślij</button>
