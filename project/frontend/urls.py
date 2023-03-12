@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import index, team_site, tournament_site, tournament_list_site, team_list_site, contact_site
-from backend.views import register, main, login_web, logout_view, settings, player_site, player_list_site, create_team
+from backend.views import register, main, login_web, logout_view, settings, player_site, player_list_site, create_team, create_tournament
 
 urlpatterns = [
     path('', index, name='index'),
@@ -12,7 +12,7 @@ urlpatterns = [
     path("teams/", team_list_site, name="team_list_site"),
     path("contact/", contact_site, name="contact_site"),
     path("create_team/", create_team, name="create_team"),
-
+    path("create_tournament/", create_tournament, name="create_tournament"),
 
 
 

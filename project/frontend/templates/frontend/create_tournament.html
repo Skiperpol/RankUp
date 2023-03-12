@@ -1,0 +1,12 @@
+{% extends 'frontend/base.html' %}
+
+{% block content %}
+<div id="container">
+    <h1>Stwórz turniej</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Wyślij</button>
+    </form>
+</div>
+{% endblock %}

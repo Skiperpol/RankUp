@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from backend.models import Team
+from backend.models import Team, Tournament
 
 class userRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text="Podaj prawidłowy email", required=True)
@@ -47,3 +47,17 @@ class TeamForm(forms.ModelForm):
         widgets = {
             'punkty': forms.HiddenInput(),
         }
+
+
+class TournamentForm(forms.ModelForm):
+    creator = forms.EmailField(widget=forms.HiddenInput(), required=False)
+    zdjecie = forms.ImageField(required=False)    
+
+    class Meta:
+        model = Tournament
+        fields = ['nazwa', 'opis', 'nagroda', 'data', 'ilosc_druzyn', 'druzyny', 'rodzaj_gry', 'format_rozgrywek']
+        widgets = {
+            'data': forms.DateInput(attrs={'type': 'datetime-local'}),
+            'druzyny': forms.HiddenInput(),
+        }
+

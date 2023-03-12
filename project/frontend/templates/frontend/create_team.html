@@ -9,7 +9,6 @@
     <h1>Stwórz drużynę</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="hidden" id="creator" name="creator" value="{{user.email}}">
         {{ form.as_p }}
         <button class="defaultbutton" type="submit">Wyślij</button>
     </form>

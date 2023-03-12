@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model, login, authenticate
-from .forms import userRegistrationForm, UserData, UserUpdate, TeamForm
+from .forms import userRegistrationForm, UserData, UserUpdate, TeamForm, TournamentForm
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from backend.models import Team, Tournament, CustomUser
@@ -130,5 +130,23 @@ def create_team(request):
         else:
             form = TeamForm()
         return render(request, 'frontend/create_team.html', {'form': form})
+    else:
+        return redirect('/')
+    
+
+def create_tournament(request):
+    user = request.user
+    if user.is_authenticated:
+        if request.method == 'POST':
+            form = TournamentForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.instance.creator=request.user.email
+                form.save()
+                return redirect('/tournaments')
+        else:
+            form = TournamentForm()
+            form.fields['data'].label = "Data rozpoczęcia turnieju"
+            form.fields['ilosc_druzyn'].label = "Maksymalna ilość drużyn"
+        return render(request, 'frontend/create_tournament.html', {'form': form})
     else:
         return redirect('/')

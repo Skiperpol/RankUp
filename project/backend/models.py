@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import MaxValueValidator
 
 
 class CustomUser(AbstractUser):
@@ -20,16 +21,28 @@ class CustomUser(AbstractUser):
 
 
 class Tournament(models.Model):
+    gry = (
+        ('League of Legends', 'League of Legends'),
+        ('Valorant', 'Valorant'),
+        ('Counter-Strike: Global Offensive', 'Counter-Strike: Global Offensive'),
+    )
+    formaty = (
+        ('5vs5','5vs5'),
+        ('2vs2','2vs2'),
+        ('1vs1','1vs1'),
+    )
+
     nazwa = models.CharField(max_length=100, unique=True)
-    zdjecie = models.ImageField(upload_to='images/', null=True, blank=True)
-    # nagroda
-    # data
-    # ilosc_graczy
-    # druzyny
+    opis = models.CharField(max_length=200, null=True, blank=True)
+    zdjecie = models.ImageField(upload_to='images/', blank=True, default="images/1.png")
+    nagroda = models.CharField(max_length=100, null=True, blank=True)
+    data = models.DateTimeField()
+    ilosc_druzyn = models.IntegerField(validators=[MaxValueValidator(32)])
+    druzyny = models.ManyToManyField('Team',null=True, blank=True)
     # regulamin
-    # organizator
-    # rodzaj_gry
-    # format_rozgrywek 5vs5 1vs1
+    creator = models.EmailField()
+    rodzaj_gry = models.CharField(choices=gry, max_length=100)
+    format_rozgrywek = models.CharField(choices=formaty, max_length=10)
 
     def __str__(self):
         return self.nazwa
