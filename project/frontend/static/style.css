@@ -426,6 +426,9 @@ letter-spacing: .2em;
 }
 #tournament-content {
     margin-top: 10vh;
+}
+#tournament-content-detailed {
+    margin-top: 10vh;
     background-color: #101319;
 }
 
