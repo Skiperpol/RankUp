@@ -1,12 +1,20 @@
 {% extends 'frontend/base.html' %}
 
 {% block content %}
-<div id="container">
+<div id="container" class="logincontainer">
+    <video autoplay muted loop id="login-container-video">
+        <source src="/media/valorant.mp4" type="video/mp4">
+      </video>
+    <div id="logininner-wrapper"> 
     <h1>Stwórz drużynę</h1>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Wyślij</button>
+        <button class="defaultbutton" type="submit">Wyślij</button>
     </form>
 </div>
+</div>
+<script>
+    side_menu.classList.add("black")
+</script>
 {% endblock %}

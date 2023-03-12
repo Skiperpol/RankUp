@@ -4,6 +4,7 @@ body {
     padding: 0;
     overflow-x: hidden;
 }
+
 .ovflow-hidden {
     overflow-y: hidden;
 }
@@ -75,6 +76,7 @@ a {
     font-family: 'Poppins', sans-serif;
 }
 #side_menu {
+    border-right: 1px solid rgb(74, 74, 74);
     width: 13vw;
     height: calc(100vh - 2vw);
     position: fixed;
@@ -134,6 +136,13 @@ h1, h2, h3, h4, h5{
     border-bottom-right-radius: 20px;
     font-size: 2.3rem;
     font-weight: bold;
+    transition: all .2s;
+}
+.play:hover { 
+    background-color: #8d1f2ccc;
+}
+a {
+    display: block;
 }
 #tournaments-list {
     position: relative;
@@ -427,6 +436,12 @@ letter-spacing: .2em;
     background-size: cover;
     background-image:linear-gradient(0deg, #101319 0%, #101319 20%, #101319a3 65%, rgba(255, 255, 255, 0) 100%), url("https://d2n34pb7vz7boc.cloudfront.net/images/backgrounds/stories.jpg"); 
 }
+#teamdetailcontainer {
+    
+    background-attachment: fixed;
+    background-position: top right;
+    background-size: cover;
+}
 #teams-list-container {
     background-attachment: fixed;
     background-position: top right;
@@ -494,6 +509,18 @@ li img {
     color: white !important;
     font-size: 1.5rem;
 }
+.teamdetail-inner-wrapper {
+    width: auto;
+    height: auto;
+    margin-top: 35vh;
+    padding-right: 10%;
+    padding-left: 10%;
+    color: white !important;
+    font-size: 1.5rem;
+}
+.teamdetail-inner-wrapper .profile-menu h1 {
+    margin-left: 0 !important;
+}
 #zmiany {
     margin-top: 10vh;
     margin-bottom: 2vh;
@@ -514,7 +541,8 @@ li img {
     left: 50%;
     transform: translate(-50%, 0);
 }
-
+.team-detail-img {
+}
 /* ------------------------------- */
 /* --------- profil -------------- */
 /* ------------------------------- */
@@ -529,6 +557,8 @@ li img {
     overflow-x: hidden;
     background: linear-gradient(0deg, rgba(16,19,25,1) 17%, rgba(31,31,31,1) 74%);
 }
+.team-detail-container {
+}
 .playerinner-wrapper {
     margin-top: 10vh !important;
     font-size: 1.2em !important;
@@ -537,8 +567,10 @@ li img {
 }
 
 .playerinner-wrapper img { 
+    animation-duration: 1s;
     height: 20vh;
-    width: auto;
+    width: 20vh;
+    object-fit: contain;
     border-radius: 9999px;
     margin-right: 1%;
     margin-left: 1%;
@@ -577,7 +609,6 @@ li img {
     align-content: flex-start;
 }
 .profile-menu div {
-    color: rgb(174, 174, 174);
     font-weight: bold;
     float: left;
     font-size: 1.4rem;
@@ -585,9 +616,15 @@ li img {
     width: auto;
     height: auto;
     padding: 2vh;
-    margin: -2vh;
-    margin-right: 5vw;
+    padding-bottom: 1vh;
+    margin-bottom: 1vh;
+    padding-top: 1vh;
+    background-color: rgb(58, 58, 69);
+    color: rgba(255, 255, 255, 0.58);
+    margin-right: 1vh;
+    border-radius: 10px;
     letter-spacing: .1rem;
+    transition: .1s all;
 }
 .profile-menu div:hover {
     color: white;
@@ -601,7 +638,7 @@ li img {
 .profile-info {
     font-size: 1.4rem;
     color: rgb(174, 174, 174);
-    margin-top: 7vh;
+    margin-top: 1vh;
 }
 .profile-info span { 
     margin-left: .5vw; 
@@ -610,19 +647,21 @@ li img {
     letter-spacing: 0 !important;
     padding: 1vh 2vh 1vh 2vh !important;
     color: #ffff !important;
-    background-color: #ff2138;
+    background-color: #ff2138 !important;
     border: none;
-    border-top-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
     margin-right: 0vh !important;
     float: right !important;
     font-size: 1.4rem;
     font-weight: bold;
-    transition: all .2s;
+    transition: .2s all ;
 }
 
 .jakas:hover { 
-    background-color: #ff21387e;
+    background-color: #ff21387e !important;
 }
 .jakas p{
     margin-left: 0 !important;
@@ -751,4 +790,11 @@ align-content: flex-end;
     counter-increment: a !important; 
     content: ""; 
     color: white;
+}
+.bio {
+    letter-spacing: 0 !important;
+}
+.playerinner-wrapper li .crown {
+    border-radius: 0 !important;
+    height: 1.3em !important;
 }

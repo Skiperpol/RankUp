@@ -122,7 +122,7 @@ def create_team(request):
     user = request.user
     if user.is_authenticated:
         if request.method == 'POST':
-            form = TeamForm(request.POST)
+            form = TeamForm(request.POST, request.FILES)
             if form.is_valid():
                 form.instance.creator=request.user.email
                 form.save()

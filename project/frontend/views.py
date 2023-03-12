@@ -25,6 +25,8 @@ from django.contrib.auth import get_user_model
 def team_site(request, teamname):
     team = Team.objects.get(nazwa=teamname)
     users = CustomUser.objects.filter()
+    creator_mail = team.creator
+    creator = CustomUser.objects.get(email=creator_mail)
 
     if request.method == 'POST':
         type = request.POST.get('type')
@@ -52,6 +54,7 @@ def team_site(request, teamname):
     context = {
         "team":team,
         "users": new_users,
+        "creator": creator,
     }
     return HttpResponse(template.render(context, request))
     
