@@ -73,7 +73,7 @@ def player_site(request, playernick):
         player = CustomUser.objects.get(nick=playernick)
         context = {
             'player': player,
-            'team': None,
+            'teams': None,
             'team_member': None,
         }
         if Team.objects.filter(creator=user.email).exists():
