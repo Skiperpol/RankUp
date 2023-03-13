@@ -80,6 +80,7 @@
     <script>
         let container = document.getElementById("container");
         let side_menu = document.getElementById("side_menu");
+        side_menu.classList.remove("black")
         container.onscroll = function (e) {
             if (container.scrollTop > 300)  {
                 side_menu.classList.add("black")

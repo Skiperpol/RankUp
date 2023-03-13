@@ -34,7 +34,7 @@
             </form>
                 
             {% else %}
-                <h1 class="float-right"><button id="show_teams" data-teams="{{teams}}">Weź udział</button></h1>
+                <div class="float-right tour-button"><button id="show_teams" class="defaultbutton" data-teams="{{teams}}">Weź udział</button></div>
             {% endif %}
             <div class="clear"><span class="grayed bold">10.02.2032</span></div>
             <div><span class="grayed">Hosted by Acer &#x2022; Bo5 &#x2022; 5vs5 &#x2022; 5.000zł</span></div>
@@ -44,70 +44,97 @@
                     <tr class="drabinka">
                         <td class="kolumna">
                             <div>Runda 1</div>
-                            <div class="kolumna-mecze firstround">
-                                <div class="mecz">
-                                    <div class="team1">Druzyna 1</div>
-                                    <div class="meczwynik team1">0</div>
-                                    <div class="team2">Druzyna 2</div>
-                                    <div class="meczwynik team2">1</div>
-                                    <span></span>
-                                </div>
-                                <div class="mecz">
-                                    <div class="team1">Druzyna 1</div>
-                                    <div class="meczwynik team1">0</div>
-                                    <div class="team2">Druzyna 2</div>
-                                    <div class="meczwynik team2">1</div>
-                                    <span></span>
-                                </div>
-                                <div class="mecz">
-                                    <div class="team1">Druzyna 1</div>
-                                    <div class="meczwynik team1">0</div>
-                                    <div class="team2">Druzyna 2</div>
-                                    <div class="meczwynik team2">1</div>
-                                    <span></span>
-                                </div>
-                                <div class="mecz">
-                                    <div class="team1">Druzyna 1</div>
-                                    <div class="meczwynik team1">0</div>
-                                    <div class="team2">Druzyna 2</div>
-                                    <div class="meczwynik team2">1</div>
-                                    <span></span>
-                                </div>
+                            <div class="kolumna-mecze {% if rozgrywki|length > 8 %}extraround {% else %} firstround{% endif %}">
+                                {% for rozgrywka in rozgrywki %}
+                                    {% if rozgrywka.faza == 0 %}
+                                    <div class="mecz">
+                                        <div class="team1">{{ rozgrywka.druzyna1 }}</div>
+                                        <div class="meczwynik team1">0</div>
+                                        <div class="team2">{{ rozgrywka.druzyna2 }}</div>
+                                        <div class="meczwynik team2">1</div>
+                                        <span></span>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </td>
                         <td class="kolumna">
                             <div>Runda 2</div>
                             <div class="kolumna-mecze secondround">
-                                <div class="mecz">
-                                    <div class="team1">Druzyna 1</div>
-                                    <div class="meczwynik team1">0</div>
-                                    <div class="team2">Druzyna 2</div>
-                                    <div class="meczwynik team2">1</div>
-                                    <span></span>
-                                </div>
-                                <div class="mecz">
-                                    <div class="team1">Druzyna 1</div>
-                                    <div class="meczwynik team1">0</div>
-                                    <div class="team2">Druzyna 2</div>
-                                    <div class="meczwynik team2">1</div>
-                                    <span></span>
-                                </div>
+                                {% for rozgrywka in rozgrywki %}
+                                    {% if rozgrywka.faza == 1 %}
+                                    <div class="mecz {% if rozgrywki|length < 5 %}final{% endif %}">
+                                        <div class="team1">{{ rozgrywka.druzyna1 }}</div>
+                                        <div class="meczwynik team1">0</div>
+                                        <div class="team2">{{ rozgrywka.druzyna2 }}</div>
+                                        <div class="meczwynik team2">1</div>
+                                        <span></span>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </td>
+                        {% if rozgrywki|length > 4 %}
                         <td class="kolumna">
                             <div>Runda 3</div>
-                            <div class="kolumna-mecze">
-                                <div class="mecz final">
-                                    <div class="team1">Druzyna 1</div>
-                                    <div class="meczwynik team1">0</div>
-                                    <div class="team2">Druzyna 2</div>
-                                    <div class="meczwynik team2">1</div>
-                                </div>
+                            <div class="kolumna-mecze thirdround">
+                                {% for rozgrywka in rozgrywki %}
+                                    {% if rozgrywka.faza == 2 %}
+                                    <div class="mecz {% if rozgrywki|length < 9 %}final{% endif %}">
+                                        <div class="team1">{{ rozgrywka.druzyna1 }}</div>
+                                        <div class="meczwynik team1">0</div>
+                                        <div class="team2">{{ rozgrywka.druzyna2 }}</div>
+                                        <div class="meczwynik team2">1</div>
+                                        <span></span>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </td>
+                        {% endif %}
+                        {% if rozgrywki|length > 8 %}
+                        <td class="kolumna">
+                            <div>Runda 4</div>
+                            <div class="kolumna-mecze">
+                                {% for rozgrywka in rozgrywki %}
+                                    {% if rozgrywka.faza == 3 %}
+                                    <div class="mecz {% if rozgrywki|length < 17 %}final{% endif %}">
+                                        <div class="team1">{{ rozgrywka.druzyna1 }}</div>
+                                        <div class="meczwynik team1">0</div>
+                                        <div class="team2">{{ rozgrywka.druzyna2 }}</div>
+                                        <div class="meczwynik team2">1</div>
+                                        <span></span>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </td>
+                        {% endif %}
+                        {% if rozgrywki|length > 16 %}
+                        <td class="kolumna">
+                            <div>Runda 5</div>
+                            <div class="kolumna-mecze">
+                                {% for rozgrywka in rozgrywki %}
+                                    {% if rozgrywka.faza == 4 %}
+                                    <div class="mecz {% if rozgrywki|length < 33 %}final{% endif %}">
+                                        <div class="team1">{{ rozgrywka.druzyna1 }}</div>
+                                        <div class="meczwynik team1">0</div>
+                                        <div class="team2">{{ rozgrywka.druzyna2 }}</div>
+                                        <div class="meczwynik team2">1</div>
+                                        <span></span>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </td>
+                        {% endif %}
                     </tr>
                 </table>
             </div>
+            <h1>ROZGRYWKI dla testu</h1>
+            {% for rozgrywka in rozgrywki %}
+            {{ rozgrywka }} <br>
+            {% endfor %}
             <h1>ZAPISANE DRUŻYNY</h1>
             {% for team in tournament.druzyny.all %}
                 {{team}}<br>
@@ -141,7 +168,7 @@
         container.style.backgroundSize = "auto 100vh";
         container.style.backgroundPosition = "top right";
         container.style.backgroundAttachment = "fixed";
-        side_menu.classList.add("black")
+        
     </script>       
 
     <!-- NIC TEN SKRYPT NIE ROBI, POPROSTU SPRAWDZAŁEM JAK SIĘ PRZESYŁA DANE Z DJANGO DO JS -->

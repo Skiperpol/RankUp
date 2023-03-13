@@ -95,6 +95,7 @@ def tworzenie_rozgrywek(ilosc_faz, max_ilosc_druzyn, lista_druzyn, turniej, ilos
 
 import random
 def tournament_site(request, tournamentname):
+    rozgrywki = Rozgrywki.objects.filter(nazwa_turnieju=tournamentname)
     tournament = Tournament.objects.get(nazwa=tournamentname)
     teams = Team.objects.filter(creator = request.user.email)
     template = loader.get_template('frontend/tournament.html')
@@ -118,14 +119,15 @@ def tournament_site(request, tournamentname):
                 tworzenie_rozgrywek(3,8, druzyny, tournament, ilosc_druzyn)
                 return redirect('tournament_site', tournamentname = tournament.nazwa)
             elif ilosc_druzyn<=16:
-                tworzenie_rozgrywek(4,15, druzyny, tournament, ilosc_druzyn)
+                tworzenie_rozgrywek(4,16, druzyny, tournament, ilosc_druzyn)
                 return redirect('tournament_site', tournamentname = tournament.nazwa)
             elif ilosc_druzyn<=32:
-                tworzenie_rozgrywek(5,31, druzyny, tournament, ilosc_druzyn)
+                tworzenie_rozgrywek(5,32, druzyny, tournament, ilosc_druzyn)
                 return redirect('tournament_site', tournamentname = tournament.nazwa)
     context = {
         "tournament":tournament,
         "teams": teams,
+        "rozgrywki": rozgrywki,
         "zapisana_druzyna": None,
     }
     for x in tournament.druzyny.all():

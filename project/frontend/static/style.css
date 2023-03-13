@@ -379,7 +379,11 @@ letter-spacing: .2em;
     letter-spacing: 0.4rem;
 }
 #name {
+    margin-top: 7vh;
     width: 70%;
+}
+.tour-button {
+    margin-top: 3vh;
 }
 .grayed {
     color: rgb(174, 174, 174);
@@ -411,25 +415,14 @@ letter-spacing: .2em;
 .clear {
     clear: both;
 }
-.float-right button {
-    letter-spacing: 0.1rem;
-    padding: 1.2vh 3vh 1.2vh 3vh ;
-    color: #ffff;
-    background-color: #16b2ca;
-    border: none;
-    border-radius: 10px;
-    font-weight: 400;
-    font-size: 1.3rem;
-    text-transform: uppercase;
-    margin-bottom: 1vh;
-    transition: all .2s;
-}
+
 #tournament-content {
     margin-top: 10vh;
 }
 #tournament-content-detailed {
     margin-top: 10vh;
     background-color: #101319;
+    overflow-x: auto !important;
 }
 
 
@@ -617,7 +610,7 @@ li img {
 .profile-menu div {
     font-weight: bold;
     float: left;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     transition: all .1s ease;
     width: auto;
     height: auto;
@@ -805,8 +798,9 @@ align-content: flex-end;
     height: 1.3em !important;
 }
 table {
-    height: 80vh;
-    overflow-x: scroll;
+    height: 90vh;
+    width: 200vw;
+    overflow-x: scroll !important;
 }
 .kolumna {
     display: flex;
@@ -838,13 +832,15 @@ height: 100%;
 }
 .mecz div {
     font-size: 1.2rem;
-    width: 50%;
+    width: 80%;
     float: left;
+}
+.mecz .meczwynik {
+    width: 20% !important;
 }
 .team1 {
     border-bottom: 1px solid white;
-    padding-bottom: .5vh;
-    content: "xd" !important;
+    padding-bottom: 1vh;
 }
 .team2 {
     padding-top: .5vh;
@@ -853,6 +849,7 @@ height: 100%;
     text-align: right;
 }
 .mecz {
+    width: 16vw;
     position: relative;
     background-color: #272f3c;
     border-radius: 0.8rem;
@@ -873,13 +870,31 @@ height: 100%;
     height: 8vh;
     /* do wywalenia */
 }
+.extraround .mecz:nth-of-type(even) span {
+    position: absolute;
+    top: -5% !important;
+    right: -2.5vw;
+    content: "";
+    width: 1px;
+    height: calc(5.5vh * 1) !important;
+    background-color: #ffffff !important;
+}
+.extraround .mecz:nth-of-type(odd) span {
+    position: absolute;
+    top: calc(50% - 1px) !important;
+    right: -2.5vw;
+    content: "";
+    width: 1px;
+    height: calc(5.5vh * 1) !important;
+    background-color: #ffffff !important;
+}
 .firstround .mecz:nth-of-type(odd) span {
     position: absolute;
     top: calc(50% - 1px);
     right: -2.5vw;
     content: "";
     width: 1px;
-    height: calc(10vh * 1);
+    height: calc(12vh * 1);
     background-color: #fff;
 }
 .secondround .mecz:nth-of-type(odd) span {
@@ -888,16 +903,16 @@ height: 100%;
     right: -2.5vw;
     content: "";
     width: 1px;
-    height: calc(10vh * 2);
+    height: calc(10.75vh * 2);
     background-color: #fff;
 }
 .secondround .mecz:nth-of-type(even) span {
     position: absolute;
-    top: calc(70% * -2);
+    top: calc(83% * -2);
     right: -2.5vw;
     content: "";
     width: 1px;
-    height: calc(9.5vh * 2);
+    height: calc(10.8vh * 2);
     background-color: #ffffff;
 }
 .firstround .mecz:nth-of-type(even) span {
@@ -909,12 +924,30 @@ height: 100%;
     height: calc(10vh * 1);
     background-color: #fff;
 }
+.thirdround .mecz:nth-of-type(odd) span {
+    position: absolute;
+    top: calc(50% - 1px);
+    right: -2.5vw;
+    content: "";
+    width: 1px;
+    height: calc(10vh * 3);
+    background-color: #fff;
+}
+.thirdround .mecz:nth-of-type(even) span {
+    position: absolute;
+    top: calc(118% * -2);
+    right: -2.5vw;
+    content: "";
+    width: 1px;
+    height: calc(9.5vh * 3);
+    background-color: #ffffff;
+}
 .mecz::after {
     position: absolute;
     top: calc(50% - 1px);
-    left: -2.7vw;
+    left: -2.6vw;
     content: "";
-    width: 2.7vw;
+    width: 2.6vw;
     height: 1px;
     background-color: #fff;
 }
@@ -927,7 +960,7 @@ height: 100%;
     height: 1px;
     background-color: #fff;
 } */
-.final::before, .firstround .mecz::after {
+.final::before, .firstround .mecz::after, .final span, .extraround .mecz::after{
     display: none;
   }
 #additionalbc {

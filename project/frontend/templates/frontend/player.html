@@ -36,7 +36,11 @@
                     {% endfor %}
                 </ol>
             {% else %}
+                {% if user == player %}
                 <p class="ifcaptain">Nie jesteś kapitanem żadnej drużyny</p><br>
+                {% else %}
+                <p class="ifcaptain">Użytkownik nie jest kapitanem żadnej drużyny</p><br>
+                {% endif %}
             {% endif %}
             {% if team_member %}
             <h3>Członek</h3>
@@ -59,7 +63,5 @@
             <hr>
         </div>  
     </div>
-    <script>
-           side_menu.classList.add("black")
-    </script>
+    
 {% endblock %}
