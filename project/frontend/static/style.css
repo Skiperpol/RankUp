@@ -385,12 +385,16 @@ letter-spacing: .2em;
 .tour-button {
     margin-top: 3vh;
 }
+.runda {
+    text-align: center;
+    width: 16vw;
+}
 .grayed {
     color: rgb(174, 174, 174);
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.1rem;
 }
 #tournament-nav {
-    margin-top: 7vh;
+    margin-top: 1vh;
     border-top: 1px solid rgb(174, 174, 174);
     overflow: auto;
 }
@@ -408,6 +412,10 @@ letter-spacing: .2em;
 .float-right {
     margin-left: auto;
     float: right;
+    margin-right: 5vw;
+}
+.dblarge {
+    font-size: 1.6rem !important;
 }
 .float-left {
     float: left;
@@ -583,6 +591,17 @@ li img {
     margin-top: 0%;
     margin-bottom: 0%;
 }
+.hnomb {
+    margin-bottom: 0;
+}
+.hnomb2 {
+    margin-top: 10vh;
+}
+.zapisana_druzyna {
+    
+    letter-spacing: 0.1rem;
+    color: #ff2138;
+}
 .playerinner-wrapper p {
     text-transform: none !important;
     float: left;
@@ -618,9 +637,9 @@ li img {
     padding-bottom: 1vh;
     margin-bottom: 1vh;
     padding-top: 1vh;
-    background-color: rgb(58, 58, 69);
     color: rgba(255, 255, 255, 0.58);
     margin-right: 1vh;
+    margin-left: -2vh;
     border-radius: 10px;
     letter-spacing: .1rem;
     transition: .1s all;
@@ -798,6 +817,7 @@ align-content: flex-end;
     height: 1.3em !important;
 }
 table {
+    margin-top: 5vh;
     height: 90vh;
     width: 200vw;
     overflow-x: scroll !important;
@@ -971,3 +991,24 @@ height: 100%;
     background-position: top;
     left: 15vw;
 }
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #101319 #272f3c;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #272f3c;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #101319;
+    border-radius: 14px;
+    border: 2px solid #5e5e5e;
+  }
