@@ -1,17 +1,63 @@
 {% extends 'frontend/base.html' %}
 
 {% block content %}
+    <style>
+        .popup {
+            position: fixed;
+            background-color: white;
+            border: 1px solid black;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            }
+    </style>
     <div id="t-container" class="tournament-detail-container">
         <!-- ZAWARTOSC -->
         <div id="inner-wrapper">
-            <h1 id="name" class="float-left">{{ tournament }}</h1><h1 class="float-right"><button>Weź udział</button></h1>
+            <h1 id="name" class="float-left">{{ tournament }}</h1>
+            {% if zapisana_druzyna is not None %}
+            <form method="POST">
+                {{zapisana_druzyna}}
+                {% csrf_token %}
+                <input type="hidden" id="type" name="type" value="remove">
+                <input type="hidden" name="nazwa" value="{{zapisana_druzyna}}">
+                <button type="submit">Zrezygnuj</button>
+            </form>
+                
+            {% else %}
+                <h1 class="float-right"><button id="show_teams" data-teams="{{teams}}">Weź udział</button></h1>
+            {% endif %}
             <div class="clear"><span class="grayed bold">10.02.2032</span></div>
             <div><span class="grayed">Hosted by Acer &#x2022; Bo5 &#x2022; 5vs5 &#x2022; 5.000zł</span></div>
             <div id="tournament-nav"><p class="active_nav">DRABINKA</p><p>MECZE</p><p>REGULAMIN</p></div>
             <div id="tournament-content">
                 <img src="https://media.istockphoto.com/id/1089779612/pl/wektor/drabinka-turniejowa-wektorowa.jpg?s=1024x1024&w=is&k=20&c=M911sQFndn9wcuyqMdjEj7BCXJ85nABXdYGYVUa7kg0=" alt="">
             </div>
+            <h1>ZAPISANE DRUŻYNY</h1>
+            {% for team in tournament.druzyny.all %}
+                {{team}}<br>
+            {% endfor %}
         </div>
+
+
+
+        <div id="wybor_druzyn" style="position: absolute; top: calc(50% - 150px); left: calc(50% - 150px); width: 300px;height: 300px;background-color: white;display: none;">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" id="type" name="type" value="add">
+                <label for="druzyna">Wybierz drużynę:</label><br>
+                <select name="druzyna" id="druzyna" size="4">
+                  {% for team in teams %}
+                    <option value="{{ team.nazwa }}">{{ team.nazwa }}</option>
+                  {% endfor %}
+                </select><br>
+                <button type="submit">Zapisz się</button>
+              </form>
+        </div>
+
+
+
     </div>
 
     <script>
@@ -21,6 +67,21 @@
         container.style.backgroundPosition = "top right";
         container.style.backgroundAttachment = "fixed";
         side_menu.classList.add("black")
+    </script>       
 
+    <!-- NIC TEN SKRYPT NIE ROBI, POPROSTU SPRAWDZAŁEM JAK SIĘ PRZESYŁA DANE Z DJANGO DO JS -->
+    <!-- <script>
+        var teamButton = document.getElementById('show_teams');
+        teamButton.addEventListener('click', function() {
+            const userTeams = document.querySelector("#teamButton").getAttribute('data-teams')
+            console.log(userTeams)
+        });
+    </script> -->
+    <script>
+        var button = document.getElementById("show_teams")
+        var wybor_druzyn = document.getElementById("wybor_druzyn");
+        button.addEventListener("click", function() {
+            wybor_druzyn.style.display = "block";
+        });
     </script>
 {% endblock %}

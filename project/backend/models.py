@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class CustomUser(AbstractUser):
@@ -37,7 +37,7 @@ class Tournament(models.Model):
     zdjecie = models.ImageField(upload_to='images/', blank=True, default="images/1.png")
     nagroda = models.CharField(max_length=100, null=True, blank=True)
     data = models.DateTimeField()
-    ilosc_druzyn = models.IntegerField(validators=[MaxValueValidator(32)])
+    ilosc_druzyn = models.IntegerField(validators=[MaxValueValidator(32), MinValueValidator(4)])
     druzyny = models.ManyToManyField('Team',null=True, blank=True)
     # regulamin
     creator = models.EmailField()

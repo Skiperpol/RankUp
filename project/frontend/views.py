@@ -65,11 +65,27 @@ def team_site(request, teamname):
 
 def tournament_site(request, tournamentname):
     tournament = Tournament.objects.get(nazwa=tournamentname)
-
+    teams = Team.objects.filter(creator = request.user.email)
     template = loader.get_template('frontend/tournament.html')
+    if request.method == 'POST':
+        type = request.POST.get('type')
+        if type == "add":
+            tournament.druzyny.add(Team.objects.get(nazwa = request.POST.get("druzyna")))
+            return redirect('tournament_site', tournamentname = tournament.nazwa)
+        elif type == "remove":
+            nazwa = request.POST.get('nazwa')
+            tournament.druzyny.remove(Team.objects.get(nazwa=nazwa))
+            return redirect('tournament_site', tournamentname = tournament.nazwa)
+        
+
     context = {
         "tournament":tournament,
+        "teams": teams,
+        "zapisana_druzyna": None,
     }
+    for x in tournament.druzyny.all():
+        if x.creator == request.user.email:
+            context['zapisana_druzyna']=x
     return HttpResponse(template.render(context, request))
     
 
