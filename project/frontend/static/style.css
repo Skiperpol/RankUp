@@ -409,13 +409,57 @@ letter-spacing: .2em;
 .active_nav {
     color: white !important;
 }
+#wybor_druzyn {
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    left: 50vw;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+    transition: all .5s ease;
+    background-color: #101319;
+    color: white;
+    overflow: hidden;
+    z-index: 40;
+    border-radius: 40px;
+}
+.dbstatic {
+    position: absolute;
+    transform: translate(-50%, 0);
+    bottom: 5vh;
+    left: 50%;
+}
+#close {
+    position: absolute;
+    top: 2.1rem;
+    font-size: 1.4rem;
+    right: 2.1rem;
+}
+#wybor_druzynbc {
+    z-index: 35;
+    position: absolute;
+    top: 0;
+    left: -15vw;
+    width: 100vw;
+    height: 1000vh;
+    background-color: #00000000;
+    pointer-events: none;
+}
+.blacked {
+    background-color: #000000ad !important;
+}
 .float-right {
     margin-left: auto;
     float: right;
-    margin-right: 5vw;
 }
 .dblarge {
+    margin-bottom: 0 !important;
     font-size: 1.6rem !important;
+    margin-top: -3vh !important;
+    display: inline;
+    float: right;
+    padding-bottom: 3vh;
 }
 .float-left {
     float: left;
@@ -738,6 +782,17 @@ align-content: flex-end;
 
 .login-form {
     margin-top: 5vh;
+}
+select {
+    padding: 5px;
+    font-size: 1.6rem;
+    border-width: 0px;
+    border-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: solid;
+    border-radius: 1px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
 }
 .login-form input {
     padding: 5px;

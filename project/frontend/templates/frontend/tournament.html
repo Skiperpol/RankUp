@@ -26,22 +26,23 @@
                 </form>
             {% endif %}
 
-            {% if zapisana_druzyna is not None %}
-            <form method="POST">
-                {% csrf_token %}
-                <input type="hidden" id="type" name="type" value="remove">
-                <input type="hidden" name="nazwa" value="{{zapisana_druzyna}}">
-                <div class="float-right tour-button"><button class="defaultbutton dblarge" type="submit">Zrezygnuj</button></div>
-            </form>
-                
-            {% else %}
-                <div class="float-right tour-button"><button id="show_teams" class="defaultbutton dblarge" data-teams="{{teams}}">Weź udział</button></div>
-            {% endif %}
             <div class="clear"><span class="grayed bold">{{ tournament.data|date:'Y-m-d H:i' }}</span></div>
-            <div><span class="grayed">Hosted by {{ creator }} &#x2022; {{ tournament.rodzaj_gry }} &#x2022; {{ tournament.format_rozgrywek }}  &#x2022; {{ tournament.nagroda }}</span></div>
+            <div class="grayed">Hosted by {{ creator }} &#x2022; {{ tournament.rodzaj_gry }} &#x2022; {{ tournament.format_rozgrywek }}  &#x2022; {{ tournament.nagroda }}
+                {% if zapisana_druzyna is not None %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" id="type" name="type" value="remove">
+                    <input type="hidden" name="nazwa" value="{{zapisana_druzyna}}">
+                    <div class="float-right tour-button"><button class="defaultbutton dblarge" type="submit">Zrezygnuj</button></div>
+                </form>
+                    
+                {% else %}
+                    <button id="show_teams" class="defaultbutton dblarge" data-teams="{{teams}}">Weź udział</button>
+                {% endif %}</div>
             {% if zapisana_druzyna %}<p class="zapisana_druzyna">Zapisano {{ zapisana_druzyna }}</p>{% endif %}
             <div id="tournament-nav"></div>
             <div id="tournament-content-detailed">
+                
                 <h2 class="hnomb">Drużyny</h2>
                 <div id="tournament-nav"></div>
                 {% for team in tournament.druzyny.all %}
@@ -221,18 +222,19 @@
         </div>
 
 
-
-        <div id="wybor_druzyn" style="position: absolute; top: calc(50% - 150px); left: calc(50% - 150px); width: 300px;height: 300px;background-color: white;display: none;">
+        <div id="wybor_druzynbc"></div>
+        <div id="wybor_druzyn">
+            <div id="close">&#10060;</div>
             <form method="POST">
                 {% csrf_token %}
                 <input type="hidden" id="type" name="type" value="add">
-                <label for="druzyna">Wybierz drużynę:</label><br>
-                <select name="druzyna" id="druzyna" size="4">
+                <label for="druzyna"><h1>Wybierz drużynę</h1></label><br>
+                <select name="druzyna" id="druzyna">
                   {% for team in teams %}
                     <option value="{{ team.nazwa }}">{{ team.nazwa }}</option>
                   {% endfor %}
                 </select><br>
-                <button type="submit">Zapisz się</button>
+                <button class="defaultbutton dbstatic" type="submit">Zapisz się</button>
               </form>
         </div>
 
@@ -259,10 +261,26 @@
         });
     </script> -->
     <script>
+        var wybor_druzynbc = document.getElementById("wybor_druzynbc")
         var button = document.getElementById("show_teams")
+        var body = document.getElementById("body")
         var wybor_druzyn = document.getElementById("wybor_druzyn");
         button.addEventListener("click", function() {
-            wybor_druzyn.style.display = "block";
+            wybor_druzyn.style.width = "25%";
+            wybor_druzyn.style.height = "75%";
+            wybor_druzyn.style.padding = "3.2rem";
+            wybor_druzyn.style.transition = "all .5s ease";
+            wybor_druzynbc.classList.add("blacked");
+            body.style.overflow = "hidden";
+        });
+        var closex = document.getElementById("close");
+        closex.addEventListener("click", function() {
+            wybor_druzyn.style.width = "0";
+            wybor_druzyn.style.height = "0";
+            wybor_druzyn.style.padding = "0";
+            wybor_druzyn.style.transition = "all .3s ease";
+            wybor_druzynbc.classList.remove("blacked")
+            body.style.overflow = "auto";
         });
     </script>
 {% endblock %}
