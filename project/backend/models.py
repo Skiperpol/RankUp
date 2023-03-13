@@ -43,9 +43,21 @@ class Tournament(models.Model):
     creator = models.EmailField()
     rodzaj_gry = models.CharField(choices=gry, max_length=100)
     format_rozgrywek = models.CharField(choices=formaty, max_length=10)
+    rozgrywki = models.ManyToManyField('Rozgrywki',null=True, blank=True)
 
     def __str__(self):
         return self.nazwa
+
+class Rozgrywki(models.Model):
+    nazwa_rozgrywki = models.CharField(max_length=100)
+    nazwa_turnieju = models.CharField(max_length=100)
+    druzyna1 = models.CharField(max_length=100, null=True, blank=True)
+    druzyna2 = models.CharField(max_length=100, null=True, blank=True)
+    winner = models.CharField(max_length=100, null=True, blank=True)
+    mecz = models.IntegerField(null=True, blank=True)
+    faza = models.IntegerField(null=True, blank=True)
+    def __str__(self):
+        return self.nazwa_rozgrywki
 
 class Team(models.Model):
     nazwa = models.CharField(max_length=100)

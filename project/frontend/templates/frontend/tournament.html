@@ -17,6 +17,13 @@
         <div id="additionalbc">
         <div id="inner-wrapper">
             <h1 id="name" class="float-left">{{ tournament }}</h1>
+            {% if tournament.creator == user.email %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="type" name="type" value="start">
+                    <button type="submit">Rozpocznij</button>
+                </form>
+            {% endif %}
             {% if zapisana_druzyna is not None %}
             <form method="POST">
                 {{zapisana_druzyna}}
