@@ -44,10 +44,12 @@
             <div id="tournament-content-detailed">
                 <h2 class="hnomb">Drużyny</h2>
                 <div id="tournament-nav"></div>
-                {% for team in teams %}
+                {% for team in tournament.druzyny.all %}
                     <a href="{% url 'team_site' teamname=team.nazwa %}"><div class="players-list-div"><li><span></span>
                     {% if team.zdjecie %}<img src="{{ team.zdjecie.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
                     <div>{{ team }}</div><div class="float-right">123pkt</div></li></div></a>
+                {% empty %}
+                <p class="zapisana_druzyna">Bądź pierwszą drużyną, która weźmie udział</p>
                 {% endfor %}
 
                 <h2 class="hnomb2">Drabinka</h2>
