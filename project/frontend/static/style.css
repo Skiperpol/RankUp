@@ -216,6 +216,35 @@ a {
     font-weight:400;
     margin-bottom: .3vh;
 }
+.register-form div label{ 
+    text-align: left;
+    width: 10vw;
+}
+.register-form div:nth-of-type(4) {
+  
+  flex-basis: 50%;
+
+}
+
+.register-form div {
+    margin-bottom: 1vh;
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+align-content: center;
+}
+.register-form div input{ 
+    margin-left: .5vw;
+    width: 15vw;
+}
+.register-form div textarea{ 
+    margin-left: .5vw;
+    height: 9em;
+    width: 15vw;
+}
+
 .tournament-card img{ 
     width: 80%;
     height: 50%;
@@ -224,9 +253,12 @@ a {
     margin-bottom: .5vh;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    border: 1px solid white;
 }
 .player-card img {
     height: 60% !important;
+    
+    border: 1px solid white;
 }
 .tour-info {
     position: absolute;

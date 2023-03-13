@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'frontend.apps.FrontendConfig',
     'backend.apps.BackendConfig',
+    'crispy_forms',
 ]
-
+CRISPY_TEMPLATE_PACK = 'uni_form'
 AUTH_USER_MODEL = 'backend.CustomUser'
 
 MIDDLEWARE = [

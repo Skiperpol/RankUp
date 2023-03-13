@@ -13,8 +13,9 @@
         <!-- {{ form.instance.email }}<br> -->
         <form class="register-form" method="post">
             {% csrf_token %}
-            {{form.as_p}}
-            <button class="defaultbutton" type="submit">Update</button>
+            {% load crispy_forms_tags %}
+            {{form|crispy}}
+            <button class="defaultbutton" type="submit">Aktualizuj profil</button>
         </form>
     </div> 
 </div> 
