@@ -175,6 +175,7 @@ def contact_site(request):
     }
     return HttpResponse(template.render(context, request))
 
+<<<<<<< HEAD
 
 @login_required
 def room(request, nazwa_turnieju, nazwa_rozgrywki, druzyna):
@@ -195,3 +196,27 @@ def room(request, nazwa_turnieju, nazwa_rozgrywki, druzyna):
             return redirect('index')
     else:
             return redirect('index')
+=======
+def room(request, nazwa_turnieju, nazwa_rozgrywki, druzyna):
+    return redirect('index')
+
+# @login_required
+# def room(request, nazwa_turnieju, nazwa_rozgrywki, druzyna):
+#     team = Team.objects.get(nazwa = druzyna)
+#     if team.creator == request.user.email:
+#         room = Rozgrywki.objects.get(nazwa_rozgrywki=nazwa_rozgrywki, nazwa_turnieju=nazwa_turnieju)
+#         if room.druzyna1 == druzyna or room.druzyna2 == druzyna:
+#             messages = Message.objects.filter(room=room)[0:25]
+#             return render(
+#                 request=request,
+#                 template_name="frontend/room.html", 
+#                 context={
+#                             'room': room,
+#                             'messages': messages
+#                         }
+#                 )
+#         else:
+#             return redirect('index')
+#     else:
+#             return redirect('index')
+>>>>>>> 964c3b39e439feca6d250c832d824991ed1a4da5
