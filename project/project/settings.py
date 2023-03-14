@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'frontend.apps.FrontendConfig',
     'backend.apps.BackendConfig',
+    'channels',
 ]
 
 AUTH_USER_MODEL = 'backend.CustomUser'

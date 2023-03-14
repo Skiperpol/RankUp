@@ -38,6 +38,14 @@
             {% else %}
                 <h1 class="float-right"><button id="show_teams" data-teams="{{teams}}">Weź udział</button></h1>
             {% endif %}
+            {% for rozgrywka in rozgrywki %}
+                {% if rozgrywka.druzyna2 == zapisana_druzyna.nazwa or rozgrywka.druzyna1 == zapisana_druzyna.nazwa %}
+                    {{rozgrywka.nazwa_rozgrywki}}
+                    {% if rozgrywka.nazwa_rozgrywki %}
+                        <a href="{% url 'room' nazwa_turnieju=tournament.nazwa nazwa_rozgrywki=rozgrywka.nazwa_rozgrywki druzyna=zapisana_druzyna.nazwa %}"><h2>Idź do pokoju</h2></a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
             <div class="clear"><span class="grayed bold">10.02.2032</span></div>
             <div><span class="grayed">Hosted by Acer &#x2022; Bo5 &#x2022; 5vs5 &#x2022; 5.000zł</span></div>
             <div id="tournament-nav"><p class="active_nav">DRABINKA</p><p>MECZE</p><p>REGULAMIN</p></div>

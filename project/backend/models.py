@@ -69,6 +69,15 @@ class Team(models.Model):
 
     def __str__(self):
         return self.nazwa
+    
+class Message(models.Model):
+    room = models.ForeignKey(Rozgrywki, related_name='messages', on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, related_name='messages', on_delete=models.CASCADE)
+    content = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('date_added',)
 
         
 
