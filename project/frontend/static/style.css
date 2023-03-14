@@ -42,6 +42,9 @@ a {
 #page1 h5 { 
     line-height: 1rem;
 }
+#mobilemenu, #mobilenav {
+    display: none;
+}
 #page2, #page3, #page4 {
     position: relative;
     background-color: rgba(0, 0, 0, 0.52);
@@ -50,7 +53,6 @@ a {
     font-size: 1.5rem;
 }
 .header {
-    
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
     font-size: 1rem !important;
@@ -131,7 +133,7 @@ h1, h2, h3, h4, h5{
     padding: 2vh 4vh 2vh 4vh ;
     color: #ffff;
     background-color: #fe4554;
-    margin-top: 49vh;
+    margin-top: 45vh;
     border: none;
     /* border-radius: 30px; */
     border-top-left-radius: 20px;
@@ -216,6 +218,35 @@ a {
     font-weight:400;
     margin-bottom: .3vh;
 }
+.register-form div label{ 
+    text-align: left;
+    width: 10vw;
+}
+.register-form div:nth-of-type(4) {
+  
+  flex-basis: 50%;
+
+}
+
+.register-form div {
+    margin-bottom: 1vh;
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+align-content: center;
+}
+.register-form div input{ 
+    margin-left: .5vw;
+    width: 15vw;
+}
+.register-form div textarea{ 
+    margin-left: .5vw;
+    height: 9em;
+    width: 15vw;
+}
+
 .tournament-card img{ 
     width: 80%;
     height: 50%;
@@ -224,9 +255,12 @@ a {
     margin-bottom: .5vh;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    border: 1px solid white;
 }
 .player-card img {
     height: 60% !important;
+    
+    border: 1px solid white;
 }
 .tour-info {
     position: absolute;
@@ -282,7 +316,9 @@ a {
 /* ----------------------------------------- TOURNAMENT LIST ----------------------------------------- */
 /* ----------------------------------------- TOURNAMENT LIST ----------------------------------------- */
 /* ----------------------------------------- TOURNAMENT LIST ----------------------------------------- */
-
+.pchide {
+    display: none;
+}
 .tournament-list-container {
     background-repeat: no-repeat;
     background-size: auto 100vh;
@@ -379,14 +415,22 @@ letter-spacing: .2em;
     letter-spacing: 0.4rem;
 }
 #name {
+    margin-top: 7vh;
     width: 70%;
+}
+.tour-button {
+    margin-top: 3vh;
+}
+.runda {
+    text-align: center;
+    width: 16vw;
 }
 .grayed {
     color: rgb(174, 174, 174);
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.1rem;
 }
 #tournament-nav {
-    margin-top: 7vh;
+    margin-top: 1vh;
     border-top: 1px solid rgb(174, 174, 174);
     overflow: auto;
 }
@@ -401,9 +445,58 @@ letter-spacing: .2em;
 .active_nav {
     color: white !important;
 }
+#wybor_druzyn {
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    left: 50vw;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+    transition: all .5s ease;
+    background-color: #101319;
+    color: white;
+    overflow: hidden;
+    z-index: 40;
+    border-radius: 40px;
+}
+.dbstatic {
+    position: absolute;
+    transform: translate(-50%, 0);
+    bottom: 5vh;
+    left: 50%;
+}
+#close {
+    position: absolute;
+    top: 2.1rem;
+    font-size: 1.4rem;
+    right: 2.1rem;
+}
+#wybor_druzynbc {
+    z-index: 35;
+    position: absolute;
+    top: 0;
+    left: -15vw;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000000;
+    pointer-events: none;
+}
+.blacked {
+    height: 1000vh !important;
+    background-color: #000000ad !important;
+}
 .float-right {
     margin-left: auto;
     float: right;
+}
+.dblarge {
+    margin-bottom: 0 !important;
+    font-size: 1.6rem !important;
+    margin-top: -3vh !important;
+    display: inline;
+    float: right;
+    padding-bottom: 3vh;
 }
 .float-left {
     float: left;
@@ -411,27 +504,20 @@ letter-spacing: .2em;
 .clear {
     clear: both;
 }
-.float-right button {
-    letter-spacing: 0.1rem;
-    padding: 1.2vh 3vh 1.2vh 3vh ;
-    color: #ffff;
-    background-color: #16b2ca;
-    border: none;
-    border-radius: 10px;
-    font-weight: 400;
-    font-size: 1.3rem;
-    text-transform: uppercase;
-    margin-bottom: 1vh;
-    transition: all .2s;
-}
+
 #tournament-content {
     margin-top: 10vh;
 }
 #tournament-content-detailed {
     margin-top: 10vh;
     background-color: #101319;
+    overflow-x: hidden !important;
 }
-
+#tablecont {
+    overflow-y: hidden !important;
+    overflow-x: auto !important;
+    margin-bottom: 10vh;
+}
 
 /* ----------------------------------------- PLAYERS LIST ----------------------------------------- */
 /* ----------------------------------------- PLAYERS LIST ----------------------------------------- */
@@ -569,7 +655,7 @@ li img {
     margin-top: 10vh !important;
     font-size: 1.2em !important;
     padding-left: 5vw !important;
-    padding-right: 15vw !important;
+    padding-right: 5vw !important;
 }
 
 .playerinner-wrapper img { 
@@ -589,6 +675,17 @@ li img {
     margin-left: 3%;
     margin-top: 0%;
     margin-bottom: 0%;
+}
+.hnomb {
+    margin-bottom: 0;
+}
+.hnomb2 {
+    margin-top: 10vh;
+}
+.zapisana_druzyna {
+    
+    letter-spacing: 0.1rem;
+    color: #ff2138;
 }
 .playerinner-wrapper p {
     text-transform: none !important;
@@ -617,7 +714,7 @@ li img {
 .profile-menu div {
     font-weight: bold;
     float: left;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     transition: all .1s ease;
     width: auto;
     height: auto;
@@ -625,9 +722,9 @@ li img {
     padding-bottom: 1vh;
     margin-bottom: 1vh;
     padding-top: 1vh;
-    background-color: rgb(58, 58, 69);
     color: rgba(255, 255, 255, 0.58);
     margin-right: 1vh;
+    margin-left: -2vh;
     border-radius: 10px;
     letter-spacing: .1rem;
     transition: .1s all;
@@ -727,6 +824,17 @@ align-content: flex-end;
 .login-form {
     margin-top: 5vh;
 }
+select {
+    padding: 5px;
+    font-size: 1.6rem;
+    border-width: 0px;
+    border-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: solid;
+    border-radius: 1px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
 .login-form input {
     padding: 5px;
     font-size: 16px;
@@ -805,8 +913,10 @@ align-content: flex-end;
     height: 1.3em !important;
 }
 table {
-    height: 80vh;
-    overflow-x: scroll;
+    margin-top: 5vh;
+    height: 90vh;
+    width: 200vw;
+    overflow-x: scroll !important;
 }
 .kolumna {
     display: flex;
@@ -838,13 +948,15 @@ height: 100%;
 }
 .mecz div {
     font-size: 1.2rem;
-    width: 50%;
+    width: 80%;
     float: left;
+}
+.mecz .meczwynik {
+    width: 20% !important;
 }
 .team1 {
     border-bottom: 1px solid white;
-    padding-bottom: .5vh;
-    content: "xd" !important;
+    padding-bottom: 1vh;
 }
 .team2 {
     padding-top: .5vh;
@@ -853,6 +965,7 @@ height: 100%;
     text-align: right;
 }
 .mecz {
+    width: 16vw;
     position: relative;
     background-color: #272f3c;
     border-radius: 0.8rem;
@@ -873,13 +986,31 @@ height: 100%;
     height: 8vh;
     /* do wywalenia */
 }
+.extraround .mecz:nth-of-type(even) span {
+    position: absolute;
+    top: -5% !important;
+    right: -2.5vw;
+    content: "";
+    width: 1px;
+    height: calc(5.5vh * 1) !important;
+    background-color: #ffffff !important;
+}
+.extraround .mecz:nth-of-type(odd) span {
+    position: absolute;
+    top: calc(50% - 1px) !important;
+    right: -2.5vw;
+    content: "";
+    width: 1px;
+    height: calc(5.5vh * 1) !important;
+    background-color: #ffffff !important;
+}
 .firstround .mecz:nth-of-type(odd) span {
     position: absolute;
     top: calc(50% - 1px);
     right: -2.5vw;
     content: "";
     width: 1px;
-    height: calc(10vh * 1);
+    height: calc(12vh * 1);
     background-color: #fff;
 }
 .secondround .mecz:nth-of-type(odd) span {
@@ -888,16 +1019,16 @@ height: 100%;
     right: -2.5vw;
     content: "";
     width: 1px;
-    height: calc(10vh * 2);
+    height: calc(10.75vh * 2);
     background-color: #fff;
 }
 .secondround .mecz:nth-of-type(even) span {
     position: absolute;
-    top: calc(70% * -2);
+    top: calc(83% * -2);
     right: -2.5vw;
     content: "";
     width: 1px;
-    height: calc(9.5vh * 2);
+    height: calc(10.8vh * 2);
     background-color: #ffffff;
 }
 .firstround .mecz:nth-of-type(even) span {
@@ -909,12 +1040,30 @@ height: 100%;
     height: calc(10vh * 1);
     background-color: #fff;
 }
+.thirdround .mecz:nth-of-type(odd) span {
+    position: absolute;
+    top: calc(50% - 1px);
+    right: -2.5vw;
+    content: "";
+    width: 1px;
+    height: calc(10vh * 3);
+    background-color: #fff;
+}
+.thirdround .mecz:nth-of-type(even) span {
+    position: absolute;
+    top: calc(118% * -2);
+    right: -2.5vw;
+    content: "";
+    width: 1px;
+    height: calc(9.5vh * 3);
+    background-color: #ffffff;
+}
 .mecz::after {
     position: absolute;
     top: calc(50% - 1px);
-    left: -2.7vw;
+    left: -2.6vw;
     content: "";
-    width: 2.7vw;
+    width: 2.6vw;
     height: 1px;
     background-color: #fff;
 }
@@ -927,7 +1076,7 @@ height: 100%;
     height: 1px;
     background-color: #fff;
 } */
-.final::before, .firstround .mecz::after {
+.final::before, .firstround .mecz::after, .final span, .extraround .mecz::after{
     display: none;
   }
 #additionalbc {
@@ -938,3 +1087,24 @@ height: 100%;
     background-position: top;
     left: 15vw;
 }
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #101319 #272f3c;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #272f3c;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #101319;
+    border-radius: 14px;
+    border: 2px solid #5e5e5e;
+  }

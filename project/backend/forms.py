@@ -4,13 +4,21 @@ from django.contrib.auth import get_user_model
 from backend.models import Team, Tournament
 
 class userRegistrationForm(UserCreationForm):
-    email = forms.EmailField(help_text="Podaj prawidłowy email", required=True)
-    nick = forms.CharField(help_text="Podaj prawidłowy email",max_length=30, required=True)
-    data_urodzenia = forms.DateField(help_text="Podaj prawidłowy email",required=False)
-    avatar = forms.ImageField(help_text="Podaj prawidłowy email",required=False)
-
+    email = forms.EmailField(required=True)
+    nick = forms.CharField(max_length=30, required=True)
+    data_urodzenia = forms.DateField(required=False)
+    avatar = forms.ImageField(required=False)
+    def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['password1'].help_text = None
+            self.fields['password2'].help_text = None
 
     class Meta:
+        help_texts = {
+            'username': None,
+            'password1': None,
+            'password2': None,
+        }
         model = get_user_model()
         fields = ['first_name', 'last_name', 'username', 'nick', 'data_urodzenia', 'avatar', 'email', 'password1', 'password2']
 
@@ -32,9 +40,14 @@ class UserData(forms.ModelForm):
 
 class UserUpdate(forms.ModelForm):
     opis = forms.Textarea()
+    avatar = forms.ImageField(widget=forms.FileInput)
+    password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
         model = get_user_model()
+        help_texts = {
+            'username': None,
+        }
         fields = ['first_name', 'last_name', 'username', 'nick', 'data_urodzenia', 'avatar', 'email', 'opis', 'password']
 
 

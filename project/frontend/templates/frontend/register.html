@@ -10,11 +10,10 @@
 
     <form class="register-form" method="post">
         {% csrf_token %}
-        {{form.as_p}}
+        {% load crispy_forms_tags %}
+        {{form|crispy}}
         <button type="submit" class="defaultbutton nomt">Zarejestruj</button>
     </form>
     </div>  </div>
-    <script>
-        side_menu.classList.add("black")
-    </script>
+
 {% endblock %}

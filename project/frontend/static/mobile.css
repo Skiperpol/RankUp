@@ -1,0 +1,366 @@
+@media only screen and (max-width: 600px) {
+   
+    /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #101319 #101319;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: rgb(0, 0, 0);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #101319;
+    border-radius: 14px;
+    border: 2px solid #5e5e5e;
+  }
+    #side_menu {
+        display: none;
+    }
+    #mobilemenu {
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 7vh;
+        bottom: 0;
+        left: 0;
+        background-color: #272f3c;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        color: white;
+    } 
+    #mobilenav {
+        display: block;
+        position: absolute;
+        width: 100vw;
+        height: 7vh;
+        top: 0;
+        left: 0;
+    }
+    .mobilemenuimgcontainer {
+        height: 7vh;
+        font-size: .8rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: flex-end;
+        color: white;
+    }
+    #mobilenav img {
+        height: 60%;
+        margin-top: 1.5vh;
+        margin-left: 1.5vh;
+    }
+    #mobilemenu img{
+        height: 40%;
+        margin-top: .5vh;
+    }
+    #mobilenavlogowanie {
+        float: right;
+        height: auto;
+        margin-top: 1.5vh;
+        margin-right: 3vh;
+        background-color: #272f3c !important;
+    }
+    #container {
+        width: 100vw;
+        margin: 0;
+    }
+    #container_bc {
+        background-position: 65% 50%;
+        background-size: cover;
+        width: 100vw;
+        left: 0;
+        top: -1vh;
+    }
+    #page1 {
+        text-align: center;
+        padding-top: 8vh;
+        padding-left: 0 !important;
+    }
+    #page2, #page3, #page4{ 
+        text-align: center;
+        padding-left: 0 !important;
+        padding-top: 9vh;
+        height: 91vh;
+    }
+    .pchide {
+        display: block;
+    }
+    .mobilehide {
+        display: none;
+    }
+    .tournament-card {
+       width: 85%;
+       height: 70%;
+       padding-left: 5vw;
+       padding-right: 5vw;
+    }
+    .tour-info button{  
+        padding: 1vh 3vh 1vh 3vh;
+        width: 50vw !important;
+        font-size: 1rem;
+    }
+    #tournaments-list-more {
+        background-color: #ff2138;
+        text-shadow: none;
+        font-size: 1rem !important;
+    }
+    .tournament-card img {
+        width: 100%;
+        margin-top: 5%;
+     }
+    #tournaments-list, #players-list, #teams-list {
+        width: 100%;
+        margin-top: 1vh;
+    }
+    .header {
+        border-radius: 0 !important;
+        font-size: 1rem !important;
+        letter-spacing: .2rem;
+        background-color: #ff2138;
+        padding: 1vh 2vh 1vh 2vh;
+        margin-bottom: 1vh;
+    }
+    .header h1 {
+        margin-top: 0;
+    }
+    h1 {
+        margin-bottom: 0 !important;
+        font-size: 2.3rem;
+        line-height: 2.3rem;
+    }
+    h2 {
+        margin-bottom: 0 !important;
+        font-size: 1.9rem;
+        text-shadow: none !important;
+        line-height: 1.9rem;
+    }
+    h3 {
+        margin-bottom: 0vh !important;
+        font-size: 1.6rem;
+        line-height: 2rem;
+        text-shadow: none !important;
+    }h5 {
+        margin-bottom: 0 !important;
+        font-size: 1.4rem;
+        text-shadow: none !important;
+        line-height: 2rem;
+    }
+    .play { 
+        margin-top: 53vh;
+        font-size: 2rem;
+        margin-left: calc(10% - 4vh);
+        width: 80%;
+    }
+    .defaultbutton{  
+        padding: .5vh 1.5vh .5vh 1.5vh ;
+        color: #ffff;
+        background-color: #ff2138;
+        border: none;
+        border-top-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        font-weight: 400;
+        font-size: .9rem;
+        text-transform: uppercase;
+        transition: all .2s;
+    }
+    /* turnieje */
+    /* turnieje */
+    /* turnieje */
+    .tournament-list-container {
+        width: 100%;
+        margin-left: 0;
+        background-position: 40% 0%;
+        background-image:linear-gradient(0deg, #101319 0%, #101319 50%, #101319a3 75%, rgba(255, 255, 255, 0) 100%), url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fc6bc1f1-2870-4492-909c-29369011dcf6/dbe3pcs-b7529486-a8d6-4673-8134-e172799bb4b3.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2ZjNmJjMWYxLTI4NzAtNDQ5Mi05MDljLTI5MzY5MDExZGNmNlwvZGJlM3Bjcy1iNzUyOTQ4Ni1hOGQ2LTQ2NzMtODEzNC1lMTcyNzk5YmI0YjMuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.rTk1y6ZoZoe2S5AiewuRUlXP60m98K75256NeQ25RQM"); /* W3C */
+    }
+    #turnieje-list-container {
+        margin-top: 2vh;
+        padding-bottom: 10vh;
+    }
+    #turnieje-list {
+        width: 100vw;
+        margin: 0;
+        padding: 5vw;
+        margin-top: 30vh;
+    }
+    .turnieje-list-object {
+        height: auto;
+    }
+    .turnieje-list-object img{
+        width: 90% !important;
+    }
+    #turnieje-list-header {
+        padding-bottom: 1vh;
+        padding-top: 1vh;
+        background: linear-gradient(90deg, rgba(254,69,84,1) 0%, rgba(255,255,255,0) 100%, rgba(255,255,255,0) 100%);
+    }
+    #turnieje-list-header h1{
+        margin-top: 0;
+    }
+    .tournament-list-object-box span {
+        letter-spacing: .1vh !important;
+        font-size: 1rem !important;
+    }
+    /* rejestracja */
+    /* rejestracja */
+    /* rejestracja */
+    #login-container-video {
+        min-width: 100% !important;
+        left: 0;
+    }
+    video {    
+        left: -177% !important;
+        object-fit: cover;
+    }
+    #registerinner-wrapper, #logininner-wrapper {
+        padding-top: 2vh !important;
+        margin-top: 10vh;
+    }
+    #registerinner-wrapper h1, #logininner-wrapper h1{
+        font-size: 1.5rem;
+        margin-bottom: 1.5vh !important;
+    }
+    .register-form div label {
+        text-align: left;
+        font-size: 1rem;
+        font-weight: normal;
+        width: 30vw;
+    }
+    .register-form div input {
+        font-size: 1rem;
+        width: 30vw;
+    }
+    .nomt {
+        margin-top: 3vh !important;
+    }
+    #logininner-wrapper input, #logininner-wrapper label {
+        width: 50% !important;
+        display: inline;
+        font-size: 1rem;
+    }
+  
+    #logininner-wrapper a{
+        font-size: 1rem;
+    }
+    /* profil */
+    /* profil */
+    /* profil */
+    .playerinner-wrapper {
+        text-align: center;
+    }
+    .playerinner-wrapper img{
+        margin: auto;
+        float:none;
+    }
+    .playerinner-wrapper *{
+        clear: both;
+    }
+    .playerinner-wrapper h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+    #profile-flex {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    }
+    #profile-flex .grayed {
+        display: block;
+        width: 100%;
+    }
+    .profile-menu .active_nav {
+        display: none;
+    }
+    .profile-menu {
+        text-align: center;
+    }
+    .profile-menu .jakas {
+        float: none !important;
+        width: 90%;
+        margin: auto;
+        margin-top: 3vh;
+    }
+    .create_team {
+        display: block;
+        float: none !important;
+        width: 90%;
+        margin: auto;
+        margin-top: 3vh;
+    }
+    .playerinner-wrapper .firsthr {
+        margin-top: 4vh;
+    }
+    .playerinner-wrapper li {
+        font-size: 1rem;
+    }
+    .playerinner-wrapper h3 {
+        text-align: left;
+    }
+    .playerinner-wrapper .profile-teams {
+        text-align: center;
+        display: block;
+    }
+    /* turniej  */
+    /* turniej  */
+    /* turniej  */
+    #t-container {
+        width: 100%;
+        margin-left: 0;
+        background-position: 50% 30% !important;
+    }
+    #additionalbc {
+        width: 100%;
+        left: 0;
+    }
+    #name {
+        margin-top: 0;
+        width: 100%;
+        letter-spacing: .1rem !important; 
+        font-size: 2.2rem;
+    }
+    #additionalbc #inner-wrapper {
+        text-align: center;
+    }
+    #additionalbc #inner-wrapper div {
+        font-size: 1.2rem;
+    }
+    #additionalbc #inner-wrapper .grayed {
+        margin-bottom: 2vh;
+        font-size: 1.2rem;
+    }
+    #show_teams, .dblarge {
+        float: none !important;
+        width: 90%;
+        margin: auto;
+    }
+    .zapisana_druzyna {
+        letter-spacing: 0.1rem;
+        color: #ff2138;
+        display: block;
+        margin-top: 0vh;
+    }
+    .float-right {
+        float: none;
+    }
+    .hnomb {
+        margin-top: 0;
+    }
+    .mecz{
+        width: 40vw;
+    }
+  }

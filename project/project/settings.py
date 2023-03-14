@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ucnsif5+!fo&%4+ultgh^%iob=jdkb@s4g^5o)(dlc@uobf$--
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'frontend.apps.FrontendConfig',
     'backend.apps.BackendConfig',
     'channels',
+    'crispy_forms',
 ]
-
+CRISPY_TEMPLATE_PACK = 'uni_form'
 AUTH_USER_MODEL = 'backend.CustomUser'
 
 MIDDLEWARE = [

@@ -96,8 +96,10 @@ def tworzenie_rozgrywek(ilosc_faz, max_ilosc_druzyn, lista_druzyn, turniej, ilos
 
 import random
 def tournament_site(request, tournamentname):
+    teams = []
+    rozgrywki = Rozgrywki.objects.filter(nazwa_turnieju=tournamentname)
     tournament = Tournament.objects.get(nazwa=tournamentname)
-
+    creator = CustomUser.objects.get(email=tournament.creator)
     template = loader.get_template('frontend/tournament.html')
     if request.user.is_authenticated:
         teams = Team.objects.filter(creator = request.user.email)
@@ -129,7 +131,9 @@ def tournament_site(request, tournamentname):
     rozgrywki = Rozgrywki.objects.filter(nazwa_turnieju=tournament.nazwa)
     context = {
         "tournament":tournament,
-        "teams": None,
+        "teams": teams,
+        "rozgrywki": rozgrywki,
+        "creator": creator,
         "zapisana_druzyna": None,
         "rozgrywki": None,
     }

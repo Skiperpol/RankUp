@@ -10,14 +10,14 @@
                 <div class="grayed">Bronze IV</div>
                 <div class="grayed bio">{{ player.opis }}</div>
             </div>
-            <div class="profile-menu"><div class="active_nav">Info</div>{% if user == player %}{% else %}<div>Zaproś do drużyny</div>{% endif %}<div>Statystyki</div>
+            <div class="profile-menu"><div class="active_nav">Info</div>
                 {% if user == player %}
-                    <a href="{% url 'settings' %}"><div class="jakas">Ustawienia</div></a>
+                    <div class="jakas"><a href="{% url 'settings' %}">Ustawienia</a></div>
                     {% else %}
                     <div class="jakas">Zgłoś gracza</div>
                     {% endif %}
             </div> 
-            <hr>
+            <hr class="firsthr">
             <div class="profile-info">
                 <div>Email: <span>{{ player.email }}</span></div>
                 <div>Ranking:  <span>{{ player.punkty }} punkty</span></div>
@@ -36,7 +36,11 @@
                     {% endfor %}
                 </ol>
             {% else %}
+                {% if user == player %}
                 <p class="ifcaptain">Nie jesteś kapitanem żadnej drużyny</p><br>
+                {% else %}
+                <p class="ifcaptain">Użytkownik nie jest kapitanem żadnej drużyny</p><br>
+                {% endif %}
             {% endif %}
             {% if team_member %}
             <h3>Członek</h3>
@@ -59,7 +63,5 @@
             <hr>
         </div>  
     </div>
-    <script>
-           side_menu.classList.add("black")
-    </script>
+    
 {% endblock %}

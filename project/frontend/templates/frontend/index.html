@@ -4,9 +4,9 @@
 <div id="container">
     <div id="page1">
         <div id="container_bc"></div>
-        <h1><span class="color_red">Fajny</span> tekst</h1>
-        <h3>Esportowy <span class="color_red">sen</span></h3>
-        <h5>Siema</h5>
+        <h1><span class="color_red">rankup</span></h1>
+        <h3>graj, <span class="color_red">rozwijaj się</span></h3>
+        <h3>zwyciężaj</h3>
         <button class="play">Wejdź do gry</button>
     </div>
     
@@ -15,7 +15,7 @@
 
         <div id="tournaments-list">
             {% for tournament in tournaments %}
-                <a class="tournament-card" href="{% url 'tournament_site' tournamentname=tournament.nazwa%}">
+                <a class="tournament-card {% if forloop.counter > 1 %}mobilehide{% endif %}" href="{% url 'tournament_site' tournamentname=tournament.nazwa%}">
                     <img src="{{ tournament.zdjecie.url }}" alt=""><br>{{ tournament }} 
                     <div class="tour-info">
                         <button>Szczegóły</button>
@@ -29,11 +29,11 @@
         </div>
     </div>
     <div id="page3">
-        <div class="header"><h1>Gracze</h1></div>
+        <div class="header"><h1>Top gracze</h1></div>
 
         <div id="players-list">
             {% for player in players %}
-            <a class="tournament-card player-card" href="#">
+            <a class="tournament-card player-card {% if forloop.counter > 1 %}mobilehide{% endif %}" href="#">
                 {% if player.avatar %}
                 <img src="{{ player.avatar.url }}" alt="">
                 {% else %}
@@ -53,11 +53,11 @@
         </div>
     </div>  
     <div id="page4">
-        <div class="header"><h1>Drużyny</h1></div>
+        <div class="header"><h1>Top drużyny</h1></div>
        
-        <div id="teams-list">
+        <div id="teams-list" class="mobileteamslist">
             {% for team in teams %}
-            <a class="tournament-card player-card" href="#">
+            <a class="tournament-card player-card {% if forloop.counter > 1 %}mobilehide{% endif %}" href="#">
                 {% if team.zdjecie %}
                 <img src="{{ team.zdjecie.url }}" alt="">
                 {% else %}
@@ -80,6 +80,7 @@
     <script>
         let container = document.getElementById("container");
         let side_menu = document.getElementById("side_menu");
+        side_menu.classList.remove("black")
         container.onscroll = function (e) {
             if (container.scrollTop > 300)  {
                 side_menu.classList.add("black")
