@@ -12,12 +12,12 @@
             </div>
             <div class="profile-menu"><div class="active_nav">Info</div>
                 {% if user == player %}
-                    <a href="{% url 'settings' %}"><div class="jakas">Ustawienia</div></a>
+                    <div class="jakas"><a href="{% url 'settings' %}">Ustawienia</a></div>
                     {% else %}
                     <div class="jakas">Zgłoś gracza</div>
                     {% endif %}
             </div> 
-            <hr>
+            <hr class="firsthr">
             <div class="profile-info">
                 <div>Email: <span>{{ player.email }}</span></div>
                 <div>Ranking:  <span>{{ player.punkty }} punkty</span></div>

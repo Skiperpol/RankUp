@@ -42,6 +42,9 @@ a {
 #page1 h5 { 
     line-height: 1rem;
 }
+#mobilemenu, #mobilenav {
+    display: none;
+}
 #page2, #page3, #page4 {
     position: relative;
     background-color: rgba(0, 0, 0, 0.52);
@@ -50,7 +53,6 @@ a {
     font-size: 1.5rem;
 }
 .header {
-    
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
     font-size: 1rem !important;
@@ -131,7 +133,7 @@ h1, h2, h3, h4, h5{
     padding: 2vh 4vh 2vh 4vh ;
     color: #ffff;
     background-color: #fe4554;
-    margin-top: 49vh;
+    margin-top: 45vh;
     border: none;
     /* border-radius: 30px; */
     border-top-left-radius: 20px;
@@ -314,7 +316,9 @@ align-content: center;
 /* ----------------------------------------- TOURNAMENT LIST ----------------------------------------- */
 /* ----------------------------------------- TOURNAMENT LIST ----------------------------------------- */
 /* ----------------------------------------- TOURNAMENT LIST ----------------------------------------- */
-
+.pchide {
+    display: none;
+}
 .tournament-list-container {
     background-repeat: no-repeat;
     background-size: auto 100vh;
@@ -474,11 +478,12 @@ letter-spacing: .2em;
     top: 0;
     left: -15vw;
     width: 100vw;
-    height: 1000vh;
+    height: 100vh;
     background-color: #00000000;
     pointer-events: none;
 }
 .blacked {
+    height: 1000vh !important;
     background-color: #000000ad !important;
 }
 .float-right {
@@ -506,9 +511,13 @@ letter-spacing: .2em;
 #tournament-content-detailed {
     margin-top: 10vh;
     background-color: #101319;
-    overflow-x: auto !important;
+    overflow-x: hidden !important;
 }
-
+#tablecont {
+    overflow-y: hidden !important;
+    overflow-x: auto !important;
+    margin-bottom: 10vh;
+}
 
 /* ----------------------------------------- PLAYERS LIST ----------------------------------------- */
 /* ----------------------------------------- PLAYERS LIST ----------------------------------------- */
@@ -646,7 +655,7 @@ li img {
     margin-top: 10vh !important;
     font-size: 1.2em !important;
     padding-left: 5vw !important;
-    padding-right: 15vw !important;
+    padding-right: 5vw !important;
 }
 
 .playerinner-wrapper img { 

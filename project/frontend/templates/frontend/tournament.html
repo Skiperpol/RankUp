@@ -37,7 +37,8 @@
                 </form>
                     
                 {% else %}
-                    <button id="show_teams" class="defaultbutton dblarge" data-teams="{{teams}}">Weź udział</button>
+                <div class="float-right tour-button pchide"><button id="show_teams" class="defaultbutton dblarge" data-teams="{{teams}}">Weź udział</button></div>
+                <button id="show_teams" class="mobilehide defaultbutton dblarge" data-teams="{{teams}}">Weź udział</button> 
                 {% endif %}</div>
             {% if zapisana_druzyna %}<p class="zapisana_druzyna">Zapisano {{ zapisana_druzyna }}</p>{% endif %}
             <div id="tournament-nav"></div>
@@ -57,6 +58,7 @@
                 <div id="tournament-nav"></div>
                 <!-- jesli nie ma rozgrywek -->
                 {% if rozgrywki.all %}
+                <div id="tablecont">
                 <table>
                     <tr class="drabinka">
                         <td class="kolumna">
@@ -146,9 +148,10 @@
                         </td>
                         {% endif %}
                     </tr>
-                </table>
+                </table></div>
                 {% else %}
                 <!-- Jesli sa wygenerowane rozgrywki -->
+                <div id="tablecont">
                 <table>
                     <tr class="drabinka">
                         <td class="kolumna">
@@ -216,7 +219,7 @@
                             </div>
                         </td>
                     </tr>
-                </table>
+                </table></div>
                 {% endif %}
             </div>
         </div>

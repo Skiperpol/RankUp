@@ -95,6 +95,7 @@ def tworzenie_rozgrywek(ilosc_faz, max_ilosc_druzyn, lista_druzyn, turniej, ilos
 
 import random
 def tournament_site(request, tournamentname):
+    teams = []
     rozgrywki = Rozgrywki.objects.filter(nazwa_turnieju=tournamentname)
     tournament = Tournament.objects.get(nazwa=tournamentname)
     creator = CustomUser.objects.get(email=tournament.creator)
