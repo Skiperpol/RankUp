@@ -1,9 +1,10 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.template import loader
-from backend.models import Team, Tournament, CustomUser, Rozgrywki
+from backend.models import Team, Tournament, CustomUser, Rozgrywki, Message
 from backend.forms import TeamForm
-
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 
 def index(request):
     teams = Team.objects.all()[0:3]
@@ -67,12 +68,12 @@ def tworzenie_rozgrywek(ilosc_faz, max_ilosc_druzyn, lista_druzyn, turniej, ilos
     i=0
     for y in range(int(faza_0)):
             if y<roznica:
-                rozgrywka = Rozgrywki(nazwa_rozgrywki="Mecz "+str(y)+" faza 0",nazwa_turnieju=nazwa_turnieju, druzyna1=lista_druzyn[i], druzyna2=lista_druzyn[i+1], mecz=y ,faza=0)
+                rozgrywka = Rozgrywki(nazwa_rozgrywki="Mecz_"+str(y)+"_faza_0",nazwa_turnieju=nazwa_turnieju, druzyna1=lista_druzyn[i], druzyna2=lista_druzyn[i+1], mecz=y ,faza=0)
                 i=i+2
                 rozgrywka.save()
                 turniej.rozgrywki.add(rozgrywka)
             else:
-                rozgrywka = Rozgrywki(nazwa_rozgrywki="Mecz "+str(y)+" faza 0",nazwa_turnieju=nazwa_turnieju, druzyna1=lista_druzyn[i], druzyna2="Walkower", mecz=y ,faza=0,winner=lista_druzyn[i])
+                rozgrywka = Rozgrywki(nazwa_rozgrywki="Mecz_"+str(y)+"_faza_0",nazwa_turnieju=nazwa_turnieju, druzyna1=lista_druzyn[i], druzyna2="Walkower", mecz=y ,faza=0,winner=lista_druzyn[i])
                 i=i+1
                 rozgrywka.save()
                 turniej.rozgrywki.add(rozgrywka)
@@ -87,7 +88,7 @@ def tworzenie_rozgrywek(ilosc_faz, max_ilosc_druzyn, lista_druzyn, turniej, ilos
                     druzyna1 = lista_rozgrywek[y*2].druzyna1
                 if lista_rozgrywek[y*2+1].druzyna2 == "Walkower":
                     druzyna2 = lista_rozgrywek[y*2+1].druzyna1
-            rozgrywka = Rozgrywki(nazwa_rozgrywki="Mecz "+str(y)+" faza "+str(fazy),nazwa_turnieju=nazwa_turnieju, druzyna1=druzyna1, druzyna2=druzyna2, mecz=y ,faza=fazy)
+            rozgrywka = Rozgrywki(nazwa_rozgrywki="Mecz_"+str(y)+"_faza_"+str(fazy),nazwa_turnieju=nazwa_turnieju, druzyna1=druzyna1, druzyna2=druzyna2, mecz=y ,faza=fazy)
             rozgrywka.save()
             turniej.rozgrywki.add(rozgrywka)
 
@@ -127,14 +128,18 @@ def tournament_site(request, tournamentname):
             elif ilosc_druzyn<=32:
                 tworzenie_rozgrywek(5,32, druzyny, tournament, ilosc_druzyn)
                 return redirect('tournament_site', tournamentname = tournament.nazwa)
+    rozgrywki = Rozgrywki.objects.filter(nazwa_turnieju=tournament.nazwa)
     context = {
         "tournament":tournament,
         "teams": teams,
         "rozgrywki": rozgrywki,
         "creator": creator,
         "zapisana_druzyna": None,
+        "rozgrywki": None,
     }
     if request.user.is_authenticated:
+        if rozgrywki != "":
+            context["rozgrywki"]=rozgrywki
         context['teams']=teams
         for x in tournament.druzyny.all():
             if x.creator == request.user.email:
@@ -169,3 +174,24 @@ def contact_site(request):
     context = {
     }
     return HttpResponse(template.render(context, request))
+
+
+@login_required
+def room(request, nazwa_turnieju, nazwa_rozgrywki, druzyna):
+    team = Team.objects.get(nazwa = druzyna)
+    if team.creator == request.user.email:
+        room = Rozgrywki.objects.get(nazwa_rozgrywki=nazwa_rozgrywki, nazwa_turnieju=nazwa_turnieju)
+        if room.druzyna1 == druzyna or room.druzyna2 == druzyna:
+            messages = Message.objects.filter(room=room)[0:25]
+            return render(
+                request=request,
+                template_name="frontend/room.html", 
+                context={
+                            'room': room,
+                            'messages': messages
+                        }
+                )
+        else:
+            return redirect('index')
+    else:
+            return redirect('index')

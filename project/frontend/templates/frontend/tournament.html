@@ -26,6 +26,26 @@
                 </form>
             {% endif %}
 
+            {% if zapisana_druzyna is not None %}
+            <form method="POST">
+                {{zapisana_druzyna}}
+                {% csrf_token %}
+                <input type="hidden" id="type" name="type" value="remove">
+                <input type="hidden" name="nazwa" value="{{zapisana_druzyna}}">
+                <button type="submit">Zrezygnuj</button>
+            </form>
+                
+            {% else %}
+                <h1 class="float-right"><button id="show_teams" data-teams="{{teams}}">Weź udział</button></h1>
+            {% endif %}
+            {% for rozgrywka in rozgrywki %}
+                {% if rozgrywka.druzyna2 == zapisana_druzyna.nazwa or rozgrywka.druzyna1 == zapisana_druzyna.nazwa %}
+                    {{rozgrywka.nazwa_rozgrywki}}
+                    {% if rozgrywka.nazwa_rozgrywki %}
+                        <a href="{% url 'room' nazwa_turnieju=tournament.nazwa nazwa_rozgrywki=rozgrywka.nazwa_rozgrywki druzyna=zapisana_druzyna.nazwa %}"><h2>Idź do pokoju</h2></a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
             <div class="clear"><span class="grayed bold">{{ tournament.data|date:'Y-m-d H:i' }}</span></div>
             <div class="grayed">Hosted by {{ creator }} &#x2022; {{ tournament.rodzaj_gry }} &#x2022; {{ tournament.format_rozgrywek }}  &#x2022; {{ tournament.nagroda }}
                 {% if zapisana_druzyna is not None %}

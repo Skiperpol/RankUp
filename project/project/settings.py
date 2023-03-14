@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'frontend.apps.FrontendConfig',
     'backend.apps.BackendConfig',
+    'channels',
     'crispy_forms',
 ]
 CRISPY_TEMPLATE_PACK = 'uni_form'
