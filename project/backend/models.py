@@ -80,6 +80,11 @@ class Team(models.Model):
 
 
 class Message(models.Model):
+<<<<<<< HEAD
+    room = models.ForeignKey(Rozgrywki, related_name='messages', on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, related_name='messages', on_delete=models.CASCADE)
+    content = models.TextField()
+=======
     nazwa_rozgrywki = models.CharField(max_length=100, null=True, blank=True)
     kapitan = models.CharField(max_length=100, null=True, blank=True)
     wiadomosci = models.CharField(max_length=100, null=True, blank=True)

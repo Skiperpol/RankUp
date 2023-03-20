@@ -24,6 +24,9 @@ urlpatterns = [
     path('profile/<nick>', player_site, name='profile'),
     path('settings', settings, name='settings'),
 
+<<<<<<< HEAD
+    path('<nazwa_turnieju>/<nazwa_rozgrywki>/<druzyna>', room, name='room'),
+=======
     path('room/<nazwa_turnieju>/<nazwa_rozgrywki>/<druzyna>', room, name='room'),
     path('chat/messages/', get_messages, name='get_messages'),
     path('send', send, name='send'),
