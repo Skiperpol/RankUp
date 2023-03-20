@@ -40,12 +40,15 @@
             {% endif %}
             {% for rozgrywka in rozgrywki %}
                 {% if rozgrywka.druzyna2 == zapisana_druzyna.nazwa or rozgrywka.druzyna1 == zapisana_druzyna.nazwa %}
-                    {{rozgrywka.nazwa_rozgrywki}}
-                    {% if rozgrywka.nazwa_rozgrywki %}
-                        <a href="{% url 'room' nazwa_turnieju=tournament.nazwa nazwa_rozgrywki=rozgrywka.nazwa_rozgrywki druzyna=zapisana_druzyna.nazwa %}"><h2>Idź do pokoju</h2></a>
+                    {% if rozgrywka.winner == None %}
+                        {{rozgrywka.nazwa_rozgrywki}}
+                        {% if rozgrywka.nazwa_rozgrywki %}
+                            <a href="{% url 'room' nazwa_turnieju=tournament.nazwa nazwa_rozgrywki=rozgrywka.nazwa_rozgrywki druzyna=zapisana_druzyna.nazwa %}"><h2>Idź do pokoju</h2></a>
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             {% endfor %}
+            
             <div class="clear"><span class="grayed bold">{{ tournament.data|date:'Y-m-d H:i' }}</span></div>
             <div class="grayed">Hosted by {{ creator }} &#x2022; {{ tournament.rodzaj_gry }} &#x2022; {{ tournament.format_rozgrywek }}  &#x2022; {{ tournament.nagroda }}
                 {% if zapisana_druzyna is not None %}
@@ -75,6 +78,7 @@
                 {% endfor %}
 
                 <h2 class="hnomb2">Drabinka</h2>
+                <button id="refresh-btn">Odśwież</button>
                 <div id="tournament-nav"></div>
                 <!-- jesli nie ma rozgrywek -->
                 {% if rozgrywki.all %}
@@ -305,5 +309,13 @@
             wybor_druzynbc.classList.remove("blacked")
             body.style.overflow = "auto";
         });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+        $("#refresh-btn").click(function() {
+            $("#tablecont").load(location.href + " #tablecont");
+        });
+    });
     </script>
 {% endblock %}

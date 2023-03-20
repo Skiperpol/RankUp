@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, team_site, tournament_site, tournament_list_site, team_list_site, contact_site, room
+from .views import index, team_site, tournament_site, tournament_list_site, team_list_site, contact_site, room, get_messages, send, winner
 from backend.views import register, main, login_web, logout_view, settings, player_site, player_list_site, create_team, create_tournament
 
 urlpatterns = [
@@ -25,6 +25,9 @@ urlpatterns = [
     path('settings', settings, name='settings'),
 
     path('room/<nazwa_turnieju>/<nazwa_rozgrywki>/<druzyna>', room, name='room'),
+    path('chat/messages/', get_messages, name='get_messages'),
+    path('send', send, name='send'),
+    path('winner', winner, name='winner'),
 ]
 
 
