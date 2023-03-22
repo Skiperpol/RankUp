@@ -24,11 +24,7 @@ urlpatterns = [
     path('profile/<nick>', player_site, name='profile'),
     path('settings', settings, name='settings'),
 
-<<<<<<< HEAD
-    path('<nazwa_turnieju>/<nazwa_rozgrywki>/<druzyna>', room, name='room'),
-=======
     path('room/<nazwa_turnieju>/<nazwa_rozgrywki>/<druzyna>', room, name='room'),
->>>>>>> 964c3b39e439feca6d250c832d824991ed1a4da5
 ]
 
 

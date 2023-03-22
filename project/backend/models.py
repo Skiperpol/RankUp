@@ -76,17 +76,11 @@ class Team(models.Model):
         return self.nazwa
     
 class Message(models.Model):
-<<<<<<< HEAD
-    room = models.ForeignKey(Rozgrywki, related_name='messages', on_delete=models.CASCADE)
-    user = models.ForeignKey(CustomUser, related_name='messages', on_delete=models.CASCADE)
-    content = models.TextField()
-=======
     nazwa_rozgrywki = models.CharField(max_length=100, null=True, blank=True)
     kapitan1 = models.CharField(max_length=100, null=True, blank=True)
     kapitan2 = models.CharField(max_length=100, null=True, blank=True)
     wiadomosci_kapitan1 = models.CharField(max_length=100, null=True, blank=True)
     wiadomosci_kapitan2 = models.CharField(max_length=100, null=True, blank=True)
->>>>>>> 964c3b39e439feca6d250c832d824991ed1a4da5
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
