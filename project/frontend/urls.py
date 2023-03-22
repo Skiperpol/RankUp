@@ -25,7 +25,6 @@ urlpatterns = [
     path('settings', settings, name='settings'),
 
 
-    path('<nazwa_turnieju>/<nazwa_rozgrywki>/<druzyna>', room, name='room'),
 
     path('room/<nazwa_turnieju>/<nazwa_rozgrywki>/<druzyna>', room, name='room'),
     path('chat/messages/', get_messages, name='get_messages'),
