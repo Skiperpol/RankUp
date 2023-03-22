@@ -2,7 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.template import loader
 from backend.models import Team, Tournament, CustomUser, Rozgrywki, Message
-from backend.forms import TeamForm
+from backend.forms import TeamForm, MessageForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
@@ -67,13 +67,14 @@ def tworzenie_rozgrywek(ilosc_faz, max_ilosc_druzyn, lista_druzyn, turniej, ilos
     roznica = ilosc_druzyn-faza_0
     i=0
     for y in range(int(faza_0)):
+            nazwa_rozgrywki="Mecz_"+str(y)+"_faza_0"
             if y<roznica:
-                rozgrywka = Rozgrywki(nazwa_rozgrywki="Mecz_"+str(y)+"_faza_0",nazwa_turnieju=nazwa_turnieju, druzyna1=lista_druzyn[i], druzyna2=lista_druzyn[i+1], mecz=y ,faza=0)
+                rozgrywka = Rozgrywki(nazwa_rozgrywki=nazwa_rozgrywki,nazwa_turnieju=nazwa_turnieju, druzyna1=lista_druzyn[i], druzyna2=lista_druzyn[i+1], mecz=y ,faza=0)
                 i=i+2
                 rozgrywka.save()
                 turniej.rozgrywki.add(rozgrywka)
             else:
-                rozgrywka = Rozgrywki(nazwa_rozgrywki="Mecz_"+str(y)+"_faza_0",nazwa_turnieju=nazwa_turnieju, druzyna1=lista_druzyn[i], druzyna2="Walkower", mecz=y ,faza=0,winner=lista_druzyn[i])
+                rozgrywka = Rozgrywki(nazwa_rozgrywki=nazwa_rozgrywki,nazwa_turnieju=nazwa_turnieju, druzyna1=lista_druzyn[i], druzyna2="Walkower", mecz=y ,faza=0,winner=lista_druzyn[i])
                 i=i+1
                 rozgrywka.save()
                 turniej.rozgrywki.add(rozgrywka)
@@ -88,7 +89,8 @@ def tworzenie_rozgrywek(ilosc_faz, max_ilosc_druzyn, lista_druzyn, turniej, ilos
                     druzyna1 = lista_rozgrywek[y*2].druzyna1
                 if lista_rozgrywek[y*2+1].druzyna2 == "Walkower":
                     druzyna2 = lista_rozgrywek[y*2+1].druzyna1
-            rozgrywka = Rozgrywki(nazwa_rozgrywki="Mecz_"+str(y)+"_faza_"+str(fazy),nazwa_turnieju=nazwa_turnieju, druzyna1=druzyna1, druzyna2=druzyna2, mecz=y ,faza=fazy)
+            nazwa_rozgrywki="Mecz_"+str(y)+"_faza_"+str(fazy)
+            rozgrywka = Rozgrywki(nazwa_rozgrywki=nazwa_rozgrywki,nazwa_turnieju=nazwa_turnieju, druzyna1=druzyna1, druzyna2=druzyna2, mecz=y ,faza=fazy)
             rozgrywka.save()
             turniej.rozgrywki.add(rozgrywka)
 
@@ -175,25 +177,85 @@ def contact_site(request):
     }
     return HttpResponse(template.render(context, request))
 
+    
+@login_required
 def room(request, nazwa_turnieju, nazwa_rozgrywki, druzyna):
-    return redirect('index')
+    team = Team.objects.get(nazwa=druzyna)
+    if team.creator != request.user.email:
+        return redirect('index')
+    room = Rozgrywki.objects.get(nazwa_rozgrywki=nazwa_rozgrywki, nazwa_turnieju=nazwa_turnieju)
+    if room.druzyna1 == druzyna:
+        form = MessageForm()
+    elif room.druzyna2 == druzyna:
+        form = MessageForm()
+    else:
+        return redirect('index')
 
-# @login_required
-# def room(request, nazwa_turnieju, nazwa_rozgrywki, druzyna):
-#     team = Team.objects.get(nazwa = druzyna)
-#     if team.creator == request.user.email:
-#         room = Rozgrywki.objects.get(nazwa_rozgrywki=nazwa_rozgrywki, nazwa_turnieju=nazwa_turnieju)
-#         if room.druzyna1 == druzyna or room.druzyna2 == druzyna:
-#             messages = Message.objects.filter(room=room)[0:25]
-#             return render(
-#                 request=request,
-#                 template_name="frontend/room.html", 
-#                 context={
-#                             'room': room,
-#                             'messages': messages
-#                         }
-#                 )
-#         else:
-#             return redirect('index')
-#     else:
-#             return redirect('index')
+    return render(
+        request=request,
+        template_name="frontend/room.html",
+        context={
+            'room': room,
+            'form': form,
+            'druzyna': druzyna,
+        }
+    )
+    
+
+
+def get_messages(request):
+    room = request.GET.get('room')
+    messages = Message.objects.filter(nazwa_rozgrywki=room)
+    return JsonResponse({"messages":list(messages.values())})
+
+def send(request):
+    wiadomosci = request.POST['wiadomosci']
+    kapitan = request.POST['kapitan']
+    nazwa_rozgrywki = request.POST['nazwa_rozgrywki']
+
+    new_message = Message.objects.create(kapitan=kapitan, wiadomosci=wiadomosci, nazwa_rozgrywki=nazwa_rozgrywki)
+    new_message.save()
+    return HttpResponse('Message sent successfully')
+
+def check(obiekt_rozgrywki):
+    if obiekt_rozgrywki.kto_wygral_druzyna1 !=None and obiekt_rozgrywki.kto_wygral_druzyna2 !=None:
+        if obiekt_rozgrywki.kto_wygral_druzyna1 == obiekt_rozgrywki.kto_wygral_druzyna2:
+            obiekt_rozgrywki.winner = obiekt_rozgrywki.kto_wygral_druzyna1
+            print(obiekt_rozgrywki.winner)
+            print(obiekt_rozgrywki.kto_wygral_druzyna1)
+            obiekt_rozgrywki.save()
+            
+            nowa_nazwa_rozgrywki = "Mecz_"+str(int(obiekt_rozgrywki.mecz)//2)+"_faza_"+str(int(obiekt_rozgrywki.faza)+1)
+            nowa_rozgrywka = Rozgrywki.objects.get(nazwa_rozgrywki=nowa_nazwa_rozgrywki)
+            print("-------------------------------")
+            print(nowa_nazwa_rozgrywki)
+            print(nowa_rozgrywka)
+            if obiekt_rozgrywki.mecz % 2 == 0:
+                nowa_rozgrywka.druzyna1 = obiekt_rozgrywki.winner
+                nowa_rozgrywka.save()
+            else:
+                nowa_rozgrywka.druzyna2 = obiekt_rozgrywki.winner
+                nowa_rozgrywka.save()
+        else:
+            print("sprzeczność")
+
+
+def winner(request):
+    druzyna=request.POST['druzyna']
+    nazwa_rozgrywki=request.POST['nazwa_rozgrywki']
+    winner = request.POST['winner']
+    img = request.FILES.get('image')
+    rozgrywka = Rozgrywki.objects.get(nazwa_rozgrywki=nazwa_rozgrywki)
+    if rozgrywka.druzyna1 == druzyna:
+        rozgrywka.screen_druzyna1 = img
+        rozgrywka.kto_wygral_druzyna1 = winner
+        rozgrywka.save()
+        check(rozgrywka)
+    elif rozgrywka.druzyna2 == druzyna:
+        rozgrywka.screen_druzyna2 = img
+        rozgrywka.kto_wygral_druzyna2 = winner
+        rozgrywka.save()
+        check(rozgrywka)
+    print(winner)
+    print(img)
+    return HttpResponse('Message sent successfully')

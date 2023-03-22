@@ -44,6 +44,7 @@ class Tournament(models.Model):
     rodzaj_gry = models.CharField(choices=gry, max_length=100)
     format_rozgrywek = models.CharField(choices=formaty, max_length=10)
     rozgrywki = models.ManyToManyField('Rozgrywki',null=True, blank=True)
+    started = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nazwa
@@ -60,7 +61,8 @@ class Rozgrywki(models.Model):
     screen_druzyna2 = models.ImageField(upload_to='images/', null=True, blank=True)
     kto_wygral_druzyna1 = models.CharField(max_length=100, null=True, blank=True)
     kto_wygral_druzyna2 = models.CharField(max_length=100, null=True, blank=True)
-    wiadomosci = models.ManyToManyField('Message')
+    message = models.ManyToManyField('Message', null=True, blank=True)
+
     def __str__(self):
         return self.nazwa_rozgrywki
 
@@ -75,16 +77,20 @@ class Team(models.Model):
     def __str__(self):
         return self.nazwa
     
+
+
 class Message(models.Model):
+    room = models.ForeignKey(Rozgrywki, related_name='messages', on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, related_name='messages', on_delete=models.CASCADE)
+    content = models.TextField()
     nazwa_rozgrywki = models.CharField(max_length=100, null=True, blank=True)
-    kapitan1 = models.CharField(max_length=100, null=True, blank=True)
-    kapitan2 = models.CharField(max_length=100, null=True, blank=True)
-    wiadomosci_kapitan1 = models.CharField(max_length=100, null=True, blank=True)
-    wiadomosci_kapitan2 = models.CharField(max_length=100, null=True, blank=True)
+    kapitan = models.CharField(max_length=100, null=True, blank=True)
+    wiadomosci = models.CharField(max_length=100, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('date_added',)
+
 
         
 

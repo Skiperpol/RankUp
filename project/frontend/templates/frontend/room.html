@@ -3,96 +3,108 @@
 {% block content %}
 <div id="container" style="color: white;">
     <h1>WITAJ W POKOJU {{room.nazwa_rozgrywki}}</h1>
-    <div id="chat-messages">
-        Napisz coś:
-        {% for m in messages %}<b>{{ m.user.username }}</b>: {{ m.content }}<br>{% endfor %}
-      
-    </div>
-    <form method="post">
-        <input type="text" id="chat-messages-input" name="message">
+    <div id="display" style="height: 200px; overflow-y: auto;"></div>
+    <form method="POST" id="post-form">
         {% csrf_token %}
-        <button id="chat-message-submit">Wyślij</button>
+        {{ form.as_p }}
+        <input type="hidden" name="kapitan" id="kapitan" value="{{user.nick}}"/>
+        <input type="hidden" name="nazwa_rozgrywki" id="nazwa_rozgrywki" value="{{room.nazwa_rozgrywki}}"/>
+        <button type="submit">Send</button>
+    </form>
+    <form method="POST" id="post-winner" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="radio" name="winner" id="winner1" value="{{room.druzyna1}}" required>
+        <label for="winner1">{{room.druzyna1}}</label><br>
+        <input type="radio" name="winner" id="winner2" value="{{room.druzyna2}}" required>
+        <label for="winner2">{{room.druzyna2}}</label><br>
+        <input type="file" id="image-upload" name="image" required><br>
+        <input type="hidden" name="druzyna" id="druzyna" value="{{druzyna}}"/>
+        <input type="hidden" name="nazwa_rozgrywki" id="nazwa_rozgrywki" value="{{room.nazwa_rozgrywki}}"/>
+        <button type="submit">Send</button>
     </form>
 </div>
-
-<<<<<<< HEAD
-{% endblock %}
-{% block scripts %}
-{{ room.nazwa_rozgrywki|json_script:"json-roomname" }}
-{{ request.user.username|json_script:"json-username" }}
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
-    const userName = JSON.parse(document.getElementById('json-username').textContent);
-    console.log("12312")
-    console.log(roomName)
-    console.log(userName)
-
-    const chatSocket = new WebSocket(
-        'ws://'
-        + window.location.host
-        + '/ws/'
-        + roomName
-        + '/'
-    );
-
-    chatSocket.onclose = function(e) {
-        console.log('onclose')
-    }
-
-    chatSocket.onmessage = function(e) {
-        const data = JSON.parse(e.data);
-
-        if (data.message) {
-            document.querySelector('#chat-messages').innerHTML += ('<b>' + data.username + '</b>: ' + data.message + '<br>');
-        } else {
-            alert('The message was empty!')
-        }
-
-        scrollToBottom();
-    };
-
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function(e) {
-        if (e.keyCode === 13) {
-            document.querySelector('#chat-message-submit').click();
-        }
-    };
-
-    document.querySelector('#chat-message-submit').onclick = function(e) {
-        e.preventDefault()
-
-        const messageInputDom = document.querySelector('#chat-message-input');
-        const message = messageInputDom.value;
-
-        console.log({
-            'message': message,
-            'username': userName,
-            'room': roomName
-        })
-
-        chatSocket.send(JSON.stringify({
-            'message': message,
-            'username': userName,
-            'room': roomName
-        }));
-
-        messageInputDom.value = '';
-
-        return false
-    };
-
-    /**
-    * A function for finding the messages element, and scroll to the bottom of it.
-    */
-    // function scrollToBottom() {
-    //     let objDiv = document.getElementById("chat-messages");
-    //     objDiv.scrollTop = objDiv.scrollHeight;
-    // }
-
-    // // Add this below the function to trigger the scroll on load.
-    // scrollToBottom();
+            var div = document.getElementById("display");
+            div.scrollTop = div.scrollHeight - div.clientHeight;
 </script>
-=======
->>>>>>> 964c3b39e439feca6d250c832d824991ed1a4da5
+<script>
+
+$(document).ready(function(){
+    var firstTime = true;
+
+    setInterval(function(){
+        $.ajax({
+            type: 'GET',
+            url : "/chat/messages/",
+            data:{
+                room: '{{room}}',
+            },
+            success: function(response){
+                console.log(response);
+                $("#display").empty();
+                for (var key in response.messages)
+                {
+                    var temp="<div class='container darker'><b>"+response.messages[key].kapitan+"</b><p>"+response.messages[key].wiadomosci+"</p><span class='time-left'>"+response.messages[key].date_added+"</span></div>";
+                    $("#display").append(temp);
+                }
+                if (firstTime) {
+                    var div = document.getElementById("display");
+                    div.scrollTop = div.scrollHeight - div.clientHeight;
+                    firstTime = false
+                }
+            },
+            error: function(response){
+                alert('An error occured')
+            }
+        });
+    },1000);
+
+    $(document).on('submit','#post-form',function(e){
+          e.preventDefault();
+
+          $.ajax({
+            type:'POST',
+            url:'/send',
+            data:{
+                kapitan:$('#kapitan').val(),
+                nazwa_rozgrywki:$('#nazwa_rozgrywki').val(),
+                wiadomosci:$('#wiadomosci').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function(data){
+               //alert(data)
+            }
+          });
+          document.getElementById('wiadomosci').value = ''
+          firstTime=true
+    });
+});
+</script>
+<script>
+    $(document).ready(function(){
+  $('#post-winner').on('submit', function(e){
+    e.preventDefault(); //zatrzymuje domyślne działanie formularza
+
+    //tworzymy obiekt FormData, który będzie przechowywał dane formularza
+    var formData = new FormData(this);
+
+    $.ajax({
+      type: 'POST',
+      url: '/winner',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(response){
+        //obsługa sukcesu
+        console.log(response);
+      },
+      error: function(error){
+        //obsługa błędów
+        console.log(error);
+      }
+    });
+  });
+});
+</script>
 {% endblock %}

@@ -6,3 +6,4 @@ admin.site.register(Tournament)
 admin.site.register(Team)
 admin.site.register(Rozgrywki)
 admin.site.register(Message)
+
