@@ -381,12 +381,15 @@
     }
     #additionalbc #inner-wrapper .grayed {
         margin-bottom: 2vh;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     #show_teams, .dblarge {
         float: none !important;
         width: 90%;
         margin: auto;
+    }
+    .mecz div {
+        font-size: 1rem !important;
     }
     .zapisana_druzyna {
         letter-spacing: 0.1rem;
@@ -401,7 +404,7 @@
         margin-top: 0;
     }
     .mecz{
-        width: 40vw;
+        width: 50vw;
     }
     .contactcontainer {
         height: auto !important;
