@@ -1,12 +1,15 @@
 {% extends 'frontend/base.html' %}
 
 {% block content %}
-<div id="container">
-    <h1>Stwórz turniej</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Wyślij</button>
-    </form>
+<div id="container" class="logincontainer create_tournamentbc">
+    <div id="logininner-wrapper"> 
+        <h1>Stwórz turniej</h1>
+        <form method="post" enctype="multipart/form-data" class="register-form">
+            {% csrf_token %}
+            {% load crispy_forms_tags %}
+            {{form|crispy}}
+            <button type="submit">Wyślij</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

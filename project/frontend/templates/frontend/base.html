@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rankup</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'mobile.css' %}">
@@ -19,7 +19,6 @@
         <a href="{% url 'tournament_list_site' %}"><h2>Turnieje</h2></a>
         <a href="{% url 'player_list_site' %}"><h2>Gracze</h2></a>
         <a href="{% url 'team_list_site' %}"><h2>Drużyny</h2></a>
-
         <a href="{% url 'contact_site' %}"><h2>Kontakt</h2></a>
         <div>
             {% if user.is_authenticated %}
@@ -34,6 +33,31 @@
     </div>
     {% block content %}
     {% endblock %}
+    <div id="mobilesidemenu" class="pchide">
+        <div id="mobilesidemenuclose">
+            <img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="">
+        </div>
+        <div class="mobilesidemenuflex">
+            <div>
+            <a href="{% url 'tournament_list_site' %}"><h2>Turnieje</h2></a>
+            <a href="{% url 'player_list_site' %}"><h2>Gracze</h2></a>
+            <a href="{% url 'team_list_site' %}"><h2>Drużyny</h2></a>
+            <a href="{% url 'contact_site' %}"><h2>Kontakt</h2></a>
+        </div>
+        <div>
+            {% if user.is_authenticated %}
+                <a href="{% url 'settings' %}"><h2>Ustawienia</h2></a>
+                <a href="{% url 'player_site' playernick=user.nick %}"><h2>Moje konto</h2></a>
+                <a href="{% url 'logout' %}"><h2>Wyloguj</h2></a>
+            {% else %}
+                <a href="{% url 'login_web' %}"><h2>Zaloguj się</h2></a>
+                <a href="{% url 'register' %}"><h2>Zarejestruj się</h2></a>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+
+    <script></script>
     <div id="mobilemenu">
         <a href="{% url 'index' %}"><div class="mobilemenuimgcontainer"><img src="https://i.ibb.co/Z8c6WrV/sa.png" alt="">rankup</div></a>
         <a href="{% url 'tournament_list_site' %}"><div class="mobilemenuimgcontainer"><img src="/media/turniejicon.png" alt="">turnieje</div></a>
@@ -42,11 +66,11 @@
         {% else %}
         <a href="{% url 'register' %}"><div class="mobilemenuimgcontainer"><img src="/media/account.png" alt="">rejestracja</div></a>
         {% endif %}
-        <div class="mobilemenuimgcontainer"><img src="/media/menu.png" alt="">menu</div>
+        <div id="mobilemenucontrol" class="mobilemenuimgcontainer"><img src="/media/menu.png" alt="">menu</div>
         
     </div>
     <div id="mobilenav">
-        <img src="https://i.ibb.co/Z8c6WrV/sa.png" alt="">
+        <a class="mobilenavindex" href="{% url 'index' %}"><img src="https://i.ibb.co/Z8c6WrV/sa.png" alt=""></a>
         <div id="mobilenavlogowanie" class="defaultbutton">
             {% if user.is_authenticated %}
             <a href="{% url 'player_site' playernick=user.nick %}">konto</a> 
@@ -55,5 +79,26 @@
             {% endif %} 
         </div>
     </div>
+    
+    <!-- otwieranie menu na telefonie -->
+    <script>
+        let control = document.getElementById("mobilemenucontrol");
+        let close = document.getElementById("mobilesidemenuclose");
+        let mobilesidemenu = document.getElementById("mobilesidemenu");
+        control.addEventListener("click", function() {
+            if (mobilesidemenu.classList.contains("mobilesidemenu_shown")) {
+                document.body.classList.remove("nooverflow");
+                mobilesidemenu.classList.remove("mobilesidemenu_shown")
+            } else {
+                mobilesidemenu.classList.add("mobilesidemenu_shown")
+                document.body.classList.add("nooverflow");
+            }
+        });  
+        close.addEventListener("click", function() {
+            mobilesidemenu.classList.remove("mobilesidemenu_shown")
+                document.body.classList.remove("nooverflow");
+        }); 
+        
+    </script>
 </body>
 </html>

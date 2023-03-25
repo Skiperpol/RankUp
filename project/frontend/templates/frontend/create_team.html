@@ -7,9 +7,11 @@
       </video>
     <div id="logininner-wrapper"> 
     <h1>Stwórz drużynę</h1>
-    <form method="post" enctype="multipart/form-data">
+    <br>
+    <form method="post" enctype="multipart/form-data" class="register-form">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% load crispy_forms_tags %}
+        {{form|crispy}}
         <button class="defaultbutton" type="submit">Wyślij</button>
     </form>
 </div>

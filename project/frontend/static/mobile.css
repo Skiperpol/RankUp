@@ -1,5 +1,10 @@
 @media only screen and (max-width: 600px) {
-   
+    html {
+        height: -webkit-fill-available;
+    }
+    body {
+        height: -webkit-fill-available;
+    }
     /* ===== Scrollbar CSS ===== */
   /* Firefox */
   * {
@@ -20,6 +25,9 @@
     background-color: #101319;
     border-radius: 14px;
     border: 2px solid #5e5e5e;
+  }
+  html, body {
+    overflow-x: hidden !important;
   }
     #side_menu {
         display: none;
@@ -42,7 +50,7 @@
     } 
     #mobilenav {
         display: block;
-        position: absolute;
+        position: fixed;
         width: 100vw;
         height: 7vh;
         top: 0;
@@ -59,10 +67,13 @@
         align-content: flex-end;
         color: white;
     }
-    #mobilenav img {
-        height: 60%;
-        margin-top: 1.5vh;
+    #mobilenav .mobilenavindex {
+        display: inline;
         margin-left: 1.5vh;
+    }
+    #mobilenav .mobilenavindex img {
+        margin-top: 1.5vh;
+        height: 4.2vh;
     }
     #mobilemenu img{
         height: 40%;
@@ -78,6 +89,7 @@
     #container {
         width: 100vw;
         margin: 0;
+        height: -webkit-fill-available;
     }
     #container_bc {
         background-position: 65% 50%;
@@ -88,15 +100,15 @@
     }
     #page1 {
         text-align: center;
-        padding-top: 8vh;
         padding-left: 0 !important;
     }
     #page2, #page3, #page4{ 
         text-align: center;
         padding-left: 0 !important;
-        padding-top: 9vh;
-        height: 91vh;
+        padding-top: 11vh;
+        height: 89vh;
     }
+    
     .pchide {
         display: block;
     }
@@ -126,6 +138,30 @@
     #tournaments-list, #players-list, #teams-list {
         width: 100%;
         margin-top: 1vh;
+    }
+    .tournament-detail-container {
+        width: 100vw;
+        margin-left: 0;
+    }
+    .aktualizacja {
+        font-size: 1rem;
+    }
+    .najlepszedruzyny {
+        font-size: 1.6rem;
+    }
+    .druzynycontent {
+        margin-top: 5vh !important;
+    }
+    .players-list-div {
+        font-size: 1rem !important;
+    }
+    .playerinner-wrapper li .crown {
+        margin-bottom: auto !important;
+    }
+    #teams-list-container {
+        background-attachment:scroll;
+        background-size: 100vh, 190vh;
+        background-image: linear-gradient(0deg, #101319 0%, #101319 50%, #101319a3 75%, rgba(255, 255, 255, 0) 100%), url(https://www.thetimes.co.uk/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2Fdc203072-5954-11ed-962f-53da0c787308.jpg?crop=3052%2C1717%2C471%2C978);
     }
     .header {
         border-radius: 0 !important;
@@ -161,7 +197,7 @@
         line-height: 2rem;
     }
     .play { 
-        margin-top: 53vh;
+        margin-top: 51vh;
         font-size: 2rem;
         margin-left: calc(10% - 4vh);
         width: 80%;
@@ -229,6 +265,9 @@
     #registerinner-wrapper, #logininner-wrapper {
         padding-top: 2vh !important;
         margin-top: 10vh;
+    }
+    #rozpocznij {
+        margin-top: 1vh !important;
     }
     #registerinner-wrapper h1, #logininner-wrapper h1{
         font-size: 1.5rem;
@@ -309,7 +348,8 @@
         font-size: 1rem;
     }
     .playerinner-wrapper h3 {
-        text-align: left;
+        text-align: center;
+        font-size: 1.6rem !important;
     }
     .playerinner-wrapper .profile-teams {
         text-align: center;
@@ -362,5 +402,68 @@
     }
     .mecz{
         width: 40vw;
+    }
+    .contactcontainer {
+        height: auto !important;
+    }
+    /* kontakt */
+    #contactinner-wrapper {
+        width: 80vw;
+        height: 20vh;
+        margin-top: 7vh;
+        padding-right: 10vw;
+        padding-left: 10vw;
+        color: white !important;
+        font-size: 1.3rem;
+        overflow: hidden !important;
+    }
+    #whitecontact {
+        width: 80vw;
+        position: absolute;
+        top: 20vh;
+        left: 0;
+        height: 75%;
+        overflow: hidden;
+        padding-left: 10vw;
+        padding-right: 10vw;
+        padding-top: 3vh;
+        background-color: #ebe7e1;
+        color: black;
+    }
+    /* boczne menu */
+    #mobilesidemenu {
+        position: fixed;
+        top: 0;
+        left: -100vw;
+        background-color: #202631;
+        height: 83vh;
+        width: 95vw;
+        transition: all .2s;
+        color: white;
+        padding-left: 5vw;
+        padding-top: 10vh;
+    }
+    #mobilesidemenu h2{ 
+        font-size: 1.5rem !important;
+    }
+    .mobilesidemenu_shown {
+        left: 0 !important;
+    }
+    #mobilesidemenuclose img {
+        width: 10vw;
+        height: auto;
+        position: absolute;
+        top: 10vh;
+        right: 10vw;
+        filter:invert(1);
+    }
+    .mobilesidemenuflex {
+        height: 85%;
+        display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-start;
+align-content: flex-start;
     }
   }

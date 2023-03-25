@@ -2,10 +2,12 @@
 body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
     background-color: #101319;
 }
-
+html {
+    overflow-x: hidden !important;
+}
 .ovflow-hidden {
     overflow-y: hidden;
 }
@@ -387,7 +389,9 @@ letter-spacing: .2em;
 .bold {
     font-weight: bold !important;
 }
-
+.nooverflow {
+    overflow: hidden !important;
+}
 /* ----------------------------------------- TOURNAMENT DETAIL ----------------------------------------- */
 /* ----------------------------------------- TOURNAMENT DETAIL ----------------------------------------- */
 /* ----------------------------------------- TOURNAMENT DETAIL ----------------------------------------- */
@@ -402,6 +406,27 @@ letter-spacing: .2em;
     overflow-x: hidden;
     background-color: #101319;
 }
+#contactinner-wrapper {
+    width: auto;
+    height: 20vh;
+    margin-top: 7vh;
+    padding-right: 10%;
+    padding-left: 5vw;
+    color: white !important;
+    font-size: 1.5rem;
+}
+#whitecontact {
+    width: 100%;
+    position: absolute;
+    top: 20vh;
+    left: 15vw;
+    height: 75vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-top: 5vh;
+    background-color: #ebe7e1;
+    color: black;
+}
 #inner-wrapper {
     width: auto;
     height: auto;
@@ -412,7 +437,7 @@ letter-spacing: .2em;
     font-size: 1.5rem;
 }
 #inner-wrapper h1{ 
-    letter-spacing: 0.4rem;
+    letter-spacing: 0.1rem;
 }
 #name {
     margin-top: 7vh;
@@ -460,6 +485,13 @@ letter-spacing: .2em;
     z-index: 40;
     border-radius: 40px;
 }
+#rozpocznij {
+    margin-top: 0vh !important;
+    margin-right: 1vw;
+}
+#refresh-btn {
+    margin-top: 0 !important;
+}
 .dbstatic {
     position: absolute;
     transform: translate(-50%, 0);
@@ -467,6 +499,7 @@ letter-spacing: .2em;
     left: 50%;
 }
 #close {
+    cursor: pointer;
     position: absolute;
     top: 2.1rem;
     font-size: 1.4rem;
@@ -731,6 +764,9 @@ li img {
 }
 .profile-menu div:hover {
     color: white;
+}
+.create_tournamentbc {
+    background-color: #ebe7e1;
 }
 .profile-menu {
     clear:both;

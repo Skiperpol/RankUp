@@ -23,6 +23,10 @@
                 <div>Ranking:  <span>{{ player.punkty }} punkty</span></div>
                 <div>Winrate: <span>100%</span></div>
             </div>
+            <h1 class="profile-teams">Turnieje{% if user.is_authenticated %}{% if user == player %}<a href="{% url 'create_tournament' %}"><span class="jakas create_team">Stwórz turniej</span></a>{% endif %}{% endif %}</h1>
+            <hr>
+            
+            
             <h1 class="profile-teams">Drużyny{% if user.is_authenticated %}{% if user == player %}<a href="{% url 'create_team' %}"><span class="jakas create_team">Stwórz drużynę</span></a>{% endif %}{% endif %}</h1>
             <hr>
             {% if team %}

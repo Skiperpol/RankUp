@@ -1,53 +1,11 @@
 {% extends 'frontend/base.html' %}
 
 {% block content %}
-    <style>
-        .popup {
-            position: fixed;
-            background-color: white;
-            border: 1px solid black;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            }
-    </style>
     <div id="t-container" class="tournament-detail-container">
         <!-- ZAWARTOSC -->
         <div id="additionalbc">
         <div id="inner-wrapper">
             <h1 id="name" class="float-left">{{ tournament }}</h1>
-
-            {% if tournament.creator == user.email %}
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" id="type" name="type" value="start">
-                    <button type="submit">Rozpocznij</button>
-                </form>
-            {% endif %}
-
-            {% if zapisana_druzyna is not None %}
-            <form method="POST">
-                {{zapisana_druzyna}}
-                {% csrf_token %}
-                <input type="hidden" id="type" name="type" value="remove">
-                <input type="hidden" name="nazwa" value="{{zapisana_druzyna}}">
-                <button type="submit">Zrezygnuj</button>
-            </form>
-                
-            {% else %}
-                <h1 class="float-right"><button id="show_teams" data-teams="{{teams}}">Weź udział</button></h1>
-            {% endif %}
-            {% for rozgrywka in rozgrywki %}
-                {% if rozgrywka.druzyna2 == zapisana_druzyna.nazwa or rozgrywka.druzyna1 == zapisana_druzyna.nazwa %}
-                    {% if rozgrywka.winner == None %}
-                        {{rozgrywka.nazwa_rozgrywki}}
-                        {% if rozgrywka.nazwa_rozgrywki %}
-                            <a href="{% url 'room' nazwa_turnieju=tournament.nazwa nazwa_rozgrywki=rozgrywka.nazwa_rozgrywki druzyna=zapisana_druzyna.nazwa %}"><h2>Idź do pokoju</h2></a>
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
             
             <div class="clear"><span class="grayed bold">{{ tournament.data|date:'Y-m-d H:i' }}</span></div>
             <div class="grayed">Hosted by {{ creator }} &#x2022; {{ tournament.rodzaj_gry }} &#x2022; {{ tournament.format_rozgrywek }}  &#x2022; {{ tournament.nagroda }}
@@ -61,11 +19,30 @@
                     
                 {% else %}
                 <div class="float-right tour-button pchide"><button id="show_teams" class="defaultbutton dblarge" data-teams="{{teams}}">Weź udział</button></div>
-                <button id="show_teams" class="mobilehide defaultbutton dblarge" data-teams="{{teams}}">Weź udział</button> 
-                {% endif %}</div>
+                <button id="show_teamsmobile" class="mobilehide defaultbutton dblarge" data-teams="{{teams}}">Weź udział</button> 
+                {% endif %}
+                {% if tournament.creator == user.email %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="type" name="type" value="start">
+                    <button type="submit" id="rozpocznij" class="defaultbutton dblarge">Rozpocznij</button>
+                    
+                </form>
+            {% endif %}</div>
             {% if zapisana_druzyna %}<p class="zapisana_druzyna">Zapisano {{ zapisana_druzyna }}</p>{% endif %}
             <div id="tournament-nav"></div>
             <div id="tournament-content-detailed">
+                
+            {% for rozgrywka in rozgrywki %}
+            {% if rozgrywka.druzyna2 == zapisana_druzyna.nazwa or rozgrywka.druzyna1 == zapisana_druzyna.nazwa %}
+                {% if rozgrywka.winner == None %}
+                    {{rozgrywka.nazwa_rozgrywki}}
+                    {% if rozgrywka.nazwa_rozgrywki %}
+                        <a href="{% url 'room' nazwa_turnieju=tournament.nazwa nazwa_rozgrywki=rozgrywka.nazwa_rozgrywki druzyna=zapisana_druzyna.nazwa %}"><h2>Idź do pokoju</h2></a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
                 
                 <h2 class="hnomb">Drużyny</h2>
                 <div id="tournament-nav"></div>
@@ -78,7 +55,7 @@
                 {% endfor %}
 
                 <h2 class="hnomb2">Drabinka</h2>
-                <button id="refresh-btn">Odśwież</button>
+                <button class="defaultbutton" id="refresh-btn">Odśwież</button>
                 <div id="tournament-nav"></div>
                 <!-- jesli nie ma rozgrywek -->
                 {% if rozgrywki.all %}
@@ -290,9 +267,18 @@
     <script>
         var wybor_druzynbc = document.getElementById("wybor_druzynbc")
         var button = document.getElementById("show_teams")
+        var buttonmobile = document.getElementById("show_teamsmobile")
         var body = document.getElementById("body")
         var wybor_druzyn = document.getElementById("wybor_druzyn");
         button.addEventListener("click", function() {
+            wybor_druzyn.style.width = "25%";
+            wybor_druzyn.style.height = "75%";
+            wybor_druzyn.style.padding = "3.2rem";
+            wybor_druzyn.style.transition = "all .5s ease";
+            wybor_druzynbc.classList.add("blacked");
+            body.style.overflow = "hidden";
+        }); 
+        buttonmobile.addEventListener("click", function() {
             wybor_druzyn.style.width = "25%";
             wybor_druzyn.style.height = "75%";
             wybor_druzyn.style.padding = "3.2rem";
