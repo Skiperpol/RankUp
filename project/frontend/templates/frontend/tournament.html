@@ -7,8 +7,8 @@
         <div id="inner-wrapper">
             <h1 id="name" class="float-left">{{ tournament }}</h1>
             
-            <div class="clear"><span class="grayed bold">{{ tournament.data|date:'Y-m-d H:i' }}</span></div>
-            <div class="grayed">Hosted by {{ creator }} &#x2022; {{ tournament.rodzaj_gry }} &#x2022; {{ tournament.format_rozgrywek }}  &#x2022; {{ tournament.nagroda }}
+            <div class="clear"><span class="grayed bold">{{ tournament.data }}</span></div>
+            <div class="grayed">Hosted by {{ creator.nick }} &#x2022; {{ tournament.rodzaj_gry }} &#x2022; {{ tournament.format_rozgrywek }}  &#x2022; {{ tournament.nagroda }}
                 {% if zapisana_druzyna is not None %}
                 <form method="POST">
                     {% csrf_token %}
@@ -36,10 +36,12 @@
             {% for rozgrywka in rozgrywki %}
             {% if rozgrywka.druzyna2 == zapisana_druzyna.nazwa or rozgrywka.druzyna1 == zapisana_druzyna.nazwa %}
                 {% if rozgrywka.winner == None %}
-                    {{rozgrywka.nazwa_rozgrywki}}
+                    <div class="dolaczdorozgrywki">
+                    {{rozgrywka.druzyna1 }} - {{rozgrywka.druzyna2 }}
                     {% if rozgrywka.nazwa_rozgrywki %}
-                        <a href="{% url 'room' nazwa_turnieju=tournament.nazwa nazwa_rozgrywki=rozgrywka.nazwa_rozgrywki druzyna=zapisana_druzyna.nazwa %}"><h2>Idź do pokoju</h2></a>
+                        <a class="defaultbutton" href="{% url 'room' nazwa_turnieju=tournament.nazwa nazwa_rozgrywki=rozgrywka.nazwa_rozgrywki druzyna=zapisana_druzyna.nazwa %}"><h2>Idź do pokoju</h2></a>
                     {% endif %}
+                    </div>
                 {% endif %}
             {% endif %}
         {% endfor %}
@@ -58,6 +60,7 @@
                 <button class="defaultbutton" id="refresh-btn">Odśwież</button>
                 <div id="tournament-nav"></div>
                 <!-- jesli nie ma rozgrywek -->
+
                 {% if rozgrywki.all %}
                 <div id="tablecont">
                 <table>

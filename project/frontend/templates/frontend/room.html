@@ -1,28 +1,52 @@
 {% extends 'frontend/base.html' %}
 
 {% block content %}
-<div id="container" style="color: white;">
-    <h1>WITAJ W POKOJU {{room.nazwa_rozgrywki}}</h1>
-    <div id="display" style="height: 200px; overflow-y: auto;"></div>
-    <form method="POST" id="post-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="hidden" name="kapitan" id="kapitan" value="{{user.nick}}"/>
-        <input type="hidden" name="nazwa_rozgrywki" id="nazwa_rozgrywki" value="{{room.nazwa_rozgrywki}}"/>
-        <button type="submit">Send</button>
-    </form>
-    <form method="POST" id="post-winner" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="radio" name="winner" id="winner1" value="{{room.druzyna1}}" required>
-        <label for="winner1">{{room.druzyna1}}</label><br>
-        <input type="radio" name="winner" id="winner2" value="{{room.druzyna2}}" required>
-        <label for="winner2">{{room.druzyna2}}</label><br>
-        <input type="file" id="image-upload" name="image" required><br>
-        <input type="hidden" name="druzyna" id="druzyna" value="{{druzyna}}"/>
-        <input type="hidden" name="nazwa_rozgrywki" id="nazwa_rozgrywki" value="{{room.nazwa_rozgrywki}}"/>
-        <button type="submit">Send</button>
-    </form>
+<div id="container" class="roomcontainer">
+    <div id="roomheader" class="room-main-header">
+        <div>
+            <h1>{{ druzynanr1 }}</h1>
+            <img class="roomteamimg" src="{{ druzynanr1.zdjecie.url }}" alt="">
+        </div> 
+        <div><h1>VS</h1></div>
+        <div>
+            <h1>{{ druzynanr2 }}</h1>
+            <img class="roomteamimg" src="{{ druzynanr2.zdjecie.url }}" alt="">
+        </div>
+    </div> 
+   <div id="displayscontainer">
+        <div>
+        <div id="display"></div>
+        <div id="displaycontrols">
+            <form method="POST" id="post-form">
+                {% csrf_token %}
+                {{ form }}
+                <input type="hidden" name="kapitan" id="kapitan" value="{{user.nick}}"/>
+                <input type="hidden" name="nazwa_rozgrywki" id="nazwa_rozgrywki" value="{{room.nazwa_rozgrywki}}"/>
+                <button class="defaultbutton" id="sendmess" type="submit">Wyślij</button>
+            </form>
+        </div></div>
+        <div id="summary">
+            <h2>Rezultat</h2>
+            <h4>Wygrała:</h4>
+            <form method="POST" id="post-winner" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="radio" name="winner" id="winner1" value="{{room.druzyna1}}" required>
+                <label for="winner1">{{room.druzyna1}}</label><br>
+                <input type="radio" name="winner" id="winner2" value="{{room.druzyna2}}" required>
+                <label for="winner2">{{room.druzyna2}}</label><br>
+                <input type="file" id="image-upload" name="image" required><br>
+                <span class="grayed">*wprowadz dane i dodaj zrzut ekranu</span>
+                <input type="hidden" name="druzyna" id="druzyna" value="{{druzyna}}"/>
+                <input type="hidden" name="nazwa_rozgrywki" id="nazwa_rozgrywki" value="{{room.nazwa_rozgrywki}}"/>
+                <button class="rezultatbutton defaultbutton" type="submit">Zatwierdź</button>
+            </form>
+        </div>
+    </div>
 </div>
+<script>
+    roomheader = document.getElementById("roomheader")
+    roomheader.style.backgroundImage = "url('{{ turniej.zdjecie.url }}')"
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
             var div = document.getElementById("display");
@@ -45,7 +69,10 @@ $(document).ready(function(){
                 $("#display").empty();
                 for (var key in response.messages)
                 {
-                    var temp="<div class='container darker'><b>"+response.messages[key].kapitan+"</b><p>"+response.messages[key].wiadomosci+"</p><span class='time-left'>"+response.messages[key].date_added+"</span></div>";
+                    var dateObject = new Date(response.messages[key].date_added);
+                    var options = {hour: '2-digit', minute: '2-digit'};
+                    var timeString = dateObject.toLocaleTimeString([], options);
+                    var temp="<div class='container darker'><br>"+"<div class='chatnav'><div class='chatheader'><img class='chatimg' src='{{ user.avatar.url }}'alt=''>"+"<b>"+response.messages[key].kapitan+"</b></div><span class='time-left'>"+timeString+"</span></div><p class='messindeed'>"+response.messages[key].wiadomosci+"</p></div>";
                     $("#display").append(temp);
                 }
                 if (firstTime) {

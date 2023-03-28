@@ -7,7 +7,7 @@ class CustomUser(AbstractUser):
     nick = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
     data_urodzenia = models.DateField(blank=True, null=True)
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(blank=True, default="images/1.png")
     opis = models.TextField('Opis', max_length=500, default='', blank=True)
     punkty = models.IntegerField(default=0)
     
@@ -34,7 +34,7 @@ class Tournament(models.Model):
 
     nazwa = models.CharField(max_length=100, unique=True)
     opis = models.CharField(max_length=200, null=True, blank=True)
-    zdjecie = models.ImageField(upload_to='images/', blank=True, default="images/1.png")
+    zdjecie = models.ImageField(upload_to='images/', blank=True, default="images/defaulttournament.jpg")
     nagroda = models.CharField(max_length=100, null=True, blank=True)
     data = models.DateTimeField()
     ilosc_druzyn = models.IntegerField(validators=[MaxValueValidator(32), MinValueValidator(4)])
@@ -69,7 +69,7 @@ class Rozgrywki(models.Model):
 class Team(models.Model):
     nazwa = models.CharField(max_length=100)
     opis = models.CharField(max_length=200, null=True, blank=True)
-    zdjecie = models.ImageField(upload_to='images/', null=True, blank=True)
+    zdjecie = models.ImageField(upload_to='images/', null=True, blank=True, default="images/1.png")
     creator = models.EmailField()
     punkty = models.IntegerField(default=0)
     players = models.ManyToManyField('CustomUser')

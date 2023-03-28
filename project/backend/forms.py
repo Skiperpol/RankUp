@@ -85,3 +85,6 @@ class MessageForm(forms.ModelForm):
             'wiadomosci': forms.TextInput(attrs={'id':'wiadomosci'}),
             'kapitan': forms.HiddenInput(),
         }
+        labels = {
+            'wiadomosci': False,
+        }

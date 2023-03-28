@@ -152,10 +152,12 @@ def tournament_site(request, tournamentname):
        
 def tournament_list_site(request):
     tournaments = Tournament.objects.all()
+    customuser = CustomUser.objects.all()
 
     template = loader.get_template('frontend/tournament_list.html')
     context = {
         "tournaments":tournaments,
+        "customuser":customuser,
     }
     return HttpResponse(template.render(context, request))     
 
@@ -192,6 +194,10 @@ def room(request, nazwa_turnieju, nazwa_rozgrywki, druzyna):
     else:
         return redirect('index')
 
+    druzynanr1 = Team.objects.get(nazwa=room.druzyna1)
+    druzynanr2 = Team.objects.get(nazwa=room.druzyna2)
+    turniej = Tournament.objects.get(nazwa=room.nazwa_turnieju)
+
     return render(
         request=request,
         template_name="frontend/room.html",
@@ -199,6 +205,9 @@ def room(request, nazwa_turnieju, nazwa_rozgrywki, druzyna):
             'room': room,
             'form': form,
             'druzyna': druzyna,
+            'druzynanr1': druzynanr1,
+            'druzynanr2': druzynanr2,
+            'turniej': turniej,
         }
     )
     

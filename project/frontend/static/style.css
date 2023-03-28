@@ -16,7 +16,7 @@ html {
     margin-left: 15vw;
     height: 100vh;
     scroll-snap-type: y mandatory;
-    overflow-y: scroll;
+    overflow-y: overlay; 
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     scroll-behavior: smooth;
@@ -380,7 +380,7 @@ border-bottom-right-radius: 10px;
     margin-left: 1vw;
 }
 .tournament-list-object-box span{
-letter-spacing: .2em;
+letter-spacing: .1em;
     font-size: 1rem;
     font-weight:400;
     margin-bottom: .3vh;
@@ -603,7 +603,7 @@ li span::before {
     content: counter(section) ". "; 
     color: white;
 }
-li img {
+li img, .chatimg {
     height: 4vh;
     width: auto;
     border-radius: 9999px;
@@ -898,6 +898,12 @@ select {
 .login-form input:focus {
     outline:none;
 }
+.login-form label {
+    display: block;
+}
+.login-form input {
+    width: 30vw !important;
+}
 #registerinner-wrapper {
     text-align: center;
     color: white;
@@ -1129,7 +1135,7 @@ height: 100%;
   /* Firefox */
   * {
     scrollbar-width: auto;
-    scrollbar-color: #101319 #272f3c;
+    scrollbar-color: #10131900 #272f3c00;
   }
 
   /* Chrome, Edge, and Safari */
@@ -1138,11 +1144,219 @@ height: 100%;
   }
 
   *::-webkit-scrollbar-track {
-    background: #272f3c;
+    background: #272f3c00;
   }
 
   *::-webkit-scrollbar-thumb {
     background-color: #101319;
     border-radius: 14px;
     border: 2px solid #5e5e5e;
+  }
+  .dolaczdorozgrywki {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 4%;
+    padding-top: 4%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20210115/pngtree-battle-against-battle-background-sports-game-banner-background-image_519897.jpg");
+  }
+  .dolaczdorozgrywki .defaultbutton {
+    display: block;
+    line-height: 1.3rem;
+    width: 50%;
+    margin-top: 1vh;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    letter-spacing: 0 !important;
+  }
+  .dolaczdorozgrywki .defaultbutton:hover {
+    background-color: #861a29;
+  }
+  .roomteamimg {
+    width: 17vw;
+    height: 17vw;
+    object-fit: cover;
+    border: 2px solid white;
+  }
+  .room-main-header {
+    height: 45vh;
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 100vw 50vh ;
+    width: 60%;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-bottom: 5vh;
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-around;
+align-items: center;
+align-content: center;
+  }
+  .room-main-header div{
+    text-align: center;
+}
+.roomcontainer {
+    color: white;
+}
+#display {
+    overflow-y: scroll;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    height: 34.5vh;
+    width: 36vw;
+    background-color: #1b212c;
+}
+#wiadomosci {
+    width: 31vw;
+    height: 2em;
+    font-size: 1.3em;
+}
+#displaycontrols {
+   width: 40vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+#sendmess {
+    margin-top: 0;
+    width: 8vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding: auto;
+}
+#displayscontainer {
+    width: 100%;
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+align-items: flex-start;
+align-content: flex-start;
+}
+#summary {
+    font-size: 1.3rem;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    width: auto;
+    width: 39vw;
+    padding-left: 3vw;
+    padding-right: 3vw;
+}
+#summary h2{
+    text-align: center; 
+}
+.rezultatbutton {
+    width: 90%;
+    margin-top: 10vh;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+#summary .grayed {
+    letter-spacing: 0;
+    font-size: 1rem;
+}
+.darker {
+    border-top: 1px gray solid;
+    border-bottom: 1px gray solid;
+}
+.time-left {
+    color: gray;
+}
+.chatheader {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+}
+.chatnav {
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-start;
+align-content: flex-start;
+}
+.chatheader img {
+    margin-right: 1vh;
+}
+.messindeed {
+    padding-left: 1vw;
+}
+#helpsupport {
+    position: fixed;
+    bottom: 2vh;
+    right: 2vh;
+    width: 7vh;
+    height: 7vh;
+    background-color: #ff2138;
+    filter: brightness( 1.4);
+    border-radius: 50%;
+}
+#helpsupport img {
+    filter:invert(1);
+    border-radius: 50%;
+    border: 1px solid black;
+    padding: 1vh;
+    height: 3vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#helpsupport:hover {
+    background-color: #f94658;
+}
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+input[type="text"],  input[type="email"], input[type="password"],  textarea {
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+#whitecontact h3 {
+    margin-bottom: 1vh;
+ } 
+ #whitecontact .defaultbutton {
+    margin-top: 1vh;
+ }
+input[type="submit"]:focus,  input[type="reset"]:focus {
+    outline: none;
+  }
+textarea {
+    height: 150px;
+  }
+input:required,  textarea:required {
+    border-color: #e74c3c;
+  }
+input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px #bdc3c7;
   }

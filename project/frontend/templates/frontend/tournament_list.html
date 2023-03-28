@@ -12,9 +12,9 @@
                 <div class="turnieje-list-object">
                     <img src="{{ tournament.zdjecie.url }}" alt="">
                     <div class="tournament-list-object-box">
-                        <div><span class="bold">10.02.2032</span></div>
+                        <div><span class="bold">{{ tournament.data }}</span></div>
                         <div>{{ tournament }}</div>
-                        <div><span>Hosted by Acer &#x2022; Bo5 &#x2022; 5vs5 &#x2022; 5.000zł</span></div>
+                        <div><span>Hosted by {% for u in customuser %}{% if u.email == tournament.creator %}{{ u.nick }}{% endif %}{% endfor %} &#x2022; {{ tournament.format_rozgrywek}} &#x2022; {{ tournament.rodzaj_gry}} &#x2022; {{ tournament.nagroda}} </span></div>
                     </div>
                 </div></a>
                 {% endfor %}
