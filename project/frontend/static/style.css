@@ -395,7 +395,9 @@ letter-spacing: .2em;
 /* ----------------------------------------- TOURNAMENT DETAIL ----------------------------------------- */
 /* ----------------------------------------- TOURNAMENT DETAIL ----------------------------------------- */
 /* ----------------------------------------- TOURNAMENT DETAIL ----------------------------------------- */
-
+.contactcontainer {
+    background: #101319 !important;
+}
 .tournament-detail-container {
     background-repeat: no-repeat;
     background-size: auto 100vh;

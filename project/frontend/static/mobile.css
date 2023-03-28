@@ -400,6 +400,9 @@
     .float-right {
         float: none;
     }
+    #wybor_druzynbc {
+        left: 0 !important;
+    }
     .hnomb {
         margin-top: 0;
     }
