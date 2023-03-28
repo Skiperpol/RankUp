@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model, login, authenticate
 from .forms import userRegistrationForm, UserData, UserUpdate, TeamForm, TournamentForm
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
-from backend.models import Team, Tournament, CustomUser
+from backend.models import Team, Tournament, CustomUser, Powiadomienia
 from django.template import loader
 from django.http import HttpResponse, JsonResponse
 
@@ -148,5 +148,13 @@ def create_tournament(request):
             form.fields['data'].label = "Data rozpoczęcia turnieju"
             form.fields['ilosc_druzyn'].label = "Maksymalna ilość drużyn"
         return render(request, 'frontend/create_tournament.html', {'form': form})
+    else:
+        return redirect('/')
+    
+def powiadomienia(request):
+    user = request.user
+    if user.is_authenticated:
+        powiadomienia = Powiadomienia.objects.filter(user=user)
+        return render(request, 'frontend/powiadomienia.html', {'powiadomienia': powiadomienia})
     else:
         return redirect('/')

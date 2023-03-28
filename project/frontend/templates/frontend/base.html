@@ -22,6 +22,7 @@
         <a href="{% url 'contact_site' %}"><h2>Kontakt</h2></a>
         <div>
             {% if user.is_authenticated %}
+                <a href="{% url 'powiadomienia' %}"><h2>Powiadomienia</h2></a>
                 <a href="{% url 'settings' %}"><h2>Ustawienia</h2></a>
                 <a href="{% url 'player_site' playernick=user.nick %}"><h2>Moje konto</h2></a>
                 <a href="{% url 'logout' %}"><h2>Wyloguj</h2></a>
@@ -46,6 +47,7 @@
         </div>
         <div>
             {% if user.is_authenticated %}
+                <a href="{% url 'powiadomienia' %}"><h2>Powiadomienia</h2></a>
                 <a href="{% url 'settings' %}"><h2>Ustawienia</h2></a>
                 <a href="{% url 'player_site' playernick=user.nick %}"><h2>Moje konto</h2></a>
                 <a href="{% url 'logout' %}"><h2>Wyloguj</h2></a>
