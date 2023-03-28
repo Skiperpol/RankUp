@@ -1,0 +1,13 @@
+{% extends 'frontend/base.html' %}
+
+{% block content %}
+    <div id="container" class="player-detail-container contactcontainer">
+        <div id="contactinner-wrapper">
+            <h1>Powiadomienia</h1>
+            {% for powiadomienie in powiadomienia %}
+                {{powiadomienie.tresc}}<br>
+            {% endfor %}
+        </div>
+    </div>
+ 
+{% endblock %}

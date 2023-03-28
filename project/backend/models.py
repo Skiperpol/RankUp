@@ -1,6 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class CustomUser(AbstractUser):
@@ -15,7 +14,10 @@ class CustomUser(AbstractUser):
         return self.username
 
 
-
+class Powiadomienia(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    tresc = models.TextField()
+    data = models.DateTimeField(auto_now_add=True)
 
 
 
@@ -32,12 +34,19 @@ class Tournament(models.Model):
         ('1vs1','1vs1'),
     )
 
+    ilosc_druzyn_format = (
+        ('4','4'),
+        ('8','8'),
+        ('16','16'),
+        ('32','32'),
+    )
+
     nazwa = models.CharField(max_length=100, unique=True)
     opis = models.CharField(max_length=200, null=True, blank=True)
     zdjecie = models.ImageField(upload_to='images/', blank=True, default="images/1.png")
     nagroda = models.CharField(max_length=100, null=True, blank=True)
     data = models.DateTimeField()
-    ilosc_druzyn = models.IntegerField(validators=[MaxValueValidator(32), MinValueValidator(4)])
+    ilosc_druzyn = models.CharField(choices=ilosc_druzyn_format, max_length=100)
     druzyny = models.ManyToManyField('Team',null=True, blank=True)
     # regulamin
     creator = models.EmailField()
