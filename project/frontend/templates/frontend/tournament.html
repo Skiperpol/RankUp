@@ -8,7 +8,8 @@
             <h1 id="name" class="float-left">{{ tournament }}</h1>
             
             <div class="clear"><span class="grayed bold">{{ tournament.data }}</span></div>
-            <div class="grayed">Hosted by {{ creator.nick }} &#x2022; {{ tournament.rodzaj_gry }} &#x2022; {{ tournament.format_rozgrywek }}  &#x2022; {{ tournament.nagroda }}
+            <div class="grayed grayednav"><div class="tourdetails">Hosted by <b><a class="inline" href="{% url 'player_site' playernick=creator.nick %}">{{ creator.nick }}</a></b> &#x2022; {{ tournament.rodzaj_gry }} &#x2022; {{ tournament.format_rozgrywek }}  &#x2022; {{ tournament.nagroda }}</div>
+                {% if tournament.started == False %}
                 {% if zapisana_druzyna is not None %}
                 <form method="POST">
                     {% csrf_token %}
@@ -20,16 +21,23 @@
                 {% else %}
                 <div class="float-right tour-button pchide"><button id="show_teams" class="defaultbutton dblarge" data-teams="{{teams}}">Weź udział</button></div>
                 <button id="show_teamsmobile" class="mobilehide defaultbutton dblarge" data-teams="{{teams}}">Weź udział</button> 
-                {% endif %}
+                {% endif %}{% endif %}
                 {% if tournament.creator == user.email %}
+                {% if tournament.started == True %}
+                {% else %}
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" id="type" name="type" value="start">
-                    <button type="submit" id="rozpocznij" class="defaultbutton dblarge">Rozpocznij</button>
                     
+                    <button type="submit" id="rozpocznij" class="defaultbutton dblarge">Rozpocznij</button>
+                    {% if zapisana_druzyna is None %}
+                    
+                    {% endif %}
+                    {% endif %}
                 </form>
             {% endif %}</div>
             {% if zapisana_druzyna %}<p class="zapisana_druzyna">Zapisano {{ zapisana_druzyna }}</p>{% endif %}
+            {% if tournament.started %}<p class="zapisana_druzyna green">Turniej trwa</p>{% endif %}
             <div id="tournament-nav"></div>
             <div id="tournament-content-detailed">
                 

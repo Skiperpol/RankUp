@@ -228,7 +228,7 @@
         padding-bottom: 10vh;
     }
     #turnieje-list {
-        width: 100vw;
+        width: 99%;
         margin: 0;
         padding: 5vw;
         margin-top: 30vh;
@@ -247,6 +247,9 @@
     #turnieje-list-header h1{
         margin-top: 0;
     }
+    .tournament-list-object-box div {
+        width: 90%;
+    }
     .tournament-list-object-box span {
         letter-spacing: .1vh !important;
         font-size: 1rem !important;
@@ -258,6 +261,11 @@
         min-width: 100% !important;
         left: 0;
     }
+    .hroom {
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
     video {    
         left: -177% !important;
         object-fit: cover;
@@ -268,6 +276,7 @@
     }
     #rozpocznij {
         margin-top: 1vh !important;
+        margin-right: 0 !important;
     }
     #registerinner-wrapper h1, #logininner-wrapper h1{
         font-size: 1.5rem;
@@ -390,12 +399,16 @@
     }
     .mecz div {
         font-size: 1rem !important;
+        width: 90%;
     }
     .zapisana_druzyna {
         letter-spacing: 0.1rem;
         color: #ff2138;
         display: block;
         margin-top: 0vh;
+    }
+    .mecz .meczwynik {
+        width: 10% !important;
     }
     .float-right {
         float: none;
@@ -442,26 +455,56 @@
         top: 0;
         left: -100vw;
         background-color: #202631;
-        height: 83vh;
+        height: -webkit-fill-available;
+        overflow: hidden !important;
         width: 95vw;
         transition: all .2s;
         color: white;
         padding-left: 5vw;
         padding-top: 10vh;
     }
+    .sidemenumobileflexheader {
+        margin-bottom: 5vh;
+        width: 88vw;
+        display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-start;
+align-content: flex-start;
+    }
+    .tourdetails {
+        width: 100% !important;
+    }
     #mobilesidemenu h2{ 
-        font-size: 1.5rem !important;
+        font-size: 1.4rem !important;
     }
     .mobilesidemenu_shown {
         left: 0 !important;
     }
     #mobilesidemenuclose img {
-        width: 10vw;
+        width: 8vw;
         height: auto;
         position: absolute;
-        top: 10vh;
+        bottom: 13vh;
         right: 10vw;
         filter:invert(1);
+    }
+    .bella {
+        height: 2.5vh;
+        filter: invert(1);
+        position: relative;
+    }
+    .bell {
+        height: 2.5vh;
+    }
+    .bella::after {
+        content: "0";
+        position: absolute;
+        bottom: -1.2vh;
+        right: -.7vh;
+        font-weight: bold;
+        color: #049092;
     }
     .mobilesidemenuflex {
         height: 85%;
@@ -471,5 +514,79 @@ flex-wrap: wrap;
 justify-content: space-between;
 align-items: flex-start;
 align-content: flex-start;
+    }
+    .dolaczdorozgrywki {
+        margin-bottom: 3vh;
+    }
+    .dolaczdorozgrywki a h2 {
+        font-size: 1rem;
+        margin-top: 0 !important;
+    }
+    .dolaczdorozgrywki .defaultbutton {
+        width: auto !important;
+    }
+    #roomheader {
+        height: 30%;
+        width: 90%;
+        padding-right: 5%;
+        padding-left: 5%;
+        padding-bottom: 0 !important;
+    }
+    #roomheader div h1 { 
+        font-size: 1rem;
+    }
+    #roomheader div {
+        width: 40%;
+    }
+    #roomheader div:nth-of-type(even) {
+        width: 10%;
+    }
+    .roomteamimg {
+        height: 15vw;
+        width: 15vw;
+    }
+    .chatsum {
+        width: 100%;
+    }
+    #display, #displaycontrols {
+        width: 100%;
+    }
+    #displaycontrols {
+        display: block;
+    }
+    .time-left {
+        margin-right: 5vw;
+    }
+    #wiadomosci {
+        width: 70%;
+    }
+    #sendmess {
+        font-size: 1.1em;
+        padding: 10px;
+        line-height: 1.2em;
+        width: 25%
+    }
+    .messindeed {
+        font-weight: 300;
+        font-size: .7em;
+        padding-right: 5vw;
+    }
+    #summary {
+        padding-top: 0 !important;
+        width: 90%;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-bottom: 3vh !important;
+    }
+    #summary h2{
+        margin-top: 1vh;
+        font-size: 1.3rem;
+    }
+    #summary h4{ 
+        font-size: 1.1rem;
+    }
+    .rezultatbutton {
+        margin-top: 1vh;
+        margin-bottom: 6vh;
     }
   }
