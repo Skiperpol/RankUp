@@ -115,6 +115,8 @@ def tournament_site(request, tournamentname):
             tournament.druzyny.remove(Team.objects.get(nazwa=nazwa))
             return redirect('tournament_site', tournamentname = tournament.nazwa)
         elif type == "start":
+            tournament.started = 1
+            tournament.save()
             ilosc_druzyn = len(tournament.druzyny.all())
             druzyny = list(tournament.druzyny.all())
             random.shuffle(druzyny)

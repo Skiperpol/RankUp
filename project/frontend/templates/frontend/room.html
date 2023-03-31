@@ -13,8 +13,9 @@
             <img class="roomteamimg" src="{{ druzynanr2.zdjecie.url }}" alt="">
         </div>
     </div> 
+    <div class="hroom">Pokój meczowy</div> 
    <div id="displayscontainer">
-        <div>
+        <div class="chatsum">
         <div id="display"></div>
         <div id="displaycontrols">
             <form method="POST" id="post-form">
@@ -45,7 +46,7 @@
 </div>
 <script>
     roomheader = document.getElementById("roomheader")
-    roomheader.style.backgroundImage = "url('{{ turniej.zdjecie.url }}')"
+    roomheader.style.setProperty("background-image", `linear-gradient(to right, #00000080, #00000080), url('{{ turniej.zdjecie.url }}')` );
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

@@ -332,6 +332,9 @@ align-content: center;
     overflow-x: hidden;
     background-color: #101319;
 }
+.tourdetails {
+    width: 60%;
+}
 #turnieje-list {
     width: 100%;
     height: auto;
@@ -452,14 +455,23 @@ letter-spacing: .1em;
     text-align: center;
     width: 16vw;
 }
+.hroom {
+    display: none;
+}
 .grayed {
     color: rgb(174, 174, 174);
     letter-spacing: 0.1rem;
+}
+#show_teamsmobile {
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 2vh !important;
 }
 #tournament-nav {
     margin-top: 1vh;
     border-top: 1px solid rgb(174, 174, 174);
     overflow: auto;
+    width: 100%;
 }
 #tournament-nav p{
     float: left;
@@ -717,6 +729,10 @@ li img, .chatimg {
 .hnomb2 {
     margin-top: 10vh;
 }
+.green {
+    color: rgb(13, 158, 13) !important;
+    font-weight: bold;
+}
 .zapisana_druzyna {
     
     letter-spacing: 0.1rem;
@@ -970,6 +986,9 @@ align-items: flex-start;
 align-content: flex-start;
 height: 100%;
 }
+.inline {
+    display: inline;
+}
 .drabinka {
     height: 100%;
     display: flex;
@@ -1153,6 +1172,7 @@ height: 100%;
     border: 2px solid #5e5e5e;
   }
   .dolaczdorozgrywki {
+    text-shadow: 1px 1px 2px black;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -1182,16 +1202,20 @@ height: 100%;
     background-color: #861a29;
   }
   .roomteamimg {
-    width: 17vw;
+    width: 17vw; 
     height: 17vw;
     object-fit: cover;
     border: 2px solid white;
   }
+  .room-main-header h1 {
+    text-shadow: 1px 1px 2px black;
+  }
+ 
   .room-main-header {
+    background-size: auto, cover;
     height: 45vh;
     background-repeat: no-repeat;
     background-position: top right;
-    background-size: 100vw 50vh ;
     width: 60%;
     padding-left: 20%;
     padding-right: 20%;
@@ -1215,7 +1239,7 @@ align-content: center;
     padding-bottom: 5vh;
     padding-left: 2vw;
     padding-right: 2vw;
-    height: 34.5vh;
+    height: 33.5vh;
     width: 36vw;
     background-color: #1b212c;
 }
@@ -1252,7 +1276,7 @@ align-content: flex-start;
 #summary {
     font-size: 1.3rem;
     padding-top: 3vh;
-    padding-bottom: 3vh;
+    padding-bottom: 0vh;
     width: auto;
     width: 39vw;
     padding-left: 3vw;
