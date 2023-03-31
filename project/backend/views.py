@@ -80,8 +80,8 @@ def player_site(request, playernick):
             team_creator=Team.objects.filter(creator=user.email)
             context['team']=team_creator
         
-        if Team.objects.filter(players__email=user.email).exists():
-            team_member = Team.objects.filter(players__email=user.email)
+        if Team.objects.filter(add_players__email=user.email).exists():
+            team_member = Team.objects.filter(add_players__email=user.email)
             context['team_member']=team_member
 
         return render(request, 'frontend/player.html', context=context)
@@ -155,6 +155,39 @@ def powiadomienia(request):
     user = request.user
     if user.is_authenticated:
         powiadomienia = Powiadomienia.objects.filter(user=user)
+        if request.method == 'POST':
+            type = request.POST.get('type')
+            team_name = request.POST.get('team')
+            team = Team.objects.get(nazwa=team_name)
+            if type == "add_invite":
+                team.add_players.add(user)
+                team.waiting_list.remove(user)
+                team.remove_players.add(user)
+                powiadomienie = powiadomienia.filter(druzyna=team_name)
+                powiadomienie.delete()
+                return redirect('powiadomienia')
+            elif type == "cancel_invite":
+                team.waiting_list.remove(user)
+                team.add_players.remove(user)
+                powiadomienie = powiadomienia.filter(druzyna=team_name)
+                powiadomienie.delete()
+                return redirect('powiadomienia')
+            elif type == "add_volunteer":
+                volunteer = request.POST.get('volunteer')
+                new_volunteer = CustomUser.objects.get(nick = volunteer)
+                team.add_players.add(new_volunteer)
+                team.remove_players.add(new_volunteer)
+                team.volunteers.remove(new_volunteer)
+                powiadomienie = powiadomienia.filter(druzyna=team_name, volunteer=volunteer)
+                powiadomienie.delete()
+                return redirect('powiadomienia')
+            elif type == "cancel_volunteer":
+                volunteer = request.POST.get('volunteer')
+                new_volunteer = CustomUser.objects.get(nick = volunteer)
+                team.volunteers.remove(new_volunteer)
+                powiadomienie = powiadomienia.filter(druzyna=team_name, volunteer=volunteer)
+                powiadomienie.delete()
+                return redirect('powiadomienia')
         return render(request, 'frontend/powiadomienia.html', {'powiadomienia': powiadomienia})
     else:
         return redirect('/')

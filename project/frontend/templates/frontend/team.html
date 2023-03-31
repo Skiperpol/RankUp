@@ -14,12 +14,19 @@
             </div>
             
         <div class="profile-menu"><h1>Skład</h1></div>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" id="type" name="type" value="prosba">
+            <input type="hidden" name="email" value="{{user.email}}">
+            <input type="hidden" name="team" value="{{team.creator}}">
+            <button>Wyślij prośbę</button>
+        </form>
         <hr>
         <div class="profile-info">
             <a href="{% url 'player_site' playernick=creator.nick %}"><div class="players-list-div"><li><span></span>
                 {% if creator.avatar %}<img src="{{ creator.avatar.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
                 <div>{{ creator.nick }}</div><img class="crown" src="https://cdn-icons-png.flaticon.com/512/6941/6941697.png" alt=""><div class="float-right">{{creator.punkty}}pkt</div></li></div></a>
-            {% for player in team.players.all %}
+            {% for player in team.add_players.all %}
                 <a href="{% url 'player_site' playernick=player.nick %}"><div class="players-list-div"><li><span></span>
                 {% if player.avatar %}<img src="{{ player.avatar.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
                 <div>{{ player.nick }}</div><div class="float-right">{{player.punkty}}pkt</div></li></div></a>
@@ -27,23 +34,33 @@
         </div>
 
         {% if team.creator == user.email %}
-            <h2>DODAJ GRACZA DO DRUŻYNY</h2>
+            <h2>ZAPROŚ GRACZA DO DRUŻYNY</h2>
             {% for user in users %}
             <form method="post">
                 {% csrf_token %}
                 <input type="hidden" id="type" name="type" value="add">
                 <input type="hidden" name="email" value="{{user.email}}">
-                {{user.nick}} <button type="submit">ADD</button>
+                {{user.nick}} <button>ZAPROŚ</button>
+            </form>
+            {% endfor %}
+
+            <h2>USUŃ ZAPROSZENIE DO DRUŻYNY</h2>
+            {% for player in waiting_list.all %}
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" id="type" name="type" value="cancel">
+                <input type="hidden" name="email" value="{{player.email}}">
+                {{ player.nick }} <button type="submit">ANULUJ</button>
             </form>
             {% endfor %}
 
             <h2>USUŃ GRACZA Z DRUŻYNY</h2>
-            {% for player in team.players.all %}
+            {% for player in team.remove_players.all %}
             <form method="post">
                 {% csrf_token %}
                 <input type="hidden" id="type" name="type" value="delete">
                 <input type="hidden" name="email" value="{{player.email}}">
-                {{ player.nick }} <button type="submit">REMOVE</button>
+                {{ player.nick }} <button type="submit">USUŃ</button>
             </form>
             
             {% endfor %}
@@ -56,5 +73,6 @@
         {% endif %}
     </div>
 </div>
-
 {% endblock %}
+
+<!-- CHYBA TRZEBA DODAĆ AJAXA BY SIĘ STRONA NIE ODŚWIEŻAŁA PO DODANIU GRACZA -->

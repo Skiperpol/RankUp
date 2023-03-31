@@ -5,7 +5,40 @@
         <div id="contactinner-wrapper">
             <h1>Powiadomienia</h1>
             {% for powiadomienie in powiadomienia %}
-                {{powiadomienie.tresc}}<br>
+                {% if powiadomienie.tresc == "Zaproszenie" %}
+                <h3>Zaproszenie</h3>
+                Kapitan drużyny {{powiadomienie.druzyna}} zaprosił Cię do drużyny.<br>Czy chcesz dąłączyć?<br>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="type" name="type" value="add_invite">
+                    <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                    <button>Dołącz</button>
+                </form>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="type" name="type" value="cancel_invite">
+                    <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                    <button>Odrzuć</button>
+                </form>
+                {% elif powiadomienie.tresc == "Prosba" %}
+                <h3>Prośba</h3>
+                Gracz {{powiadomienie.volunteer}} chce dołączyć do Twojej drużyny {{powiadomienie.druzyna}}.<br>Czy chcesz go dodać?<br>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="type" name="type" value="add_volunteer">
+                    <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                    <input type="hidden" id="volunteer" name="volunteer" value={{powiadomienie.volunteer}}>
+                    <button>Zatwierdź</button>
+                </form>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="type" name="type" value="cancel_volunteer">
+                    <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                    <input type="hidden" id="volunteer" name="volunteer" value={{powiadomienie.volunteer}}>
+                    <button>Odrzuć</button>
+                </form>
+                {% endif %}
+                <br>
             {% endfor %}
         </div>
     </div>

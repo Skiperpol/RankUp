@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.template import loader
-from backend.models import Team, Tournament, CustomUser, Rozgrywki, Message
+from backend.models import Team, Tournament, CustomUser, Rozgrywki, Message, Powiadomienia
 from backend.forms import TeamForm, MessageForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -28,23 +28,41 @@ def team_site(request, teamname):
     users = CustomUser.objects.filter()
     creator_mail = team.creator
     creator = CustomUser.objects.get(email=creator_mail)
-
+    waiting_list = team.waiting_list.all()
     if request.method == 'POST':
         type = request.POST.get('type')
         email = request.POST.get('email')
+        user = get_user_model().objects.get(email=email)
         if type == "delete":
-            user = get_user_model().objects.get(email=email)
-            team.players.remove(user)
+            team.add_players.remove(user)
+            team.remove_players.remove(user)
+            return redirect('team_site', teamname=teamname)
+        elif type == "cancel":
+            team.waiting_list.remove(user)
+            team.add_players.remove(user)
+            tresc = "Zaproszenie"
+            powiadomienie = Powiadomienia.objects.get(user=user, tresc=tresc, druzyna=team.nazwa)
+            powiadomienie.delete()
             return redirect('team_site', teamname=teamname)
         elif type == "add":
-            user = get_user_model().objects.get(email=email)
-            team.players.add(user)
+            team.waiting_list.add(user)
+            team.add_players.add(user)
+            tresc = "Zaproszenie"
+            nowe_powiadomienie = Powiadomienia.objects.create(user=user, tresc=tresc, druzyna=team.nazwa)
+            nowe_powiadomienie.save()
             return redirect('team_site', teamname=teamname)
+        elif type == "prosba":
+            team.volunteers.add(user)
+            tresc = "Prosba"
+            team_creator = request.POST.get('team')
+            team_creator_instance = get_user_model().objects.get(email=team_creator)
+            nowe_powiadomienie = Powiadomienia.objects.create(user=team_creator_instance, tresc=tresc, druzyna=team.nazwa, volunteer=user.nick)
+            nowe_powiadomienie.save()
 
     new_users = []
     for user in users:
         nalezy = False
-        for team_user in team.players.all():
+        for team_user in team.add_players.all():
             if user.nick == team_user.nick:
                 nalezy = True
         if nalezy == False:
@@ -56,6 +74,7 @@ def team_site(request, teamname):
         "team":team,
         "users": new_users,
         "creator": creator,
+        "waiting_list":waiting_list,
     }
     return HttpResponse(template.render(context, request))
     
@@ -67,7 +86,7 @@ def tworzenie_rozgrywek(ilosc_faz, max_ilosc_druzyn, lista_druzyn, turniej, ilos
     roznica = ilosc_druzyn-faza_0
     i=0
     for y in range(int(faza_0)):
-            nazwa_rozgrywki="Mecz_"+str(y)+"_faza_0"
+            nazwa_rozgrywki=nazwa_turnieju+"_mecz_"+str(y)+"_faza_0"
             if y<roznica:
                 rozgrywka = Rozgrywki(nazwa_rozgrywki=nazwa_rozgrywki,nazwa_turnieju=nazwa_turnieju, druzyna1=lista_druzyn[i], druzyna2=lista_druzyn[i+1], mecz=y ,faza=0)
                 i=i+2
@@ -89,7 +108,7 @@ def tworzenie_rozgrywek(ilosc_faz, max_ilosc_druzyn, lista_druzyn, turniej, ilos
                     druzyna1 = lista_rozgrywek[y*2].druzyna1
                 if lista_rozgrywek[y*2+1].druzyna2 == "Walkower":
                     druzyna2 = lista_rozgrywek[y*2+1].druzyna1
-            nazwa_rozgrywki="Mecz_"+str(y)+"_faza_"+str(fazy)
+            nazwa_rozgrywki=nazwa_turnieju+"_mecz_"+str(y)+"_faza_"+str(fazy)
             rozgrywka = Rozgrywki(nazwa_rozgrywki=nazwa_rozgrywki,nazwa_turnieju=nazwa_turnieju, druzyna1=druzyna1, druzyna2=druzyna2, mecz=y ,faza=fazy)
             rozgrywka.save()
             turniej.rozgrywki.add(rozgrywka)

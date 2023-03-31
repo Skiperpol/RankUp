@@ -17,6 +17,8 @@ class CustomUser(AbstractUser):
 class Powiadomienia(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     tresc = models.TextField()
+    druzyna = models.CharField(max_length=100, null=True, blank=True)
+    volunteer = models.CharField(max_length=100, null=True, blank=True)
     data = models.DateTimeField(auto_now_add=True)
 
 
@@ -82,7 +84,10 @@ class Team(models.Model):
     zdjecie = models.ImageField(upload_to='images/', null=True, blank=True, default="images/1.png")
     creator = models.EmailField()
     punkty = models.IntegerField(default=0)
-    players = models.ManyToManyField('CustomUser')
+    add_players = models.ManyToManyField('CustomUser', related_name="add_players", null=True, blank=True)
+    waiting_list = models.ManyToManyField('CustomUser', related_name="waiting_list", null=True, blank=True)
+    remove_players = models.ManyToManyField('CustomUser', related_name="remove_players", null=True, blank=True)
+    volunteers = models.ManyToManyField('CustomUser', related_name="volunteers", null=True, blank=True)
 
     def __str__(self):
         return self.nazwa
