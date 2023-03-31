@@ -54,6 +54,7 @@ class Tournament(models.Model):
     format_rozgrywek = models.CharField(choices=formaty, max_length=10)
     rozgrywki = models.ManyToManyField('Rozgrywki',null=True, blank=True)
     started = models.BooleanField(default=False)
+    finished = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nazwa
