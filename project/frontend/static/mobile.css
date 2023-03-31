@@ -578,12 +578,21 @@ align-content: flex-start;
         padding-right: 5%;
         padding-bottom: 3vh !important;
     }
+    .teammenu {
+        margin-top: 4vh;
+    }
     #summary h2{
         margin-top: 1vh;
         font-size: 1.3rem;
     }
+    .creatorname {
+        width: 100%;
+    }
     #summary h4{ 
         font-size: 1.1rem;
+    }
+    .flexform {
+        margin-bottom: 10vh !important;
     }
     .rezultatbutton {
         margin-top: 1vh;
