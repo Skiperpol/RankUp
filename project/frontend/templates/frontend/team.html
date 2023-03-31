@@ -8,12 +8,12 @@
             {% if team.zdjecie %}<img src="{{ team.zdjecie.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
             <div id="profile-flex">
                 <h1>{{ team.nazwa }}</h1>
-                <p>{{ team.creator }}</p>
+                <p class="creatorname">{{ creator.nick }}</p>
                 <div class="grayed">{{ punkty }}</div>
                 <div class="grayed bio">{{ team.opis }}</div>
             </div>
             
-        <div class="profile-menu"><h1>Skład</h1></div>
+        <div class="profile-menu teammenu"><h1>Skład</h1></div>
         <form method="post">
             {% csrf_token %}
             <input type="hidden" id="type" name="type" value="prosba">
@@ -29,14 +29,23 @@
             {% for player in team.add_players.all %}
                 <a href="{% url 'player_site' playernick=player.nick %}"><div class="players-list-div"><li><span></span>
                 {% if player.avatar %}<img src="{{ player.avatar.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
-                <div>{{ player.nick }}</div><div class="float-right">{{player.punkty}}pkt</div></li></div></a>
+                <div>{{ player.nick }}</div><div class="float-right special"><div>{{player.punkty}}pkt</div>
+                     <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="type" name="type" value="delete">
+                    <input type="hidden" name="email" value="{{player.email}}">
+                    {% if user.email == creator.email %}
+                    <button class="defaultbutton" type="submit">Usuń z drużyny</button>
+                    {% endif %}
+                </form></div></li></div></a>
             {% endfor %}
         </div>
-
+        <br>
+        <br>
         {% if team.creator == user.email %}
-            <h2>ZAPROŚ GRACZA DO DRUŻYNY</h2>
+            <h2 class="profile-menu">ZAPROŚ GRACZA DO DRUŻYNY</h2>
             {% for user in users %}
-            <form method="post">
+            <form  class="flexform" method="post">
                 {% csrf_token %}
                 <input type="hidden" id="type" name="type" value="add">
                 <input type="hidden" name="email" value="{{user.email}}">
@@ -62,14 +71,14 @@
                 <input type="hidden" name="email" value="{{player.email}}">
                 {{ player.nick }} <button type="submit">USUŃ</button>
             </form>
-            
             {% endfor %}
+
                 <select name="player" multiple>
                     {% for user in users %}
-                        <option value="{{user.email}}">{{user.nick}}</option>
+                        <option class="option" value="{{user.email}}">{{user.nick}}</option>
                     {% endfor %}
                 </select>
-                <br>
+                
         {% endif %}
     </div>
 </div>

@@ -1009,6 +1009,60 @@ align-items: flex-start;
 align-content: flex-start;
 height: 100%;
 }
+.special {
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-items: center;
+align-content: center;
+}
+.flexform {
+    margin-bottom: 5vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+}
+.select {
+    margin-right: .3vw;
+    width: 50%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    color: #333;
+    outline: none;
+  }
+  
+  .select:hover {
+    border-color: #aaa;
+  }
+  
+  .select:focus {
+    border-color: #3366ff;
+    box-shadow: 0 0 5px #3366ff;
+  }
+  
+  .option {
+    font-size: 14px;
+    color: #333;
+    padding: 5px;
+  }
+  
+  .option:hover {
+    background-color: #f2f2f2;
+  }
+  
+  
+.special .defaultbutton  {
+    margin-left: 2vw;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
 .mecz div {
     font-size: 1.2rem;
     width: 80%;
