@@ -237,6 +237,7 @@
         height: auto;
     }
     .turnieje-list-object img{
+        max-height: 30vh;
         width: 90% !important;
     }
     #turnieje-list-header {
@@ -297,7 +298,9 @@
     }
     #logininner-wrapper input, #logininner-wrapper label {
         width: 50% !important;
-        display: inline;
+        display: block;
+        text-align: center;
+        margin: auto;
         font-size: 1rem;
     }
   
@@ -490,6 +493,20 @@ align-content: flex-start;
         right: 10vw;
         filter:invert(1);
     }
+    .profile-menu form {
+        clear: none !important;
+    }
+    .powiadomienieinner_wrapper {
+        height: 100% !important;
+    }
+    .powiadomienie_card {
+        font-size: .7em;
+    }
+    .powiadomienie_form {
+        width: auto;
+        margin-right: 2vw !important;
+        text-align: left;
+    }
     .bella {
         height: 2.5vh;
         filter: invert(1);
@@ -498,8 +515,8 @@ align-content: flex-start;
     .bell {
         height: 2.5vh;
     }
-    .bella::after {
-        content: "0";
+    #bellaafter {
+        display: block;
         position: absolute;
         bottom: -1.2vh;
         right: -.7vh;

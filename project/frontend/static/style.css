@@ -733,6 +733,10 @@ li img, .chatimg {
     color: rgb(13, 158, 13) !important;
     font-weight: bold;
 }
+.smallgreen {
+    
+    font-size: .8em;
+}
 .zapisana_druzyna {
     
     letter-spacing: 0.1rem;
@@ -1016,6 +1020,46 @@ flex-wrap: wrap;
 justify-content: flex-start;
 align-items: center;
 align-content: center;
+}
+.powiadomienie_card h4{ 
+    margin-top: 0;
+}
+.powiadomienie_card {
+    margin-top: 3vh;
+    padding: 1vh 3vh 1vh 3vh;
+    background-color: #1b212c;
+    text-align: left;
+}
+.powheader {
+    margin-bottom: 0;
+}
+.response .defaultbutton{
+    margin-top: 2vh;
+}
+.sendrequest {
+    margin-top: 0 !important;
+    float: right;
+    clear: none !important;
+}
+.powiadomienie_form:nth-of-type(even) .defaultbutton{
+    border-top-left-radius: 0 !important;
+}
+.powiadomienie_form:nth-of-type(odd) .defaultbutton{
+    border-bottom-right-radius: 0 !important;
+}
+.response {
+    width: 100%;
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-items: flex-start;
+align-content: flex-start;
+}
+.powiadomienie_form {
+    width: auto;
+    margin-right: .5vw;
+    text-align: left;
 }
 .flexform {
     margin-bottom: 5vh;

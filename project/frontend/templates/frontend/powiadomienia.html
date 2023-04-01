@@ -2,26 +2,32 @@
 
 {% block content %}
     <div id="container" class="player-detail-container contactcontainer">
-        <div id="contactinner-wrapper">
-            <h1>Powiadomienia</h1>
+        <div id="contactinner-wrapper" class="powiadomienieinner_wrapper">
+            <h1 class="powheader">Powiadomienia</h1>
             {% for powiadomienie in powiadomienia %}
+            <hr>
                 {% if powiadomienie.tresc == "Zaproszenie" %}
-                <h3>Zaproszenie</h3>
-                Kapitan drużyny {{powiadomienie.druzyna}} zaprosił Cię do drużyny.<br>Czy chcesz dąłączyć?<br>
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" id="type" name="type" value="add_invite">
-                    <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
-                    <button>Dołącz</button>
-                </form>
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" id="type" name="type" value="cancel_invite">
-                    <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
-                    <button>Odrzuć</button>
-                </form>
+
+                <div class="powiadomienie_card">
+                <h4>Zaproszenie</h4>
+                    Kapitan drużyny&nbsp;<a class="inline" href="{% url 'team_site' teamname=powiadomienie.druzyna %}"><b>{{powiadomienie.druzyna}}</b></a>&nbsp;zaprosił Cię do drużyny.<br>Czy chcesz dąłączyć?<br>
+                    <div class="response">
+                        <form class="powiadomienie_form" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" id="type" name="type" value="add_invite">
+                            <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                            <button class="defaultbutton">Dołącz</button>
+                        </form>
+                        <form class="powiadomienie_form" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" id="type" name="type" value="cancel_invite">
+                            <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                            <button class="defaultbutton">Odrzuć</button>
+                        </form>
+                    </div>
+                </div>
                 {% elif powiadomienie.tresc == "Prosba" %}
-                <h3>Prośba</h3>
+                <h4>Prośba</h4>
                 Gracz {{powiadomienie.volunteer}} chce dołączyć do Twojej drużyny {{powiadomienie.druzyna}}.<br>Czy chcesz go dodać?<br>
                 <form method="post">
                     {% csrf_token %}

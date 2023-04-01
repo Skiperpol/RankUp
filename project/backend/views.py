@@ -159,6 +159,7 @@ def powiadomienia(request):
             type = request.POST.get('type')
             team_name = request.POST.get('team')
             team = Team.objects.get(nazwa=team_name)
+            print(type, team_name, team)
             if type == "add_invite":
                 team.add_players.add(user)
                 team.waiting_list.remove(user)

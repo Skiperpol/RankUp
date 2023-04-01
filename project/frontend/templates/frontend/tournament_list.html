@@ -15,6 +15,7 @@
                         <div><span class="bold">{{ tournament.data }}</span></div>
                         <div>{{ tournament }}</div>
                         <div><span>Hosted by {% for u in customuser %}{% if u.email == tournament.creator %}<b>{{ u.nick }}</b>{% endif %}{% endfor %} &#x2022; {{ tournament.format_rozgrywek}} &#x2022; {{ tournament.rodzaj_gry}} &#x2022; {{ tournament.nagroda}} </span></div>
+                        {% if tournament.started == True %}<div class="zapisana_druzyna smallgreen green">Turniej trwa</div>{% endif %}
                     </div>
                 </div></a>
                 {% endfor %}
