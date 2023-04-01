@@ -1,10 +1,11 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.template import loader
-from backend.models import Team, Tournament, CustomUser, Rozgrywki, Message, Powiadomienia
+from backend.models import Team, Tournament, CustomUser, Rozgrywki, Message, Powiadomienia, Problemy
 from backend.forms import TeamForm, MessageForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+import math
 
 def index(request):
     teams = Team.objects.all()[0:3]
@@ -120,6 +121,7 @@ def tournament_site(request, tournamentname):
     teams = []
     rozgrywki = Rozgrywki.objects.filter(nazwa_turnieju=tournamentname)
     tournament = Tournament.objects.get(nazwa=tournamentname)
+    print("------------------"+str(int(math.log2(len(tournament.rozgrywki.all())+1) )))
     creator = CustomUser.objects.get(email=tournament.creator)
     template = loader.get_template('frontend/tournament.html')
     if request.user.is_authenticated:
@@ -248,27 +250,44 @@ def send(request):
     new_message.save()
     return HttpResponse('Message sent successfully')
 
+def zakonczono(max_faza, obiekt_rozgrywki):
+    wygrane_punkty = max_faza*10
+    win_team = Team.objects.get(nazwa=obiekt_rozgrywki.winner)
+    win_team.punkty = win_team.punkty+wygrane_punkty
+    win_team.save()
+    turniej = Tournament.objects.get(nazwa = obiekt_rozgrywki.nazwa_turnieju)
+    turniej.finished = True
+    turniej.winner = obiekt_rozgrywki.winner
+    turniej.save()
+    print("ZAKOŃCZONO")
+
+
 def check(obiekt_rozgrywki):
     if obiekt_rozgrywki.kto_wygral_druzyna1 !=None and obiekt_rozgrywki.kto_wygral_druzyna2 !=None:
         if obiekt_rozgrywki.kto_wygral_druzyna1 == obiekt_rozgrywki.kto_wygral_druzyna2:
+            turniej = Tournament.objects.get(nazwa = obiekt_rozgrywki.nazwa_turnieju)
+            max_faza = str(int(math.log2(len(turniej.rozgrywki.all())+1) ))
             obiekt_rozgrywki.winner = obiekt_rozgrywki.kto_wygral_druzyna1
             print(obiekt_rozgrywki.winner)
             print(obiekt_rozgrywki.kto_wygral_druzyna1)
             obiekt_rozgrywki.save()
-            
-            nowa_nazwa_rozgrywki = "Mecz_"+str(int(obiekt_rozgrywki.mecz)//2)+"_faza_"+str(int(obiekt_rozgrywki.faza)+1)
-            nowa_rozgrywka = Rozgrywki.objects.get(nazwa_rozgrywki=nowa_nazwa_rozgrywki)
-            print("-------------------------------")
-            print(nowa_nazwa_rozgrywki)
-            print(nowa_rozgrywka)
-            if obiekt_rozgrywki.mecz % 2 == 0:
-                nowa_rozgrywka.druzyna1 = obiekt_rozgrywki.winner
-                nowa_rozgrywka.save()
+            if obiekt_rozgrywki.faza == max_faza:
+                zakonczono(max_faza, obiekt_rozgrywki)
             else:
-                nowa_rozgrywka.druzyna2 = obiekt_rozgrywki.winner
-                nowa_rozgrywka.save()
+                nowa_nazwa_rozgrywki = obiekt_rozgrywki.nazwa_turnieju+"_mecz_"+str(int(obiekt_rozgrywki.mecz)//2)+"_faza_"+str(int(obiekt_rozgrywki.faza)+1)
+                nowa_rozgrywka = Rozgrywki.objects.get(nazwa_rozgrywki=nowa_nazwa_rozgrywki)
+                print("-------------------------------")
+                print(nowa_nazwa_rozgrywki)
+                print(nowa_rozgrywka)
+                if obiekt_rozgrywki.mecz % 2 == 0:
+                    nowa_rozgrywka.druzyna1 = obiekt_rozgrywki.winner
+                    nowa_rozgrywka.save()
+                else:
+                    nowa_rozgrywka.druzyna2 = obiekt_rozgrywki.winner
+                    nowa_rozgrywka.save()
         else:
-            print("sprzeczność")
+            nowy_problem = Problemy.objects.create(nazwa_rozgrywki=obiekt_rozgrywki.nazwa_rozgrywki, nazwa_turnieju=obiekt_rozgrywki.nazwa_turnieju)
+            nowy_problem.save()
 
 
 def winner(request):
@@ -290,3 +309,5 @@ def winner(request):
     print(winner)
     print(img)
     return HttpResponse('Message sent successfully')
+
+

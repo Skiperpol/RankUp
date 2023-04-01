@@ -66,9 +66,9 @@
         <a href="{% url 'index' %}"><div class="mobilemenuimgcontainer"><img src="https://i.ibb.co/YhSCzFb/logo2.png" alt="">rankup</div></a>
         <a href="{% url 'tournament_list_site' %}"><div class="mobilemenuimgcontainer"><img src="/media/turniejicon.png" alt="">turnieje</div></a>
         {% if user.is_authenticated %}
-        <a href="{% url 'player_site' playernick=user.nick %}"><div class="mobilemenuimgcontainer"><img src="/media/account.png" alt="">konto</div></a>
+            <a href="{% url 'player_site' playernick=user.nick %}"><div class="mobilemenuimgcontainer"><img src="/media/account.png" alt="">konto</div></a>
         {% else %}
-        <a href="{% url 'register' %}"><div class="mobilemenuimgcontainer"><img src="/media/account.png" alt="">rejestracja</div></a>
+            <a href="{% url 'register' %}"><div class="mobilemenuimgcontainer"><img src="/media/account.png" alt="">rejestracja</div></a>
         {% endif %}
         <div id="mobilemenucontrol" class="mobilemenuimgcontainer"><img src="/media/menu.png" alt="">menu</div>
         
