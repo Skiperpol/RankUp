@@ -17,7 +17,9 @@
             {% for tournament in tournaments %}
                 <a class="tournament-card {% if forloop.counter > 1 %}mobilehide{% endif %}" href="{% url 'tournament_site' tournamentname=tournament.nazwa%}">
                     <img src="{{ tournament.zdjecie.url }}" alt=""><br>{{ tournament }} 
+                    {% if tournament.started == True %}<div class="zapisana_druzyna smallgreen betterg green">Turniej trwa</div>{% endif %}
                     <div class="tour-info">
+                        
                         <button>Szczegóły</button>
                         <span>{{ tournament.data }}</span> 
                     </div>
