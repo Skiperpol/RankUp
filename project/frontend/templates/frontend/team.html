@@ -14,7 +14,10 @@
             </div>
             
         <div class="profile-menu teammenu"><h1>Skład</h1>
+            {% if user.is_authenticated %}
             {% if user.email == creator.email %}
+            <button id="show_teams" class="defaultbutton mobilehide sendrequest smallwidth">Zaproś graczy do drużyny</button>
+            <button id="show_teamsmobile" class="pchide defaultbutton sendrequest smallwidth">Zaproś graczy do drużyny</button>
             {% else %}
             <form method="post">
                 {% csrf_token %}
@@ -23,7 +26,7 @@
                 <input type="hidden" name="team" value="{{team.creator}}">
                 <button class="defaultbutton sendrequest">Wyślij prośbę</button>
             </form>
-            {% endif %}</div>
+            {% endif %}{% endif %}</div>
        
         <hr>
         <div class="profile-info">
@@ -47,26 +50,17 @@
         <br>
         <br>
         {% if team.creator == user.email %}
-            <h2 class="profile-menu">ZAPROŚ GRACZA DO DRUŻYNY</h2>
-            <form  class="flexform" method="post">
-                {% csrf_token %}
-                <input type="hidden" id="type" name="type" value="add">
-                <select class="select" name="email" >
-                    {% for user in users %}
-                        <option class="option" value="{{user.email}}">{{user.nick}}</option>
-                    {% endfor %}
-                </select>
-                <button>ZAPROŚ</button>
-            </form>
 
-            <h2>USUŃ ZAPROSZENIE DO DRUŻYNY</h2>
+            <h2 class="zaprh2">Zaproszenia</h2>
             {% for player in waiting_list.all %}
-            <form method="post">
+            <form class="anulujdiv" method="post">
                 {% csrf_token %}
                 <input type="hidden" id="type" name="type" value="cancel">
                 <input type="hidden" name="email" value="{{player.email}}">
-                {{ player.nick }} <button type="submit">ANULUJ</button>
-            </form>
+                <div class="zaproszeniecard">{% if player.avatar %}<img src="{{ player.avatar.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
+                <a href="{% url 'player_site' playernick=player.nick %}">{{ player.nick }}</a></div><button class="defaultbutton differentbutton" type="submit">Anuluj zaproszenie</button>
+                
+            </form><hr class="anhr">
             {% endfor %}
 
           
@@ -74,6 +68,53 @@
                 
                 
         {% endif %}
+        <div id="wybor_graczybc"></div>
+        <div id="wybor_druzyn">
+            <div id="close">&#10060;</div>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" id="type" name="type" value="add">
+                <label for="email"><h1 class="graczeinvite">Zaproś do drużyny</h1></label><br>
+                <select class="select" name="email" >
+                    {% for user in users %}
+                        <option class="option" value="{{user.email}}">{{user.nick}}</option>
+                    {% endfor %}
+                </select>
+                <button class="defaultbutton dbstatic biggersend" type="submit">Wyślij</button>
+              </form>
+        </div>
+        <script>
+            var wybor_druzynbc = document.getElementById("wybor_graczybc")
+            var button = document.getElementById("show_teams")
+            var buttonmobile = document.getElementById("show_teamsmobile")
+            var body = document.getElementById("body")
+            var wybor_druzyn = document.getElementById("wybor_druzyn");
+            button.addEventListener("click", function() {
+                wybor_druzyn.style.width = "25%";
+                wybor_druzyn.style.height = "75%";
+                wybor_druzyn.style.padding = "3.2rem";
+                wybor_druzyn.style.transition = "all .5s ease";
+                wybor_druzynbc.classList.add("blacked");
+                body.style.overflow = "hidden";
+            }); 
+            buttonmobile.addEventListener("click", function() {
+            wybor_druzyn.style.width = "69%";
+            wybor_druzyn.style.height = "70%";
+            wybor_druzyn.style.padding = "2.2rem";
+            wybor_druzyn.style.transition = "all .5s ease";
+            wybor_druzynbc.classList.add("blacked");
+            body.style.overflow = "hidden";
+        });
+            var closex = document.getElementById("close");
+            closex.addEventListener("click", function() {
+                wybor_druzyn.style.width = "0";
+                wybor_druzyn.style.height = "0";
+                wybor_druzyn.style.padding = "0";
+                wybor_druzyn.style.transition = "all .3s ease";
+                wybor_druzynbc.classList.remove("blacked")
+                body.style.overflow = "auto";
+            });
+        </script>
     </div>
 </div>
 {% endblock %}

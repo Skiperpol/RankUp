@@ -271,7 +271,7 @@
         left: -177% !important;
         object-fit: cover;
     }
-    #registerinner-wrapper, #logininner-wrapper {
+    #registerinner-wrapper, #logininner-wrapper, #createteaminner-wrapper {
         padding-top: 2vh !important;
         margin-top: 10vh;
     }
@@ -279,7 +279,7 @@
         margin-top: 1vh !important;
         margin-right: 0 !important;
     }
-    #registerinner-wrapper h1, #logininner-wrapper h1{
+    #registerinner-wrapper h1, #logininner-wrapper h1, #createteaminner-wrapper h1{
         font-size: 1.5rem;
         margin-bottom: 1.5vh !important;
     }
@@ -292,9 +292,16 @@
     .register-form div input {
         font-size: 1rem;
         width: 30vw;
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+        margin-bottom: 0 !important;
     }
     .nomt {
         margin-top: 3vh !important;
+    }
+    textarea {
+        height: 11vh !important;
+        width: 70% !important;
     }
     #logininner-wrapper input, #logininner-wrapper label {
         width: 50% !important;
@@ -302,9 +309,20 @@
         text-align: center;
         margin: auto;
         font-size: 1rem;
+    } 
+    .teammenu .smallwidth {
+        width: auto !important;
+        float: right !important;
+    }
+    #createteaminner-wrapper input, #createteaminner-wrapper label, #createteaminner-wrapper select {
+        width: 30% !important;
+        display: block;
+        text-align: center;
+        margin: auto;
+        font-size: 1rem;
     }
   
-    #logininner-wrapper a{
+    #logininner-wrapper a, #createteaminner-wrapper a{
         font-size: 1rem;
     }
     /* profil */
@@ -336,6 +354,12 @@
     }
     .profile-menu .active_nav {
         display: none;
+    }
+    #t-container * {
+        overscroll-behavior: auto !important;
+    }
+    * {
+        overscroll-behavior: none;
     }
     .profile-menu {
         text-align: center;
@@ -388,6 +412,10 @@
     #additionalbc #inner-wrapper {
         text-align: center;
     }
+    button:active, a:active {
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+      }
     #additionalbc #inner-wrapper div {
         font-size: 1.2rem;
     }
@@ -395,8 +423,9 @@
         margin-bottom: 2vh;
         font-size: 1.1rem;
     }
+    
     #show_teams, .dblarge {
-        float: none !important;
+        float: none;
         width: 90%;
         margin: auto;
     }
@@ -422,16 +451,29 @@
     .hnomb {
         margin-top: 0;
     }
+    .zaprh2 {
+        margin-bottom: 3vh !important;
+    }
+    .anhr:last-of-type {
+        margin-bottom: 20vh !important;
+    }
     .mecz{
         width: 50vw;
     }
     .contactcontainer {
         height: auto !important;
     }
+    .graczeinvite {
+        font-size: 1.5em !important;
+        text-align: center;
+    }
+    .biggersend {
+        font-size: .9em !important;
+    }
     /* kontakt */
     #contactinner-wrapper {
         width: 80vw;
-        height: 20vh;
+        height: auto !important;
         margin-top: 7vh;
         padding-right: 10vw;
         padding-left: 10vw;
