@@ -19,7 +19,7 @@
             <hr class="firsthr">
             <div class="profile-info">
                 <div>Email: <span>{{ player.email }}</span></div>
-                <div>Ranking:  <span>{{ player.punkty }} punkty</span></div>
+                <div>Ranking:  <span>{{ player.punkty }}pkt</span></div>
             </div>
             <h1 class="profile-teams">Turnieje{% if user.is_authenticated %}{% if user == player %}<a href="{% url 'create_tournament' %}"><span class="jakas create_team">Stwórz turniej</span></a>{% endif %}{% endif %}</h1>
             <hr>

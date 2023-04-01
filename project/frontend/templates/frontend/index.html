@@ -44,7 +44,7 @@
                 <br>{{ player }} <br>
                 <div class="index-personal grayed">{{ player.imie }} {{ player.nazwisko }}</div>
                 <div class="index-personal grayed">{{ player.nick }}</div>
-                <div class="index-team-points">{{ player.punkty }} punktów</div>
+                <div class="index-team-points">{{ player.punkty }}pkt</div>
                 <div class="tour-info">
                     <span>{% for team in player.druzyna.all|slice:":1" %}{{ team }}{% endfor %}</span> 
                 </div>
@@ -72,7 +72,7 @@
                 <div class="tour-info">
                     <span>{% for team in player.druzyna.all|slice:":1" %}{{ team }}{% endfor %}</span> 
                 </div> -->
-                <div class="index-team-points">{{ team.punkty }} punktów</div>
+                <div class="index-team-points">{{ team.punkty }}pkt</div>
             </a>
             {% endfor %}
             <a id="tournaments-list-more" href="{% url 'team_list_site' %}">
