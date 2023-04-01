@@ -174,7 +174,7 @@ def tournament_site(request, tournamentname):
 
        
 def tournament_list_site(request):
-    tournaments = Tournament.objects.all()
+    tournaments = Tournament.objects.all().order_by('data')
     customuser = CustomUser.objects.all()
 
     template = loader.get_template('frontend/tournament_list.html')

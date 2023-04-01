@@ -99,17 +99,31 @@ a {
 .black h2::before {
     background-color: white !important;
 }
+.redcolor {
+    color: #fe4554;
+}
+.intitleimg {
+    height: 1.2em;
+    margin-bottom: -.1em;
+}
+.betterg {
+    text-shadow: none !important;
+}
 #side_menu div { 
     position: fixed;
     bottom: 2vw;
+}
+.imga {
+    padding-right: 2vw !important;
+    text-align: center;
 }
 #side_menu h2 {
     display:table;
     position: relative;
 }
 #side_menu img {
-    width: 11vw;
-    height: 17vh;
+    width: 9vw;
+    margin: auto;
 }
 #side_menu h2::before {
     content: '';
@@ -215,7 +229,8 @@ a {
     background-color: #1b212c;
 }
 .tournament-card span { 
-    letter-spacing: .5em;
+    display: block;
+    letter-spacing: .1em;
     font-size: 1rem;
     font-weight:400;
     margin-bottom: .3vh;
@@ -519,11 +534,25 @@ letter-spacing: .1em;
     font-size: 1.4rem;
     right: 2.1rem;
 }
+.graczeinvite {
+    font-size: 1.6rem;
+    width: 100%;
+}
 #wybor_druzynbc {
     z-index: 35;
     position: absolute;
     top: 0;
     left: -15vw;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000000;
+    pointer-events: none;
+}
+#wybor_graczybc {
+    z-index: 35;
+    position: absolute;
+    top: 0;
+    left:0;
     width: 100vw;
     height: 100vh;
     background-color: #00000000;
@@ -723,12 +752,24 @@ li img, .chatimg {
     margin-top: 0%;
     margin-bottom: 0%;
 }
+
 .hnomb {
     margin-bottom: 0;
 }
 .hnomb2 {
     margin-top: 10vh;
 }
+#wybor_druzyn select{
+    color: #333;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    padding: 10px;
+  }
+  
+#wybor_druzyn option {
+    color: #333;
+    background-color: #fff;
+  }
 .green {
     color: rgb(13, 158, 13) !important;
     font-weight: bold;
@@ -839,7 +880,50 @@ justify-content: space-between;
 align-items: flex-end;
 align-content: flex-end;
 }
+.differentbutton {
+    margin-left: 3vw;
+    font-size: 1rem !important;
+    margin-top: 0 !important;
+}
+.zaproszeniecard {
+    margin-bottom: .5vh;
+    display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content: flex-start;
+align-items: center;
+align-content: flex-start;
+}
+.anulujdiv img {
+    margin-bottom: 0 !important;
+    height: 6vh;
+    width: 6vh;
+    margin-right: .5vw;
+}
+.anulujdiv {
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: center;
+align-content: center;
+}
 #logininner-wrapper {
+    text-align: center;
+    color: white;
+    width: auto;
+    height: auto;
+    margin-top: 13vh;
+    margin-right: 10%;
+    margin-left: 10%;
+    font-size: 1.3rem;
+    background-color: #101319cd;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+}
+#createteaminner-wrapper {
     text-align: center;
     color: white;
     width: auto;
@@ -875,7 +959,7 @@ align-content: flex-end;
 .defaultbutton:hover{  
     background-color: #ff21387e;
 }
-#logininner-wrapper h1 {
+#logininner-wrapper h1, #createteaminner-wrapper h1 {
     margin-bottom: 0;
 }
 

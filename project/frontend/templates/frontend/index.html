@@ -4,7 +4,7 @@
 <div id="container">
     <div id="page1">
         <div id="container_bc"></div>
-        <h1><span class="color_red">rankup</span></h1>
+        <h1><span class="color_red">rank<img class="intitleimg" src="https://i.ibb.co/YhSCzFb/logo2.png" alt=""></span></h1>
         <h3>graj, <span class="color_red">rozwijaj się</span></h3>
         <h3>zwyciężaj</h3>
         <button class="play"><a href="{% url 'tournament_list_site' %}">Wejdź do gry</a></button>
@@ -17,9 +17,11 @@
             {% for tournament in tournaments %}
                 <a class="tournament-card {% if forloop.counter > 1 %}mobilehide{% endif %}" href="{% url 'tournament_site' tournamentname=tournament.nazwa%}">
                     <img src="{{ tournament.zdjecie.url }}" alt=""><br>{{ tournament }} 
+                    {% if tournament.started == True %}<div class="zapisana_druzyna smallgreen betterg green">Turniej trwa</div>{% endif %}
                     <div class="tour-info">
+                        
                         <button>Szczegóły</button>
-                        <span>10.02.2032</span> 
+                        <span>{{ tournament.data }}</span> 
                     </div>
                 </a>
             {% endfor %}
@@ -41,7 +43,8 @@
                 {% endif %}
                 <br>{{ player }} <br>
                 <div class="index-personal grayed">{{ player.imie }} {{ player.nazwisko }}</div>
-                <div class="index-personal-points">123 pkt</div>
+                <div class="index-personal grayed">{{ player.nick }}</div>
+                <div class="index-team-points">{{ player.punkty }}pkt</div>
                 <div class="tour-info">
                     <span>{% for team in player.druzyna.all|slice:":1" %}{{ team }}{% endfor %}</span> 
                 </div>
@@ -64,11 +67,12 @@
                 <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">
                 {% endif %}
                 <br>{{ team }} <br>
+                <div class="index-personal grayed">{{ team.creator }}</div>
                 <!-- <div id="index-personal" class="grayed">{{ player.imie }} {{ player.nazwisko }}</div>
                 <div class="tour-info">
                     <span>{% for team in player.druzyna.all|slice:":1" %}{{ team }}{% endfor %}</span> 
                 </div> -->
-                <div class="index-team-points">123 pkt</div>
+                <div class="index-team-points">{{ team.punkty }}pkt</div>
             </a>
             {% endfor %}
             <a id="tournaments-list-more" href="{% url 'team_list_site' %}">

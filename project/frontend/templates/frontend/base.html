@@ -16,14 +16,14 @@
 </head>
 <body id="body">
     <div id="side_menu" class="black">
-        <a href="{% url 'index' %}"><img src="https://i.ibb.co/Z8c6WrV/sa.png" alt=""></a>
+        <a class="imga" href="{% url 'index' %}"><img src="https://i.ibb.co/YhSCzFb/logo2.png" alt=""></a>
         <a href="{% url 'tournament_list_site' %}"><h2>Turnieje</h2></a>
         <a href="{% url 'player_list_site' %}"><h2>Gracze</h2></a>
         <a href="{% url 'team_list_site' %}"><h2>Drużyny</h2></a>
         <a href="{% url 'contact_site' %}"><h2>Kontakt</h2></a>
         <div>
             {% if user.is_authenticated %}
-                <a href="{% url 'powiadomienia' %}"><h2>Powiadomienia</h2></a>
+                <a href="{% url 'powiadomienia' %}"><h2 class="{% notification_class %}">Powiadomienia</h2></a>
                 <a href="{% url 'settings' %}"><h2>Ustawienia</h2></a>
                 <a href="{% url 'player_site' playernick=user.nick %}"><h2>Moje konto</h2></a>
                 <a href="{% url 'logout' %}"><h2>Wyloguj</h2></a>
@@ -63,7 +63,7 @@
 
     <script></script>
     <div id="mobilemenu">
-        <a href="{% url 'index' %}"><div class="mobilemenuimgcontainer"><img src="https://i.ibb.co/Z8c6WrV/sa.png" alt="">rankup</div></a>
+        <a href="{% url 'index' %}"><div class="mobilemenuimgcontainer"><img src="https://i.ibb.co/YhSCzFb/logo2.png" alt="">rankup</div></a>
         <a href="{% url 'tournament_list_site' %}"><div class="mobilemenuimgcontainer"><img src="/media/turniejicon.png" alt="">turnieje</div></a>
         {% if user.is_authenticated %}
             <a href="{% url 'player_site' playernick=user.nick %}"><div class="mobilemenuimgcontainer"><img src="/media/account.png" alt="">konto</div></a>
@@ -77,7 +77,7 @@
         <img src="/media/images/questionmark.png" alt="">
     </a>
     <div id="mobilenav">
-        <a class="mobilenavindex" href="{% url 'index' %}"><img src="https://i.ibb.co/Z8c6WrV/sa.png" alt=""></a>
+        <a class="mobilenavindex" href="{% url 'index' %}"><img src="https://i.ibb.co/YhSCzFb/logo2.png" alt=""></a>
         <div id="mobilenavlogowanie" class="defaultbutton">
             {% if user.is_authenticated %}
             <a href="{% url 'player_site' playernick=user.nick %}">konto</a> 
