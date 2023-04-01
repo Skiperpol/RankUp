@@ -99,6 +99,9 @@ a {
 .black h2::before {
     background-color: white !important;
 }
+.redcolor {
+    color: #fe4554;
+}
 .intitleimg {
     height: 1.2em;
     margin-bottom: -.1em;
