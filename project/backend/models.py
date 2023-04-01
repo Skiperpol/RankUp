@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-
 class CustomUser(AbstractUser):
     nick = models.CharField(max_length=30, unique=True)
     email = models.EmailField(unique=True)
@@ -55,11 +54,14 @@ class Tournament(models.Model):
     rodzaj_gry = models.CharField(choices=gry, max_length=100)
     format_rozgrywek = models.CharField(choices=formaty, max_length=10)
     rozgrywki = models.ManyToManyField('Rozgrywki',null=True, blank=True)
+    winner = models.CharField(max_length=100, null=True, blank=True)
     started = models.BooleanField(default=False)
     finished = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nazwa
+    class Meta:
+        ordering = ['finished', 'started', 'nazwa']
 
 class Rozgrywki(models.Model):
     nazwa_rozgrywki = models.CharField(max_length=100)
@@ -102,6 +104,10 @@ class Message(models.Model):
 
     class Meta:
         ordering = ('date_added',)
+
+class Problemy(models.Model):
+    nazwa_rozgrywki = models.CharField(max_length=100)
+    nazwa_turnieju = models.CharField(max_length=100)
 
 
         
