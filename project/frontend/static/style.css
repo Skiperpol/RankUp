@@ -103,12 +103,17 @@ a {
     position: fixed;
     bottom: 2vw;
 }
+.imga {
+    padding-right: 2vw !important;
+    text-align: center;
+}
 #side_menu h2 {
     display:table;
     position: relative;
 }
 #side_menu img {
-    width: 10vw;
+    width: 9vw;
+    margin: auto;
 }
 #side_menu h2::before {
     content: '';
@@ -214,7 +219,8 @@ a {
     background-color: #1b212c;
 }
 .tournament-card span { 
-    letter-spacing: .5em;
+    display: block;
+    letter-spacing: .1em;
     font-size: 1rem;
     font-weight:400;
     margin-bottom: .3vh;

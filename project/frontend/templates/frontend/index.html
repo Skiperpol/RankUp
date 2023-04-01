@@ -19,7 +19,7 @@
                     <img src="{{ tournament.zdjecie.url }}" alt=""><br>{{ tournament }} 
                     <div class="tour-info">
                         <button>Szczegóły</button>
-                        <span>10.02.2032</span> 
+                        <span>{{ tournament.data }}</span> 
                     </div>
                 </a>
             {% endfor %}
@@ -41,7 +41,8 @@
                 {% endif %}
                 <br>{{ player }} <br>
                 <div class="index-personal grayed">{{ player.imie }} {{ player.nazwisko }}</div>
-                <div class="index-personal-points">123 pkt</div>
+                <div class="index-personal grayed">{{ player.nick }}</div>
+                <div class="index-team-points">{{ player.punkty }} punktów</div>
                 <div class="tour-info">
                     <span>{% for team in player.druzyna.all|slice:":1" %}{{ team }}{% endfor %}</span> 
                 </div>
@@ -64,11 +65,12 @@
                 <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">
                 {% endif %}
                 <br>{{ team }} <br>
+                <div class="index-personal grayed">{{ team.creator }}</div>
                 <!-- <div id="index-personal" class="grayed">{{ player.imie }} {{ player.nazwisko }}</div>
                 <div class="tour-info">
                     <span>{% for team in player.druzyna.all|slice:":1" %}{{ team }}{% endfor %}</span> 
                 </div> -->
-                <div class="index-team-points">123 pkt</div>
+                <div class="index-team-points">{{ team.punkty }} punktów</div>
             </a>
             {% endfor %}
             <a id="tournaments-list-more" href="{% url 'team_list_site' %}">
