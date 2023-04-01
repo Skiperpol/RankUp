@@ -99,6 +99,10 @@ a {
 .black h2::before {
     background-color: white !important;
 }
+.intitleimg {
+    height: 1.2em;
+    margin-bottom: -.1em;
+}
 .betterg {
     text-shadow: none !important;
 }
