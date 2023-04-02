@@ -359,6 +359,9 @@
     .profile-menu .active_nav {
         display: none;
     }
+    #players-list-container, #players-list-container * {
+        overscroll-behavior: auto !important;
+    }
     #t-container * {
         overscroll-behavior: auto !important;
     }
