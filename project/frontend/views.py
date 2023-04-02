@@ -50,16 +50,20 @@ def team_site(request, teamname):
             team.waiting_list.add(user)
             team.add_players.add(user)
             tresc = "Zaproszenie"
-            nowe_powiadomienie = Powiadomienia.objects.create(user=user, tresc=tresc, druzyna=team.nazwa)
-            nowe_powiadomienie.save()
+            istnieje = Powiadomienia.objects.filter(user=user, tresc=tresc, druzyna=team.nazwa)
+            if not istnieje:
+                nowe_powiadomienie = Powiadomienia.objects.create(user=user, tresc=tresc, druzyna=team.nazwa)
+                nowe_powiadomienie.save()
             return redirect('team_site', teamname=teamname)
         elif type == "prosba":
             team.volunteers.add(user)
             tresc = "Prosba"
             team_creator = request.POST.get('team')
             team_creator_instance = get_user_model().objects.get(email=team_creator)
-            nowe_powiadomienie = Powiadomienia.objects.create(user=team_creator_instance, tresc=tresc, druzyna=team.nazwa, volunteer=user.nick)
-            nowe_powiadomienie.save()
+            istnieje = Powiadomienia.objects.filter(user=team_creator_instance, tresc=tresc, druzyna=team.nazwa, volunteer=user.nick)
+            if not istnieje:
+                nowe_powiadomienie = Powiadomienia.objects.create(user=team_creator_instance, tresc=tresc, druzyna=team.nazwa, volunteer=user.nick)
+                nowe_powiadomienie.save()
 
     new_users = []
     for user in users:
