@@ -33,14 +33,14 @@
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" id="type" name="type" value="add_volunteer">
-                    <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                    <input type="hidden" id="team" name="team" value="{{powiadomienie.druzyna}}">
                     <input type="hidden" id="volunteer" name="volunteer" value="{{powiadomienie.volunteer}}">
                     <button>Zatwierdź</button>
                 </form>
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" id="type" name="type" value="cancel_volunteer">
-                    <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                    <input type="hidden" id="team" name="team" value="{{powiadomienie.druzyna}}">
                     <input type="hidden" id="volunteer" name="volunteer" value="{{powiadomienie.volunteer}}">
                     <button>Odrzuć</button>
                 </form>
