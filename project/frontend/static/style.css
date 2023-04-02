@@ -473,6 +473,9 @@ letter-spacing: .1em;
     text-align: center;
     width: 16vw;
 }
+.spacer {
+    margin-bottom: 15vh;
+}
 .hide {
     display: none;
 }

@@ -28,22 +28,26 @@
                     </div>
                 </div>
                 {% elif powiadomienie.tresc == "Prosba" %}
-                <h4>Prośba</h4>
-                Gracz {{powiadomienie.volunteer}} chce dołączyć do Twojej drużyny {{powiadomienie.druzyna}}.<br>Czy chcesz go dodać?<br>
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" id="type" name="type" value="add_volunteer">
-                    <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
-                    <input type="hidden" id="volunteer" name="volunteer" value="{{powiadomienie.volunteer}}">
-                    <button>Zatwierdź</button>
-                </form>
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" id="type" name="type" value="cancel_volunteer">
-                    <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
-                    <input type="hidden" id="volunteer" name="volunteer" value="{{powiadomienie.volunteer}}">
-                    <button>Odrzuć</button>
-                </form>
+                <div class="powiadomienie_card">
+                    <h4>Prośba</h4>
+                    Gracz <a class="inline" href="{% url 'player_site' playernick=powiadomienie.volunteer %}"><b>{{powiadomienie.volunteer}}</b></a> chce dołączyć do Twojej drużyny <a class="inline" href="{% url 'team_site' teamname=powiadomienie.druzyna %}"><b>{{powiadomienie.druzyna}}</b></a>.<br>Czy chcesz go dodać?<br>
+                    <div class="response">
+                        <form class="powiadomienie_form" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" id="type" name="type" value="add_volunteer">
+                            <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                            <input type="hidden" id="volunteer" name="volunteer" value="{{powiadomienie.volunteer}}">
+                            <button class="defaultbutton">Zatwierdź</button>
+                        </form>
+                        <form class="powiadomienie_form" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" id="type" name="type" value="cancel_volunteer">
+                            <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                            <input type="hidden" id="volunteer" name="volunteer" value="{{powiadomienie.volunteer}}">
+                            <button class="defaultbutton">Odrzuć</button>
+                        </form>
+                    </div>
+                </div>
                 {% endif %}
                 <br>
             {% endfor %}

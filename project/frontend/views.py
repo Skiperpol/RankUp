@@ -176,7 +176,7 @@ def tournament_site(request, tournamentname):
 
        
 def tournament_list_site(request):
-    tournaments = Tournament.objects.filter(finished=False).order_by('data')
+    tournaments = Tournament.objects.filter(finished=False).order_by('data').order_by('started').reverse()
     tournaments_ongoing = Tournament.objects.filter(started=True).filter(finished=False).order_by('data')
     tournaments_finished = Tournament.objects.filter(started=True).filter(finished=True).order_by('data')
     customuser = CustomUser.objects.all()
