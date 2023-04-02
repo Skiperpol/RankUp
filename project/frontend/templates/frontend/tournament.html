@@ -37,7 +37,7 @@
                 </form>
             {% endif %}</div>
             {% if zapisana_druzyna %}<p class="zapisana_druzyna">Zapisano {{ zapisana_druzyna }}</p>{% endif %}
-            {% if tournament.started %}<p class="zapisana_druzyna green">Turniej trwa</p>{% endif %}
+            {% if tournament.finished == True %}<p class="zapisana_druzyna">Turniej zakończony</p>{% else %}{% if tournament.started == True %}<div class="zapisana_druzyna green">Turniej trwa</div>{% endif %}{% endif %}
             <div id="tournament-nav"></div>
             <div id="tournament-content-detailed">
                 
@@ -68,14 +68,16 @@
                 <button class="defaultbutton" id="refresh-btn">Odśwież</button>
                 <div id="tournament-nav"></div>
                 <!-- jesli sa  rozgrywki -->
-
+                {% if tournament.started == False %}
+                <div class="grayed mb5">oczekiwanie na rozpoczęcie turnieju</div>
+                {% else %}
                 {% if rozgrywki.all %}
                 <div id="tablecont">
                 <table>
                     <tr class="drabinka">
                         <td class="kolumna">
-                            <div class="runda">Runda 1</div>
-                            <div class="kolumna-mecze {% if rozgrywki|length > 8 %}extraround {% else %} firstround{% endif %}">
+                            <div class="runda">Runda 1 {{ rozgrywki|length }}</div>
+                            <div class="kolumna-mecze {% if rozgrywki|length > 8 %}extraround {% elif rozgrywki|length <= 4 %}fourfirst firstround{% else %} firstround{% endif %}">
                                 {% for rozgrywka in rozgrywki %}
                                     {% if rozgrywka.faza == 0 %}
                                     <div class="mecz">
@@ -232,6 +234,7 @@
                         </td>
                     </tr>
                 </table></div>
+                {% endif %}
                 {% endif %}
             </div>
         </div>

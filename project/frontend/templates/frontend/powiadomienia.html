@@ -4,6 +4,7 @@
     <div id="container" class="player-detail-container contactcontainer">
         <div id="contactinner-wrapper" class="powiadomienieinner_wrapper">
             <h1 class="powheader">Powiadomienia</h1>
+            {% if powiadomienia.all %}
             {% for powiadomienie in powiadomienia %}
             <hr>
                 {% if powiadomienie.tresc == "Zaproszenie" %}
@@ -46,6 +47,10 @@
                 {% endif %}
                 <br>
             {% endfor %}
+            {% else %}
+            <br>
+            <div class="grayed">brak powiadomień</div>
+            {% endif %}
         </div>
     </div>
  

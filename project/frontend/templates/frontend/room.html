@@ -39,11 +39,16 @@
                 <span class="grayed">*wprowadz dane i dodaj zrzut ekranu</span>
                 <input type="hidden" name="druzyna" id="druzyna" value="{{druzyna}}"/>
                 <input type="hidden" name="nazwa_rozgrywki" id="nazwa_rozgrywki" value="{{room.nazwa_rozgrywki}}"/>
-                <button class="rezultatbutton defaultbutton" type="submit">Zatwierdź</button>
+                <button onclick="powiadom()" class="rezultatbutton defaultbutton" type="submit">Zatwierdź</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    function powiadom() {
+        alert("Rezultat zostął wysłany")
+    }
+</script>
 <script>
     roomheader = document.getElementById("roomheader")
     roomheader.style.setProperty("background-image", `linear-gradient(to right, #00000080, #00000080), url('{{ turniej.zdjecie.url }}')` );
