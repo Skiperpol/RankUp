@@ -266,9 +266,6 @@ def send(request):
 def zakonczono(max_faza, obiekt_rozgrywki):
     wygrane_punkty = (int(max_faza)-1)*10
     win_team = Team.objects.get(nazwa=obiekt_rozgrywki.winner)
-    print("PUNKTY")
-    print(wygrane_punkty)
-    print(win_team.punkty)
     win_team.punkty = win_team.punkty+(int(wygrane_punkty)*5)
     win_team.save()
     turniej = Tournament.objects.get(nazwa = obiekt_rozgrywki.nazwa_turnieju)
