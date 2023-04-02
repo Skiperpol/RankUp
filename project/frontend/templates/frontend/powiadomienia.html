@@ -15,13 +15,13 @@
                         <form class="powiadomienie_form" method="post">
                             {% csrf_token %}
                             <input type="hidden" id="type" name="type" value="add_invite">
-                            <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                            <input type="hidden" id="team" name="team" value="{{powiadomienie.druzyna}}">
                             <button class="defaultbutton">Dołącz</button>
                         </form>
                         <form class="powiadomienie_form" method="post">
                             {% csrf_token %}
                             <input type="hidden" id="type" name="type" value="cancel_invite">
-                            <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
+                            <input type="hidden" id="team" name="team" value="{{powiadomienie.druzyna}}">
                             <button class="defaultbutton">Odrzuć</button>
                         </form>
                     </div>
@@ -33,14 +33,14 @@
                     {% csrf_token %}
                     <input type="hidden" id="type" name="type" value="add_volunteer">
                     <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
-                    <input type="hidden" id="volunteer" name="volunteer" value={{powiadomienie.volunteer}}>
+                    <input type="hidden" id="volunteer" name="volunteer" value="{{powiadomienie.volunteer}}">
                     <button>Zatwierdź</button>
                 </form>
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" id="type" name="type" value="cancel_volunteer">
                     <input type="hidden" id="team" name="team" value={{powiadomienie.druzyna}}>
-                    <input type="hidden" id="volunteer" name="volunteer" value={{powiadomienie.volunteer}}>
+                    <input type="hidden" id="volunteer" name="volunteer" value="{{powiadomienie.volunteer}}">
                     <button>Odrzuć</button>
                 </form>
                 {% endif %}
