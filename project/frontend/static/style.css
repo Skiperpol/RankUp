@@ -466,8 +466,20 @@ letter-spacing: .1em;
     margin-top: 7vh;
     width: 70%;
 }
+.noml {
+    margin-left: 0 !important;
+}
 .tour-button {
     margin-top: 3vh;
+}
+.rect {
+    object-fit: cover;
+    border-radius: 0 !important;
+    height: 10vh !important;
+}
+.proftour {
+    height: 15vh;
+    padding-top: 3vh;
 }
 .runda {
     text-align: center;

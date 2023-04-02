@@ -69,12 +69,14 @@ def login_web(request):
 
 def player_site(request, playernick):
     user = get_user_model().objects.filter(nick=playernick).first()
+    tournaments = Tournament.objects.filter(creator=user.email)
     if user:
         player = CustomUser.objects.get(nick=playernick)
         context = {
             'player': player,
             'teams': None,
             'team_member': None,
+            'tournaments': tournaments,
         }
         if Team.objects.filter(creator=user.email).exists():
             team_creator=Team.objects.filter(creator=user.email)

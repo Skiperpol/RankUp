@@ -28,8 +28,9 @@
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" id="type" name="type" value="start">
-                    
+                    {% if tournament.druzyny.count > 3 %}
                     <button type="submit" id="rozpocznij" class="defaultbutton dblarge">Rozpocznij</button>
+                    {% endif %}
                     {% if zapisana_druzyna is None %}
                     
                     {% endif %}
@@ -78,7 +79,7 @@
                 <table>
                     <tr class="drabinka">
                         <td class="kolumna">
-                            <div class="runda">Runda 1 {{ rozgrywki|length }}</div>
+                            <div class="runda">Runda 1</div>
                             <div class="kolumna-mecze {% if rozgrywki|length > 8 %}extraround {% elif rozgrywki|length <= 4 %}fourfirst firstround{% else %} firstround{% endif %}">
                                 {% for rozgrywka in rozgrywki %}
                                     {% if rozgrywka.faza == 0 %}

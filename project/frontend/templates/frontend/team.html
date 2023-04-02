@@ -9,7 +9,7 @@
             <div id="profile-flex">
                 <h1>{{ team.nazwa }}</h1>
                 <p class="creatorname"><a class="inline" href="{% url 'player_site' playernick=creator.nick %}">{{ creator.nick }}</a></p>
-                <div class="grayed">{{ punkty }}pkt</div>
+                <div class="grayed">{{ team.punkty }}pkt</div>
                 <div class="grayed bio">{{ team.opis }}</div>
             </div>
             

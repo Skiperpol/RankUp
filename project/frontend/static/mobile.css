@@ -348,7 +348,24 @@
     align-items: center;
     align-content: center;
     }
-    
+    .spacer {
+        margin-bottom: 20vh !important;
+    }
+    .proftour {
+        border-bottom: 1px solid #2f384c;
+        margin-bottom: 0 !important;
+        padding-bottom: 3vh;
+    }
+    .profbox {
+        width: 100% !important;
+    }
+    .proftour img {
+        width: 100% !important;
+        height: 14vh !important;
+    }
+    .profbox div {
+        margin: auto !important;
+    }
     #filtry {
         margin-top: 2vh;
     }
