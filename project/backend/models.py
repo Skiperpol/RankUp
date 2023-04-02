@@ -76,7 +76,7 @@ class Rozgrywki(models.Model):
     kto_wygral_druzyna1 = models.CharField(max_length=100, null=True, blank=True)
     kto_wygral_druzyna2 = models.CharField(max_length=100, null=True, blank=True)
     message = models.ManyToManyField('Message', null=True, blank=True)
-
+    zakonczono = models.BooleanField(default=False)
     def __str__(self):
         return self.nazwa_rozgrywki
 

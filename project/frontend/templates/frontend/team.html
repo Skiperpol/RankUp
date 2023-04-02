@@ -62,12 +62,13 @@
                 
             </form><hr class="anhr">
             {% endfor %}
-
-          
-
-                
-                
         {% endif %}
+        <div>
+            <h2>HISTORIA</h2>
+            {% for turniej in history.all %}
+                {{turniej}}<br>
+            {% endfor %}
+        </div>
         <div id="wybor_graczybc"></div>
         <div id="wybor_druzyn">
             <div id="close">&#10060;</div>

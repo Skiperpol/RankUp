@@ -26,6 +26,7 @@ def index(request):
 from django.contrib.auth import get_user_model
 def team_site(request, teamname):
     team = Team.objects.get(nazwa=teamname)
+    history = Tournament.objects.filter(finished=True, druzyny=team)
     users = CustomUser.objects.filter()
     creator_mail = team.creator
     creator = CustomUser.objects.get(email=creator_mail)
@@ -76,6 +77,7 @@ def team_site(request, teamname):
         "users": new_users,
         "creator": creator,
         "waiting_list":waiting_list,
+        "history":history
     }
     return HttpResponse(template.render(context, request))
     
@@ -210,10 +212,13 @@ def room(request, nazwa_turnieju, nazwa_rozgrywki, druzyna):
     if team.creator != request.user.email:
         return redirect('index')
     room = Rozgrywki.objects.get(nazwa_rozgrywki=nazwa_rozgrywki, nazwa_turnieju=nazwa_turnieju)
-    if room.druzyna1 == druzyna:
-        form = MessageForm()
-    elif room.druzyna2 == druzyna:
-        form = MessageForm()
+    if room.zakonczono == False:
+        if room.druzyna1 == druzyna:
+            form = MessageForm()
+        elif room.druzyna2 == druzyna:
+            form = MessageForm()
+        else:
+            return redirect('index')
     else:
         return redirect('index')
 
@@ -251,14 +256,21 @@ def send(request):
     return HttpResponse('Message sent successfully')
 
 def zakonczono(max_faza, obiekt_rozgrywki):
-    wygrane_punkty = max_faza*10
+    wygrane_punkty = (int(max_faza)-1)*10
     win_team = Team.objects.get(nazwa=obiekt_rozgrywki.winner)
-    win_team.punkty = win_team.punkty+wygrane_punkty
+    print("PUNKTY")
+    print(wygrane_punkty)
+    print(win_team.punkty)
+    win_team.punkty = win_team.punkty+(int(wygrane_punkty)*5)
     win_team.save()
     turniej = Tournament.objects.get(nazwa = obiekt_rozgrywki.nazwa_turnieju)
     turniej.finished = True
     turniej.winner = obiekt_rozgrywki.winner
     turniej.save()
+    for x in win_team.remove_players.all():
+        x.punkty = x.punkty+int(wygrane_punkty)
+        x.save()
+        print(x)
     print("ZAKOŃCZONO")
 
 
@@ -268,10 +280,13 @@ def check(obiekt_rozgrywki):
             turniej = Tournament.objects.get(nazwa = obiekt_rozgrywki.nazwa_turnieju)
             max_faza = str(int(math.log2(len(turniej.rozgrywki.all())+1) ))
             obiekt_rozgrywki.winner = obiekt_rozgrywki.kto_wygral_druzyna1
+            obiekt_rozgrywki.zakonczono = True
             print(obiekt_rozgrywki.winner)
             print(obiekt_rozgrywki.kto_wygral_druzyna1)
             obiekt_rozgrywki.save()
-            if obiekt_rozgrywki.faza == max_faza:
+            print(obiekt_rozgrywki.faza)
+            if int(obiekt_rozgrywki.faza) == int(max_faza)-1:
+                print("KONIEC")
                 zakonczono(max_faza, obiekt_rozgrywki)
             else:
                 nowa_nazwa_rozgrywki = obiekt_rozgrywki.nazwa_turnieju+"_mecz_"+str(int(obiekt_rozgrywki.mecz)//2)+"_faza_"+str(int(obiekt_rozgrywki.faza)+1)

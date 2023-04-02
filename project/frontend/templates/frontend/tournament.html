@@ -44,12 +44,14 @@
             {% for rozgrywka in rozgrywki %}
             {% if rozgrywka.druzyna2 == zapisana_druzyna.nazwa or rozgrywka.druzyna1 == zapisana_druzyna.nazwa %}
                 {% if rozgrywka.winner == None %}
-                    <div class="dolaczdorozgrywki">
-                    {{rozgrywka.druzyna1 }} - {{rozgrywka.druzyna2 }}
-                    {% if rozgrywka.nazwa_rozgrywki %}
-                        <a class="defaultbutton" href="{% url 'room' nazwa_turnieju=tournament.nazwa nazwa_rozgrywki=rozgrywka.nazwa_rozgrywki druzyna=zapisana_druzyna.nazwa %}"><h2>Idź do pokoju</h2></a>
+                    {% if rozgrywka.zakonczono == False %}
+                        <div class="dolaczdorozgrywki">
+                        {{rozgrywka.druzyna1 }} - {{rozgrywka.druzyna2 }}
+                        {% if rozgrywka.nazwa_rozgrywki %}
+                            <a class="defaultbutton" href="{% url 'room' nazwa_turnieju=tournament.nazwa nazwa_rozgrywki=rozgrywka.nazwa_rozgrywki druzyna=zapisana_druzyna.nazwa %}"><h2>Idź do pokoju</h2></a>
+                        {% endif %}
+                        </div>
                     {% endif %}
-                    </div>
                 {% endif %}
             {% endif %}
         {% endfor %}
