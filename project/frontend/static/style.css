@@ -469,6 +469,33 @@ letter-spacing: .1em;
 .noml {
     margin-left: 0 !important;
 }
+.golden {
+    color: gold;
+}
+.gob {
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-items: center;
+align-content: center;
+width: 100%;
+}.gob a {
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-items: center;
+align-content: center;
+width: 100%;
+}
+.betterimg {
+    height: 5vh;
+    width: auto;
+    border-radius: 9999px;
+    margin-right: 1%;
+    margin-left: 1%;
+}
 .tour-button {
     margin-top: 3vh;
 }

@@ -38,7 +38,7 @@
                 </form>
             {% endif %}</div>
             {% if zapisana_druzyna %}<p class="zapisana_druzyna">Zapisano {{ zapisana_druzyna }}</p>{% endif %}
-            {% if tournament.finished == True %}<p class="zapisana_druzyna">Turniej zakończony</p>{% else %}{% if tournament.started == True %}<div class="zapisana_druzyna green">Turniej trwa</div>{% endif %}{% endif %}
+            {% if tournament.finished == True %}<p class="zapisana_druzyna">Turniej zakończony</p><p class="zapisana_druzyna gob green"><a href="{% url 'team_site' teamname=tournament.winner %}">Turniej zwycięża {{ tournament.winner }}! <img class="betterimg" src="{% for t in teams %}{% if t.nazwa == tournament.winner %}{{ t.zdjecie.url }}{% endif %}{% endfor %}" alt=""></a></p>{% else %}{% if tournament.started == True %}<div class="zapisana_druzyna green">Turniej trwa</div>{% endif %}{% endif %}
             <div id="tournament-nav"></div>
             <div id="tournament-content-detailed">
                 
@@ -84,10 +84,10 @@
                                 {% for rozgrywka in rozgrywki %}
                                     {% if rozgrywka.faza == 0 %}
                                     <div class="mecz">
-                                        <div class="team1">{{ rozgrywka.druzyna1 }}</div>
-                                        <div class="meczwynik team1">{% if rozgrywka.winner == rozgrywka.druzyna1 %}1{% elif rozgrywka.winner == rozgrywka.druzyna2 %}0{% else %}-{% endif %}</div>
-                                        <div class="team2">{{ rozgrywka.druzyna2 }}</div>
-                                        <div class="meczwynik team2">{% if rozgrywka.winner == rozgrywka.druzyna1 %}0{% elif rozgrywka.winner == rozgrywka.druzyna2 %}1{% else %}-{% endif %}</div>
+                                        <div class="team1 {% if rozgrywka.druzyna1 == tournament.winner %}golden{% endif %}">{{ rozgrywka.druzyna1 }}</div>
+                                        <div class="meczwynik team1 {% if rozgrywka.druzyna1 == tournament.winner %}golden{% endif %}">{% if rozgrywka.winner == rozgrywka.druzyna1 %}1{% elif rozgrywka.winner == rozgrywka.druzyna2 %}0{% else %}-{% endif %}</div>
+                                        <div class="team2 {% if rozgrywka.druzyna2 == tournament.winner %}golden{% endif %}">{{ rozgrywka.druzyna2 }}</div>
+                                        <div class="meczwynik team2 {% if rozgrywka.druzyna2 == tournament.winner %}golden{% endif %}">{% if rozgrywka.winner == rozgrywka.druzyna1 %}0{% elif rozgrywka.winner == rozgrywka.druzyna2 %}1{% else %}-{% endif %}</div>
                                         <span></span>
                                     </div>
                                     {% endif %}
@@ -100,10 +100,10 @@
                                 {% for rozgrywka in rozgrywki %}
                                     {% if rozgrywka.faza == 1 %}
                                     <div class="mecz {% if rozgrywki|length < 5 %}final{% endif %}">
-                                        <div class="team1">{{ rozgrywka.druzyna1 }}</div>
-                                        <div class="meczwynik team1">{% if rozgrywka.winner == rozgrywka.druzyna1 %}1{% elif rozgrywka.winner == rozgrywka.druzyna2 %}0{% else %}-{% endif %}</div>
-                                        <div class="team2">{{ rozgrywka.druzyna2 }}</div>
-                                        <div class="meczwynik team2">{% if rozgrywka.winner == rozgrywka.druzyna1 %}0{% elif rozgrywka.winner == rozgrywka.druzyna2 %}1{% else %}-{% endif %}</div>
+                                        <div class="team1 {% if rozgrywka.druzyna1 == tournament.winner %}golden{% endif %}">{{ rozgrywka.druzyna1 }}</div>
+                                        <div class="meczwynik team1 {% if rozgrywka.druzyna1 == tournament.winner %}golden{% endif %}">{% if rozgrywka.winner == rozgrywka.druzyna1 %}1{% elif rozgrywka.winner == rozgrywka.druzyna2 %}0{% else %}-{% endif %}</div>
+                                        <div class="team2 {% if rozgrywka.druzyna2 == tournament.winner %}golden{% endif %}">{{ rozgrywka.druzyna2 }}</div>
+                                        <div class="meczwynik team2 {% if rozgrywka.druzyna2 == tournament.winner %}golden{% endif %}">{% if rozgrywka.winner == rozgrywka.druzyna1 %}0{% elif rozgrywka.winner == rozgrywka.druzyna2 %}1{% else %}-{% endif %}</div>
                                         <span></span>
                                     </div>
                                     {% endif %}
@@ -117,10 +117,10 @@
                                 {% for rozgrywka in rozgrywki %}
                                     {% if rozgrywka.faza == 2 %}
                                     <div class="mecz {% if rozgrywki|length < 9 %}final{% endif %}">
-                                        <div class="team1">{{ rozgrywka.druzyna1 }}</div>
-                                        <div class="meczwynik team1">{% if rozgrywka.winner == rozgrywka.druzyna1 %}1{% elif rozgrywka.winner == rozgrywka.druzyna2 %}0{% else %}-{% endif %}</div>
-                                        <div class="team2">{{ rozgrywka.druzyna2 }}</div>
-                                        <div class="meczwynik team2">{% if rozgrywka.winner == rozgrywka.druzyna1 %}0{% elif rozgrywka.winner == rozgrywka.druzyna2 %}1{% else %}-{% endif %}</div>
+                                        <div class="team1 {% if rozgrywka.druzyna1 == tournament.winner %}golden{% endif %}">{{ rozgrywka.druzyna1 }}</div>
+                                        <div class="meczwynik team1 {% if rozgrywka.druzyna1 == tournament.winner %}golden{% endif %}">{% if rozgrywka.winner == rozgrywka.druzyna1 %}1{% elif rozgrywka.winner == rozgrywka.druzyna2 %}0{% else %}-{% endif %}</div>
+                                        <div class="team2 {% if rozgrywka.druzyna2 == tournament.winner %}golden{% endif %}">{{ rozgrywka.druzyna2 }}</div>
+                                        <div class="meczwynik team2 {% if rozgrywka.druzyna2 == tournament.winner %}golden{% endif %}">{% if rozgrywka.winner == rozgrywka.druzyna1 %}0{% elif rozgrywka.winner == rozgrywka.druzyna2 %}1{% else %}-{% endif %}</div>
                                         <span></span>
                                     </div>
                                     {% endif %}
@@ -135,10 +135,10 @@
                                 {% for rozgrywka in rozgrywki %}
                                     {% if rozgrywka.faza == 3 %}
                                     <div class="mecz {% if rozgrywki|length < 17 %}final{% endif %}">
-                                        <div class="team1">{{ rozgrywka.druzyna1 }}</div>
-                                        <div class="meczwynik team1">{% if rozgrywka.winner == rozgrywka.druzyna1 %}1{% elif rozgrywka.winner == rozgrywka.druzyna2 %}0{% else %}-{% endif %}</div>
-                                        <div class="team2">{{ rozgrywka.druzyna2 }}</div>
-                                        <div class="meczwynik team2">{% if rozgrywka.winner == rozgrywka.druzyna1 %}0{% elif rozgrywka.winner == rozgrywka.druzyna2 %}1{% else %}-{% endif %}</div>
+                                        <div class="team1 {% if rozgrywka.druzyna1 == tournament.winner %}golden{% endif %}">{{ rozgrywka.druzyna1 }}</div>
+                                        <div class="meczwynik team1 {% if rozgrywka.druzyna1 == tournament.winner %}golden{% endif %}">{% if rozgrywka.winner == rozgrywka.druzyna1 %}1{% elif rozgrywka.winner == rozgrywka.druzyna2 %}0{% else %}-{% endif %}</div>
+                                        <div class="team2 {% if rozgrywka.druzyna2 == tournament.winner %}golden{% endif %}">{{ rozgrywka.druzyna2 }}</div>
+                                        <div class="meczwynik team2 {% if rozgrywka.druzyna2 == tournament.winner %}golden{% endif %}">{% if rozgrywka.winner == rozgrywka.druzyna1 %}0{% elif rozgrywka.winner == rozgrywka.druzyna2 %}1{% else %}-{% endif %}</div>
                                         <span></span>
                                     </div>
                                     {% endif %}
@@ -153,10 +153,10 @@
                                 {% for rozgrywka in rozgrywki %}
                                     {% if rozgrywka.faza == 4 %}
                                     <div class="mecz {% if rozgrywki|length < 33 %}final{% endif %}">
-                                        <div class="team1">{{ rozgrywka.druzyna1 }}</div>
-                                        <div class="meczwynik team1">{% if rozgrywka.winner == rozgrywka.druzyna1 %}1{% elif rozgrywka.winner == rozgrywka.druzyna2 %}0{% else %}-{% endif %}</div>
-                                        <div class="team2">{{ rozgrywka.druzyna2 }}</div>
-                                        <div class="meczwynik team2">{% if rozgrywka.winner == rozgrywka.druzyna1 %}0{% elif rozgrywka.winner == rozgrywka.druzyna2 %}1{% else %}-{% endif %}</div>
+                                        <div class="team1 {% if rozgrywka.druzyna1 == tournament.winner %}golden{% endif %}">{{ rozgrywka.druzyna1 }}</div>
+                                        <div class="meczwynik team1 {% if rozgrywka.druzyna1 == tournament.winner %}golden{% endif %}">{% if rozgrywka.winner == rozgrywka.druzyna1 %}1{% elif rozgrywka.winner == rozgrywka.druzyna2 %}0{% else %}-{% endif %}</div>
+                                        <div class="team2 {% if rozgrywka.druzyna2 == tournament.winner %}golden{% endif %}">{{ rozgrywka.druzyna2 }}</div>
+                                        <div class="meczwynik team2 {% if rozgrywka.druzyna2 == tournament.winner %}golden{% endif %}">{% if rozgrywka.winner == rozgrywka.druzyna1 %}0{% elif rozgrywka.winner == rozgrywka.druzyna2 %}1{% else %}-{% endif %}</div>
                                         <span></span>
                                     </div>
                                     {% endif %}

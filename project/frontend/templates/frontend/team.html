@@ -65,9 +65,23 @@
         {% endif %}
         <div>
             <h2>HISTORIA</h2>
-            {% for turniej in history.all %}
-                {{turniej}}<br>
+            <hr>
+            {% if history.count == 0 %}
+            <div class="grayed noml">brak rozgrywek</div>
+            {% endif %}
+            {% for tournament in history.all %}
+            <a href="{% url 'tournament_site' tournamentname=tournament.nazwa%}">
+                <div class="turnieje-list-object proftour">
+                    <img class="rect" src="{{ tournament.zdjecie.url }}" alt="">
+                    <div class="tournament-list-object-box profbox">
+                        <div><span class="bold">{{ tournament.data }}</span></div>
+                        <div>{{ tournament }}</div>
+                        <div><span>Hosted by {% for u in customuser %}{% if u.email == tournament.creator %}<b>{{ u.nick }}</b>{% endif %}{% endfor %} &#x2022; {{ tournament.format_rozgrywek}} &#x2022; {{ tournament.rodzaj_gry}} &#x2022; {{ tournament.nagroda}} </span></div>
+                        {% if tournament.finished == True %}<div class="zapisana_druzyna smallgreen">Turniej zakończony</div>{% else %}{% if tournament.started == True %}<div class="zapisana_druzyna smallgreen green">Turniej trwa</div>{% endif %}{% endif %}
+                    </div>
+                </div></a>
             {% endfor %}
+            <div class="spacer"></div>
         </div>
         <div id="wybor_graczybc"></div>
         <div id="wybor_druzyn">
