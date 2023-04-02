@@ -34,7 +34,7 @@
                     {% for t in team %}
                     <a href="{% url 'team_site' teamname=t.nazwa %}"><div class="players-list-div"><li><span></span>
                     {% if t.zdjecie %}<img src="{{ t.zdjecie.url }}" alt="">{% else %}<img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="">{% endif %}
-                    <div>{{ t }}</div><div class="float-right">123pkt</div></li></div></a>
+                    <div>{{ t }}</div><div class="float-right">{{ t.punkty }}pkt</div></li></div></a>
                     {% endfor %}
                 </ol>
             {% else %}

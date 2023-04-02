@@ -176,12 +176,16 @@ def tournament_site(request, tournamentname):
 
        
 def tournament_list_site(request):
-    tournaments = Tournament.objects.all().order_by('data')
+    tournaments = Tournament.objects.filter(finished=False).order_by('data')
+    tournaments_ongoing = Tournament.objects.filter(started=True).filter(finished=False).order_by('data')
+    tournaments_finished = Tournament.objects.filter(started=True).filter(finished=True).order_by('data')
     customuser = CustomUser.objects.all()
 
     template = loader.get_template('frontend/tournament_list.html')
     context = {
         "tournaments":tournaments,
+        "tournaments_ongoing":tournaments_ongoing,
+        "tournaments_finished":tournaments_finished,
         "customuser":customuser,
     }
     return HttpResponse(template.render(context, request))     

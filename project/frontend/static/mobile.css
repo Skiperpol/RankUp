@@ -223,7 +223,7 @@
         background-position: 40% 0%;
         background-image:linear-gradient(0deg, #101319 0%, #101319 50%, #101319a3 75%, rgba(255, 255, 255, 0) 100%), url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fc6bc1f1-2870-4492-909c-29369011dcf6/dbe3pcs-b7529486-a8d6-4673-8134-e172799bb4b3.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2ZjNmJjMWYxLTI4NzAtNDQ5Mi05MDljLTI5MzY5MDExZGNmNlwvZGJlM3Bjcy1iNzUyOTQ4Ni1hOGQ2LTQ2NzMtODEzNC1lMTcyNzk5YmI0YjMuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.rTk1y6ZoZoe2S5AiewuRUlXP60m98K75256NeQ25RQM"); /* W3C */
     }
-    #turnieje-list-container {
+    #turnieje-list-container, #turnieje-list-containertrwa, #turnieje-list-containerkoniec {
         margin-top: 2vh;
         padding-bottom: 10vh;
     }
@@ -348,12 +348,19 @@
     align-items: center;
     align-content: center;
     }
+    
+    #filtry {
+        margin-top: 2vh;
+    }
     #profile-flex .grayed {
         display: block;
         width: 100%;
     }
     .profile-menu .active_nav {
         display: none;
+    }
+    #players-list-container, #players-list-container * {
+        overscroll-behavior: auto !important;
     }
     #t-container * {
         overscroll-behavior: auto !important;

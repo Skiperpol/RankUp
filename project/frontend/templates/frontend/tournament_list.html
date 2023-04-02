@@ -6,6 +6,14 @@
             <div id="turnieje-list-header">
                 <h1>TURNIEJE</h1>
             </div>
+            <div id="filtry">
+                Filtrowanie: 
+                <select id="filtryselect" class="select" name="status" onchange="zmienfiltry()">
+                    <option class="option" value="aktualne">Aktualne</option>
+                    <option class="option" value="trwajace">Trwające</option>
+                    <option class="option" value="zakonczone">Zakończone</option>
+                </select>
+            </div>
             <div id="turnieje-list-container">
                 {% for tournament in tournaments %}
                 <a href="{% url 'tournament_site' tournamentname=tournament.nazwa%}">
@@ -15,13 +23,63 @@
                         <div><span class="bold">{{ tournament.data }}</span></div>
                         <div>{{ tournament }}</div>
                         <div><span>Hosted by {% for u in customuser %}{% if u.email == tournament.creator %}<b>{{ u.nick }}</b>{% endif %}{% endfor %} &#x2022; {{ tournament.format_rozgrywek}} &#x2022; {{ tournament.rodzaj_gry}} &#x2022; {{ tournament.nagroda}} </span></div>
-                        {% if tournament.started == True %}<div class="zapisana_druzyna smallgreen green">Turniej trwa</div>{% endif %}
+                        {% if tournament.finished == True %}<div class="zapisana_druzyna smallgreen">Turniej zakończony</div>{% else %}{% if tournament.started == True %}<div class="zapisana_druzyna smallgreen green">Turniej trwa</div>{% endif %}{% endif %}
+                    </div>
+                </div></a>
+                {% endfor %}
+            </div>
+            <div id="turnieje-list-containertrwa" class="hide">
+                {% for tournament in tournaments_ongoing %}
+                <a href="{% url 'tournament_site' tournamentname=tournament.nazwa%}">
+                <div class="turnieje-list-object">
+                    <img src="{{ tournament.zdjecie.url }}" alt="">
+                    <div class="tournament-list-object-box">
+                        <div><span class="bold">{{ tournament.data }}</span></div>
+                        <div>{{ tournament }}</div>
+                        <div><span>Hosted by {% for u in customuser %}{% if u.email == tournament.creator %}<b>{{ u.nick }}</b>{% endif %}{% endfor %} &#x2022; {{ tournament.format_rozgrywek}} &#x2022; {{ tournament.rodzaj_gry}} &#x2022; {{ tournament.nagroda}} </span></div>
+                        {% if tournament.finished == True %}<div class="zapisana_druzyna smallgreen">Turniej zakończony</div>{% else %}{% if tournament.started == True %}<div class="zapisana_druzyna smallgreen green">Turniej trwa</div>{% endif %}{% endif %}
+                    </div>
+                </div></a>
+                {% endfor %}
+            </div><div id="turnieje-list-containerkoniec" class="hide">
+                {% for tournament in tournaments_finished %}
+                <a href="{% url 'tournament_site' tournamentname=tournament.nazwa%}">
+                <div class="turnieje-list-object">
+                    <img src="{{ tournament.zdjecie.url }}" alt="">
+                    <div class="tournament-list-object-box">
+                        <div><span class="bold">{{ tournament.data }}</span></div>
+                        <div>{{ tournament }}</div>
+                        <div><span>Hosted by {% for u in customuser %}{% if u.email == tournament.creator %}<b>{{ u.nick }}</b>{% endif %}{% endfor %} &#x2022; {{ tournament.format_rozgrywek}} &#x2022; {{ tournament.rodzaj_gry}} &#x2022; {{ tournament.nagroda}} </span></div>
+                        {% if tournament.finished == True %}<div class="zapisana_druzyna smallgreen">Turniej zakończony</div>{% else %}{% if tournament.started == True %}<div class="zapisana_druzyna smallgreen green">Turniej trwa</div>{% endif %}{% endif %}
                     </div>
                 </div></a>
                 {% endfor %}
             </div>
         </div>
     </div>
+    <script>
+        function zmienfiltry() {
+            var selectedValue = document.getElementById("filtryselect").value;
+            var akt = document.getElementById("turnieje-list-container")
+            var trwa = document.getElementById("turnieje-list-containertrwa")
+            var koniec = document.getElementById("turnieje-list-containerkoniec")
+            if (selectedValue == "aktualne") {
+                akt.classList.remove("hide");
+                trwa.classList.add("hide");
+                koniec.classList.add("hide");
+            } 
+            if (selectedValue == "trwajace") {
+                akt.classList.add("hide");
+                trwa.classList.remove("hide");
+                koniec.classList.add("hide");
+            }
+            if (selectedValue == "zakonczone") {
+                akt.classList.add("hide");
+                trwa.classList.add("hide");
+                koniec.classList.remove("hide");
+            }
+        }
+    </script>
     
   
 {% endblock %}

@@ -113,6 +113,9 @@ a {
     position: fixed;
     bottom: 2vw;
 }
+.mb5 {
+    margin-bottom: 5vh;
+}
 .imga {
     padding-right: 2vw !important;
     text-align: center;
@@ -122,7 +125,7 @@ a {
     position: relative;
 }
 #side_menu img {
-    width: 9vw;
+    width: 8vw;
     margin: auto;
 }
 #side_menu h2::before {
@@ -366,10 +369,10 @@ letter-spacing: .3rem;
 border-top-left-radius: 10px;
 border-bottom-right-radius: 10px;
 }
-#turnieje-list-container {
+#turnieje-list-container, #turnieje-list-containertrwa, #turnieje-list-containerkoniec {
     margin-top: 4vh;
 }
-#turnieje-list-container img {
+#turnieje-list-container img, #turnieje-list-containertrwa img, #turnieje-list-containerkoniec img {
     width: 16%;
     height: 100%;
     object-fit: cover;
@@ -469,6 +472,9 @@ letter-spacing: .1em;
 .runda {
     text-align: center;
     width: 16vw;
+}
+.hide {
+    display: none;
 }
 .hroom {
     display: none;
@@ -1170,11 +1176,6 @@ align-content: flex-start;
     border-color: #aaa;
   }
   
-  .select:focus {
-    border-color: #3366ff;
-    box-shadow: 0 0 5px #3366ff;
-  }
-  
   .option {
     font-size: 14px;
     color: #333;
@@ -1231,6 +1232,26 @@ align-content: flex-start;
     height: 8vh;
     /* do wywalenia */
 }
+#filtry {
+    width: 100%;
+}
+#filtry .select{
+    color: white;
+    margin-left: .6vw;
+    background-color: #1b212c;
+}
+#filtry .option{
+    color: white;
+    background-color: #1b212c;
+}
+select:focus {
+    outline: none;
+  }
+  
+select:active {
+    outline: none;
+  }
+  
 .extraround .mecz:nth-of-type(even) span {
     position: absolute;
     top: -5% !important;
@@ -1258,6 +1279,15 @@ align-content: flex-start;
     height: calc(12vh * 1);
     background-color: #fff;
 }
+.fourfirst .mecz:nth-of-type(odd) span {
+    position: absolute;
+    top: calc(50% - 1px);
+    right: -2.5vw;
+    content: "";
+    width: 1px;
+    height: calc(11vh * 2);
+    background-color: #fff;
+}
 .secondround .mecz:nth-of-type(odd) span {
     position: absolute;
     top: calc(50% - 1px);
@@ -1283,6 +1313,14 @@ align-content: flex-start;
     content: "";
     width: 1px;
     height: calc(10vh * 1);
+    background-color: #fff;
+}.fourfirst .mecz:nth-of-type(even) span {
+    position: absolute;
+    top: calc(165% * -1);
+    right: -2.5vw;
+    content: "";
+    width: 1px;
+    height: calc(10.7vh * 2);
     background-color: #fff;
 }
 .thirdround .mecz:nth-of-type(odd) span {
